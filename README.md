@@ -1,97 +1,76 @@
-# YOLOv5 기반 이미지 분석기
+# YOLOv5 기반 UI 리버스엔지니어링 → CLEOPATRA .clx 변환 프로젝트 계획
 
-이 프로젝트는 YOLOv5 모델을 기반으로 특정 이미지를 분석하는 Python 프로그램입니다.
-
-## 설치 방법
-
-1. 프로젝트 클론
-```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
-```
-
-2. 가상 환경 생성 및 활성화 (선택)
-```bash
-python -m venv venv
-source venv/bin/activate  # 윈도우는 venv\Scripts\activate
-```
-
-3. 의존성 설치
-```bash
-pip install -r requirements.txt
-```
-
-4. 모델 다운로드 (필요시)
-```bash
-# 예시: yolov5s.pt 다운로드
-wget https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5s.pt
-```
-
-5. 실행
-```bash
-python your_main_script.py --source images/
-```
-
-## 결과
-분석 결과는 `runs/detect/exp` 폴더에 저장됩니다.  
-
----  
-
-
-
-# Eclipse에서 YOLOv5 Python 프로젝트 세팅 가이드
-
-이 문서는 Eclipse IDE에서 YOLOv5 기반 Python 프로젝트를 설정하고 실행하는 방법을 안내합니다.
-
-## 1. Eclipse IDE 설치
-
-- [Eclipse 공식 사이트](https://www.eclipse.org/downloads/)에서 "Eclipse IDE for Python Developers" 또는 "Eclipse IDE for Java Developers" + 플러그인 설치
-- 설치 후 실행
-
-## 2. PyDev 플러그인 설치 (필요 시)
-
-1. Eclipse 상단 메뉴에서 `Help` > `Eclipse Marketplace...` 클릭
-2. 검색창에 `PyDev` 입력
-3. `PyDev for Eclipse` 설치
-
-설치 후 Eclipse 재시작
-
-## 3. Python 인터프리터 설정
-
-1. 상단 메뉴 `Window` > `Preferences` 클릭
-2. `PyDev` > `Interpreters` > `Python Interpreter` 메뉴 선택
-3. `New...` 버튼 클릭 → 시스템의 Python 설치 경로 선택 (예: `C:\Python311\python.exe`)
-4. OK 후 적용
-
-## 4. 프로젝트 가져오기
-
-1. Git에서 클론
-```bash
-git clone https://github.com/your-username/your-repo-name.git
-```
-
-2. Eclipse에서
-   - `File` > `Import...` > `General` > `Existing Projects into Workspace`
-   - 경로: 위에서 클론한 폴더 지정
-
-## 5. 가상환경(vEnv) 설정 (선택)
-
-- Python 가상환경을 만들었다면, PyDev 프로젝트에서 해당 가상환경을 인터프리터로 설정할 수 있습니다.
-
-## 6. 의존성 설치
-
-Eclipse 내부 터미널 또는 외부 터미널에서:
-```bash
-pip install -r requirements.txt
-```
-
-## 7. 실행
-
-- `your_main_script.py` 우클릭 → `Run As` > `Python Run`
-- 또는 상단 실행 버튼 클릭
+## ✅ 전체 구성 및 단계별 할 일 (마일스톤 기반)
 
 ---
 
-✅ 참고:
-- 모델 파일(`yolov5s.pt`)은 실행 전 다운로드 필요
-- PyDev가 잘 작동하지 않을 경우 Visual Studio Code도 대안입니다
+### 🧱 1단계: YOLOv5 모델 환경 구성 및 테스트
+- [x] YOLOv5 모델 로딩 (torch hub 사용)
+- [x] 이미지 입력 및 객체 감지 확인
+- [ ] UI 요소 클래스 정의 (예: `button`, `input`, `textbox` 등)
+- [ ] 커스텀 데이터셋(스크린샷 기반) 만들기 및 YOLOv5 재학습 (필요 시)
+- [ ] 감지 결과를 JSON 또는 구조화된 데이터로 변환
+
+> 🧠 **산출물**: 감지된 UI 요소 리스트(JSON)
+
+---
+
+### 🧩 2단계: 감지 결과 → CLEOPATRA .clx 변환기
+- [x] CLEOPATRA .clx XML 구조 파악
+- [x] UI 요소와 `<cl:*>` 매핑 룰 정의
+- [ ] 요소 위치(x, y, width, height) → `<cl:xylayoutdata>` 생성
+- [ ] 각 UI 요소 유형별 `<cl:button>`, `<cl:inputbox>` 등 생성 코드 작성
+- [ ] 스타일/속성 자동 부여 로직 (필요 시)
+
+> 🧠 **산출물**: `.clx` 형태의 XML 파일
+
+---
+
+### ⚙️ 3단계: 전체 파이프라인 통합
+- [ ] 이미지 → YOLOv5 → 감지결과(JSON) → `.clx` 변환까지 자동화
+- [ ] 디렉터리 감시 기능 (예: `screenshots/` 폴더에 이미지 생기면 자동 변환)
+- [ ] 변환 결과 미리보기 (선택사항: HTML or CLEOPATRA로 열기)
+
+---
+
+### 📦 4단계: 사용자 인터페이스/CLI 및 도구화
+- [ ] CLI(Command Line Interface) 도구화
+- [ ] 설정파일(`config.json`)에서 클래스 매핑/출력 디렉토리 등 지정
+- [ ] 로그/에러 처리/예외 처리
+
+```bash
+python run_converter.py --input test.png --output out.clx
+```
+
+---
+
+### 🧪 5단계: 테스트/검증 및 개선
+- [ ] 다양한 스크린샷 테스트
+- [ ] 검출 정확도 평가 (precision/recall)
+- [ ] 오탐/누락된 요소에 대한 보완 (후처리 logic 추가)
+
+---
+
+### 🌐 6단계: 배포 및 문서화
+- [ ] `requirements.txt`, `README.md`, `사용자 가이드` 문서화
+- [ ] `GitHub`에 오픈소스화 및 예제 포함
+- [ ] 필요시 Web GUI 도구로 확장
+
+---
+
+## 📁 폴더 구조 예시
+
+```
+ui-detector-project/
+├── models/                # YOLOv5 모델 weights
+├── screenshots/           # 분석할 이미지
+├── output/                # 생성된 .clx 파일
+├── converter/             # 감지결과 → .clx 로 변환하는 코드
+│   ├── clx_writer.py
+│   └── tag_mapper.py
+├── yolo/                  # YOLOv5 추론 코드
+│   └── detector.py
+├── run_converter.py       # 메인 파이프라인 스크립트
+├── requirements.txt
+└── README.md
+```
