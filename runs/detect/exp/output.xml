@@ -1,0 +1,12 @@
+<annotation>
+	<object>
+		<name>laptop</name>
+		<confidence>0.631604790687561</confidence>
+		<bndbox>
+			<xmin>35.104331970214844</xmin>
+			<ymin>50.07219314575195</ymin>
+			<xmax>1056.3111572265625</xmax>
+			<ymax>522.0</ymax>
+		</bndbox>
+	</object>
+</annotation>
