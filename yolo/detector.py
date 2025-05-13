@@ -3,38 +3,51 @@ Created on 2025. 5. 13.
 
 @author: LCM
 '''
-# yolo/detector.py
 import torch
 import json
-import os
+import cv2
+from pathlib import Path
 
-model = torch.hub.load('ultralytics/yolov5', 'yolov5s', trust_repo=True)
+# YOLO 모델 로드
+model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
 
-def detect(image_path: str, save_json_path: str = "output/detection.json"):
-    results = model(image_path)
+def detect_ui_elements(image_path):
+    # 이미지 로드
+    img = cv2.imread(image_path)
+    results = model(img)
+    
+    # 결과를 JSON 형식으로 변환
+    detected_elements = []
+    for idx, det in enumerate(results.xywh[0]):
+        # 감지된 요소의 클래스, 좌표, 크기
+        class_id = int(det[5].item())  # 클래스 ID
+        x, y, w, h = det[:4].tolist()  # 좌표 및 크기
+        label = results.names[class_id]  # 클래스명 (예: 'button', 'textbox')
 
-    # 결과를 Pandas DataFrame으로 추출
-    df = results.pandas().xyxy[0]
+        # 감지된 요소 정보
+        detected_elements.append({
+            "type": label,
+            "id": f"{label}-{idx}",
+            "position": {
+                "top": f"{int(y)}px",
+                "left": f"{int(x)}px",
+                "width": f"{int(w)}px",
+                "height": f"{int(h)}px"
+            },
+            "children": []
+        })
+    
+    # 계층형 JSON 구조로 포장
+    ui_json = {
+        "name": Path(image_path).stem,  # 이미지 이름을 UI 이름으로 사용
+        "elements": detected_elements
+    }
 
-    # 필요한 필드만 추출
-    objects = []
-    for _, row in df.iterrows():
-        obj = {
-            "class": row['name'],
-            "confidence": float(row['confidence']),
-            "x1": float(row['xmin']),
-            "y1": float(row['ymin']),
-            "x2": float(row['xmax']),
-            "y2": float(row['ymax'])
-        }
-        objects.append(obj)
+    return ui_json
 
-    # 디렉토리 없으면 생성
-    os.makedirs(os.path.dirname(save_json_path), exist_ok=True)
+# 이미지에서 UI 요소 감지 후 JSON 생성
+image_path = '../img/test.png'
+ui_json = detect_ui_elements(image_path)
 
-    # JSON으로 저장
-    with open(save_json_path, 'w', encoding='utf-8') as f:
-        json.dump(objects, f, indent=2)
-
-    print(f"Detection result saved to: {save_json_path}")
-    return objects
+# 결과 출력
+print(json.dumps(ui_json, indent=2))
