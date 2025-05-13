@@ -1,5 +1,10 @@
 import torch
 import json
+import warnings
+import logging
+
+warnings.filterwarnings("ignore")  # 모든 워닝 제거
+logging.getLogger().setLevel(logging.ERROR)  # 로그 레벨 높여서 info 제거
 
 # 이미지 경로 (로컬 이미지 경로로 수정하세요)
 image_path = 'test.png'  # 예: 'C:/Users/LCM/Desktop/test.png'
