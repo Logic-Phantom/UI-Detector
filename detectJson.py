@@ -3,7 +3,7 @@ import cv2
 from ultralytics import YOLO
 
 # YOLOv5 모델 로드
-model = YOLO("runs/detect/train/weights/best.pt")  # 모델 로딩
+model = YOLO("runs/detect/train2/weights/best.pt")  # 모델 로딩
 
 def detect_ui_elements(image_path):
     # 이미지 로드
