@@ -1,0 +1,48 @@
+path: screenshots
+train: start
+val: val
+nc: 43
+names:
+  - HTMLSnippet
+  - HTMLObject
+  - MDIFolder
+  - Group
+  - Grid
+  - NumberEditor
+  - NavigationBar
+  - DateInput
+  - RadioButton
+  - ListBox
+  - LinkedListBox
+  - LinkedComboBox
+  - MaskEditor
+  - Menu
+  - Button
+  - Video
+  - SideNavigation
+  - SearchInput
+  - Shell
+  - Slider
+  - Output
+  - Accordion
+  - Notification
+  - Audio
+  - Image
+  - InputBox
+  - EmbeddedApp
+  - EmbeddedPage
+  - CheckBox
+  - CheckBoxGroup
+  - Calendar
+  - ComboBox
+  - TabFolder
+  - TextArea
+  - Tree
+  - FileUpload
+  - FileInput
+  - PageIndexer
+  - Progress
+  - TreeCell
+  - AppHeader
+  - GridTitle
+  - FormTitle
