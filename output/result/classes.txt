@@ -1,0 +1,40 @@
+HTML Snippet
+HTML Object
+MDI Folder
+Group
+Grid
+Number Editor
+Navigation Bar
+Date Input
+Radio Button
+List Box
+Linked List Box
+Linked Combo Box
+Mask Editor
+Menu
+Button
+Video
+Side Navigation
+Search Input
+Shell
+Slider
+Output
+Accordion
+Notification
+Audio
+Image
+Input Box
+Embedded App
+Embedded Page
+Check Box
+Check Box Group
+Calendar
+Combo Box
+Tab Folder
+Text Area
+Tree
+File Upload
+File Input
+Page Indexer
+Progress
+Tree Cell
