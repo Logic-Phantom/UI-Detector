@@ -46,7 +46,7 @@ def detect_ui_elements(image_path):
     return json.dumps(ui_json, indent=2)
 
 # 테스트 실행
-image_path = 'C:/Users/LCM/git/UI-Detector/img/test.png'  # 경로를 실제 이미지로 설정
+image_path = '../screenshots/test.png'  # 경로를 실제 이미지로 설정
 ui_json = detect_ui_elements(image_path)
 print(ui_json)
 print(model.names)

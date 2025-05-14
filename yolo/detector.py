@@ -46,7 +46,7 @@ def detect_ui_elements(image_path):
     return ui_json
 
 # 이미지에서 UI 요소 감지 후 JSON 생성
-image_path = '../img/test.png'
+image_path = '../screenshots/test.png'
 ui_json = detect_ui_elements(image_path)
 
 # 결과 출력
