@@ -5,7 +5,7 @@ from ultralytics import YOLO
 import os
 
 # YOLOv5 모델 로드
-model_path = '../runs/detect/train9/weights/best.pt'
+model_path = '../runs/detect/train/weights/best.pt'
 if os.path.exists(model_path):
     print(f"Model file found at: {model_path}")
     model = YOLO(model_path)
