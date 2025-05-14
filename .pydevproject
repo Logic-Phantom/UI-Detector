@@ -8,6 +8,7 @@
         <path>/${PROJECT_DIR_NAME}/models</path>
         <path>/${PROJECT_DIR_NAME}/output</path>
         <path>/${PROJECT_DIR_NAME}/converter</path>
+        <path>/${PROJECT_DIR_NAME}/yolo/datasets/screenshots</path>
     </pydev_pathproperty>
             
     
