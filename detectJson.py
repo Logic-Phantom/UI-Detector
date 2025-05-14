@@ -15,8 +15,17 @@ def detect_ui_elements(image_path):
     # 결과에서 pandas 형식으로 변환 후 첫 번째 객체에 접근
     detected_elements_df = results[0].to_df()  # pandas DataFrame 형식으로 변환
 
-    # DataFrame 출력하여 실제 구조 확인 (디버깅용)
+    # 디버깅용: 감지된 객체 출력 (데이터프레임)
+    print("Detected Elements:")
     print(detected_elements_df)
+
+    # 추가된 로그: 감지된 객체 리스트
+    if len(detected_elements_df) == 0:
+        print("No objects detected.")
+    else:
+        print(f"Total {len(detected_elements_df)} objects detected.")
+        for idx, row in detected_elements_df.iterrows():
+            print(f"Detected object {idx}: {row['name']} at box {row['box']}")
 
     ui_json = {
         "name": "test",
@@ -78,5 +87,11 @@ def detect_ui_elements(image_path):
 # 테스트 실행
 image_path = './screenshots/test.png'  # 경로를 실제 이미지로 설정
 ui_json = detect_ui_elements(image_path)
+
+# 최종 결과 출력
+print("Resulting UI JSON:")
 print(ui_json)
-print(model.names)  # 학습된 클래스 이름 출력
+
+# 학습된 클래스 이름 출력
+print("Class Names in the model:")
+print(model.names)
