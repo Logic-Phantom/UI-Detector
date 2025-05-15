@@ -55,8 +55,44 @@ class DetectionJsonBuilder:
                     "name": f"Rectangle_{class_name}",
                     "type": "RECTANGLE",
                     "scrollBehavior": "SCROLLS",
+                    "boundVariables": {
+                        "fills": [{
+                            "type": "VARIABLE_ALIAS",
+                            "id": f"VariableID:{uuid.uuid4()}"
+                        }]
+                    },
                     "blendMode": "PASS_THROUGH",
+                    "fills": [{
+                        "blendMode": "NORMAL",
+                        "type": "SOLID",
+                        "color": {
+                            "r": 1.0,
+                            "g": 0.17647,
+                            "b": 0.33333,
+                            "a": 1.0
+                        },
+                        "boundVariables": {
+                            "color": {
+                                "type": "VARIABLE_ALIAS",
+                                "id": f"VariableID:{uuid.uuid4()}"
+                            }
+                        }
+                    }],
+                    "strokes": [],
+                    "strokeWeight": 1.0,
+                    "strokeAlign": "INSIDE",
+                    "styles": {
+                        "fill": f"{uuid.uuid4().int % 100}:4"
+                    },
+                    "cornerRadius": 4.0,
+                    "cornerSmoothing": 0.0,
                     "absoluteBoundingBox": {
+                        "x": x1,
+                        "y": y1,
+                        "width": x2 - x1,
+                        "height": y2 - y1
+                    },
+                    "absoluteRenderBounds": {
                         "x": x1,
                         "y": y1,
                         "width": x2 - x1,
@@ -65,21 +101,102 @@ class DetectionJsonBuilder:
                     "constraints": {
                         "vertical": "TOP",
                         "horizontal": "LEFT"
-                    }
+                    },
+                    "effects": [],
+                    "interactions": []
                 },
                 {
                     "id": self.generate_id(),
                     "name": f"{class_name}_{conf:.2f}",
                     "type": "TEXT",
                     "scrollBehavior": "SCROLLS",
+                    "blendMode": "PASS_THROUGH",
+                    "fills": [{
+                        "blendMode": "NORMAL",
+                        "type": "SOLID",
+                        "color": {
+                            "r": 1.0,
+                            "g": 1.0,
+                            "b": 1.0,
+                            "a": 1.0
+                        }
+                    }],
+                    "strokes": [],
+                    "strokeWeight": 1.0,
+                    "strokeAlign": "OUTSIDE",
+                    "styles": {
+                        "fill": "3:43",
+                        "text": "3:44"
+                    },
+                    "absoluteBoundingBox": {
+                        "x": x1 + (x2 - x1) / 2,  # 텍스트를 박스 중앙에 배치
+                        "y": y1 - 20,  # 텍스트를 박스 위에 배치
+                        "width": 100,
+                        "height": 20
+                    },
+                    "absoluteRenderBounds": {
+                        "x": x1 + (x2 - x1) / 2,
+                        "y": y1 - 20,
+                        "width": 100,
+                        "height": 20
+                    },
+                    "constraints": {
+                        "vertical": "TOP",
+                        "horizontal": "LEFT"
+                    },
                     "characters": f"{class_name} ({conf:.2f})",
                     "style": {
-                        "fontFamily": "Arial",
-                        "fontSize": 14,
-                        "fontWeight": 600
-                    }
+                        "fontFamily": "Pretendard",
+                        "fontPostScriptName": "Pretendard-SemiBold",
+                        "fontStyle": "SemiBold",
+                        "fontWeight": 600,
+                        "fontSize": 16,
+                        "textAlignHorizontal": "LEFT",
+                        "textAlignVertical": "CENTER",
+                        "letterSpacing": -0.28,
+                        "lineHeightPx": 20,
+                        "lineHeightPercent": 104.17266082763672,
+                        "lineHeightPercentFontSize": 125.0,
+                        "lineHeightUnit": "PIXELS"
+                    },
+                    "layoutVersion": 4,
+                    "effects": [],
+                    "interactions": []
                 }
-            ]
+            ],
+            "blendMode": "PASS_THROUGH",
+            "clipsContent": False,
+            "background": [],
+            "fills": [],
+            "strokes": [],
+            "cornerRadius": 4.0,
+            "cornerSmoothing": 0.0,
+            "strokeWeight": 1.0,
+            "strokeAlign": "INSIDE",
+            "backgroundColor": {
+                "r": 0.0,
+                "g": 0.0,
+                "b": 0.0,
+                "a": 0.0
+            },
+            "absoluteBoundingBox": {
+                "x": x1,
+                "y": y1,
+                "width": x2 - x1,
+                "height": y2 - y1
+            },
+            "absoluteRenderBounds": {
+                "x": x1,
+                "y": y1,
+                "width": x2 - x1,
+                "height": y2 - y1
+            },
+            "constraints": {
+                "vertical": "TOP",
+                "horizontal": "LEFT"
+            },
+            "effects": [],
+            "interactions": []
         }
 
     def detect_and_create_json(self, image_path):
