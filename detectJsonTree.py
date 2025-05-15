@@ -233,7 +233,7 @@ def main():
     json_result = detector.detect_and_create_json(image_path)
     
     # JSON 결과 저장
-    with open("./json/detection_results.json", "w", encoding="utf-8") as f:
+    with open("json/detection_results.json", "w", encoding="utf-8") as f:
         json.dump(json_result, f, ensure_ascii=False, indent=2)
 
 if __name__ == "__main__":
