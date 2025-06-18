@@ -1,4 +1,4 @@
-path: screenshots
+path: yolo/datasets/screenshots
 train: start
 val: val
 nc: 43

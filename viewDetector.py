@@ -5,7 +5,7 @@ from pathlib import Path
 from ultralytics import YOLO
 
 # YOLO 모델 로드
-model = YOLO("runs/detect/train4/weights/best.pt")  # 모델 로딩
+model = YOLO("runs/detect/train5/weights/best.pt")  # 모델 로딩
 
 def detect_ui_elements(image_path, save_path='detected_output.png'):
     # 이미지 로드
