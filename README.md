@@ -150,6 +150,76 @@ python train.py
 - [ ] 검출 정확도 평가 (precision/recall)
 - [ ] 오탐/누락된 요소에 대한 보완 (후처리 logic 추가)
 
+## 📈 데이터셋 확장/라벨링 가이드
+
+### 1. 데이터셋 확장 전략
+- **클래스별 최소 20~30개 이상 라벨 확보**: 감지 성능이 급격히 향상됩니다.
+- **다양한 UI/화면/상황에서 스크린샷 수집**: 실제 사용 환경과 유사한 데이터 확보
+- **각 클래스별로 골고루 라벨링**: 특정 클래스에만 치우치지 않게 주의
+- **라벨링 파일명은 이미지와 동일하게** (예: workScr4.png → workScr4.txt)
+
+### 2. 라벨링 툴 추천
+- **[LabelImg](https://github.com/tzutalin/labelImg)** (YOLO 포맷 지원, 무료/오픈소스)
+- **[Roboflow](https://roboflow.com/)** (웹 기반, 증강/변환/라벨링 지원)
+- **[makesense.ai](https://www.makesense.ai/)** (설치 없이 웹에서 바로 라벨링)
+
+#### LabelImg 사용법 요약
+1. 설치: `pip install labelImg`
+2. 실행: `labelImg`
+3. YOLO 포맷 선택 후 이미지 폴더 열기
+4. 객체 박스 지정 → 클래스명 입력 → 저장
+
+### 3. 데이터 증강 자동화 예시
+```python
+from PIL import Image, ImageEnhance
+import os
+import random
+
+def augment_image(image_path, output_dir, num_aug=5):
+    img = Image.open(image_path)
+    base = os.path.splitext(os.path.basename(image_path))[0]
+    for i in range(num_aug):
+        aug = img.copy()
+        # 밝기/대비/색상/회전/좌우반전 등 랜덤 적용
+        if random.random() < 0.5:
+            aug = aug.transpose(Image.FLIP_LEFT_RIGHT)
+        if random.random() < 0.5:
+            aug = aug.rotate(random.randint(-10, 10))
+        enhancer = ImageEnhance.Brightness(aug)
+        aug = enhancer.enhance(random.uniform(0.7, 1.3))
+        enhancer = ImageEnhance.Contrast(aug)
+        aug = enhancer.enhance(random.uniform(0.7, 1.3))
+        aug.save(os.path.join(output_dir, f"{base}_aug{i}.png"))
+
+# 사용 예시
+# augment_image('yolo/datasets/screenshots/start/images/workScr4.png', 'yolo/datasets/screenshots/start/images')
+```
+- **라벨 파일도 동일하게 복사/이름변경 필요** (증강 이미지와 동일한 이름)
+- YOLO 라벨은 이미지 변환(좌우반전 등)에 맞게 좌표도 변환 필요 (LabelImg/Roboflow에서 자동 지원)
+
+### 4. 데이터셋 구조 예시
+```
+yolo/datasets/screenshots/start/
+├── images/
+│   ├── workScr4.png
+│   ├── ...
+├── labels/
+│   ├── workScr4.txt
+│   ├── classes.txt
+```
+
+### 5. 데이터셋 품질 체크
+- `python analyze_labels.py` 실행 시 클래스별 라벨 개수, 오류 자동 분석
+- 라벨이 없는 클래스가 있으면 추가 라벨링 권장
+
+### 6. 라벨링/증강 후 학습
+- `python train.py`로 재학습
+- `python improved_detector.py`로 감지 성능 확인
+
+---
+
+(이외에도 데이터 증강 자동화 스크립트, 라벨링 툴 사용법, 라벨 포맷 변환 등 추가 지원이 필요하면 언제든 요청해주세요!)
+
 ## 🔧 문제 해결
 
 ### 일반적인 문제들

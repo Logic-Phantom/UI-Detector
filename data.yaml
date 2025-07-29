@@ -1,6 +1,6 @@
-path: screenshots
-train: start
-val: val
+path: yolo/datasets/screenshots
+train: start/images
+val: start/images
 nc: 43
 names:
   - HTMLSnippet

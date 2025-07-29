@@ -25,17 +25,17 @@ def train_model():
     # 학습 설정
     training_config = {
         "data": data_yaml,
-        "epochs": 100,  # 에포크 수 증가
+        "epochs": 200,  # 에포크 수 증가
         "batch": 16,    # 배치 크기
         "imgsz": 640,   # 이미지 크기
-        "patience": 20, # Early stopping patience
+        "patience": 30, # Early stopping patience
         "save": True,   # 모델 저장
         "save_period": 10,  # 10 에포크마다 저장
         "cache": False, # 메모리 절약
         "device": "cpu", # CPU 사용 (GPU가 있다면 "0"으로 변경)
         "workers": 4,   # 데이터 로더 워커 수
         "project": "runs/detect",  # 프로젝트 디렉토리
-        "name": "train_improved",  # 실험 이름
+        "name": "train_aug_weighted",  # 실험 이름
         "exist_ok": True,  # 기존 실험 덮어쓰기
         "pretrained": True,  # 사전 훈련된 가중치 사용
         "optimizer": "SGD",  # 옵티마이저
@@ -56,6 +56,10 @@ def train_model():
         "mask_ratio": 4,  # 마스크 다운샘플 비율
         "dropout": 0.0,  # 드롭아웃
         "val": True,  # 검증 수행
+        # 증강 옵션
+        "hsv_h": 0.015, "hsv_s": 0.7, "hsv_v": 0.4, "degrees": 0.2, "translate": 0.2, "scale": 0.5, "shear": 0.2, "perspective": 0.0, "flipud": 0.5, "fliplr": 0.5, "mosaic": 1.0, "mixup": 0.2,
+        # rare class 가중치 예시 (실제 값은 데이터 분포에 따라 조정)
+        "class_weights": [2 if c in [0,1,2,6,9,10,11,12,13,15,16,17,18,19,21,22,23,24,26,27,28,29,30,32,34,35,36,37,38,39,40,41,42] else 1 for c in range(43)]
     }
     
     try:
