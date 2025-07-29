@@ -1,113 +1,2883 @@
 {
-  "name": "test",
-  "image_path": "./screenshots/test.png",
+  "name": "workScr4",
+  "image_path": "yolo/datasets/screenshots/start\\images\\workScr4.png",
   "detection_info": {
     "threshold": 0.05,
-    "total_detections": 5,
-    "average_confidence": 0.2075748212635517,
-    "detection_score": 1.0378741063177586,
-    "model_path": "runs/detect/train4/weights/best.pt"
+    "total_detections": 150,
+    "average_confidence": 0.34098656309147674,
+    "detection_score": 51.147984463721514,
+    "model_path": "runs/detect/train_aug_clean/weights/best.pt"
   },
   "elements": [
     {
-      "type": "Group",
-      "id": "Group-0",
-      "confidence": 0.39815402030944824,
+      "type": "DateInput",
+      "id": "DateInput-0",
+      "confidence": 0.9096346497535706,
       "position": {
-        "top": "111px",
-        "left": "75px",
-        "width": "949px",
-        "height": "310px"
+        "top": "353px",
+        "left": "940px",
+        "width": "110px",
+        "height": "27px"
       },
       "bbox": [
-        75,
-        111,
-        1024,
-        421
+        940,
+        353,
+        1050,
+        380
       ],
-      "area": 294190,
+      "area": 2970,
       "children": []
     },
     {
-      "type": "Group",
-      "id": "Group-1",
-      "confidence": 0.21913662552833557,
+      "type": "DateInput",
+      "id": "DateInput-1",
+      "confidence": 0.8722168207168579,
+      "position": {
+        "top": "353px",
+        "left": "1056px",
+        "width": "114px",
+        "height": "27px"
+      },
+      "bbox": [
+        1056,
+        353,
+        1170,
+        380
+      ],
+      "area": 3078,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-2",
+      "confidence": 0.8637841939926147,
+      "position": {
+        "top": "349px",
+        "left": "1181px",
+        "width": "133px",
+        "height": "37px"
+      },
+      "bbox": [
+        1181,
+        349,
+        1314,
+        386
+      ],
+      "area": 4921,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-3",
+      "confidence": 0.8482624292373657,
+      "position": {
+        "top": "427px",
+        "left": "794px",
+        "width": "136px",
+        "height": "40px"
+      },
+      "bbox": [
+        794,
+        427,
+        930,
+        467
+      ],
+      "area": 5440,
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-4",
+      "confidence": 0.8465366959571838,
+      "position": {
+        "top": "98px",
+        "left": "1322px",
+        "width": "110px",
+        "height": "28px"
+      },
+      "bbox": [
+        1322,
+        98,
+        1432,
+        126
+      ],
+      "area": 3080,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-5",
+      "confidence": 0.8427838683128357,
+      "position": {
+        "top": "388px",
+        "left": "1181px",
+        "width": "133px",
+        "height": "37px"
+      },
+      "bbox": [
+        1181,
+        388,
+        1314,
+        425
+      ],
+      "area": 4921,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-6",
+      "confidence": 0.8383776545524597,
+      "position": {
+        "top": "348px",
+        "left": "794px",
+        "width": "138px",
+        "height": "38px"
+      },
+      "bbox": [
+        794,
+        348,
+        932,
+        386
+      ],
+      "area": 5244,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-7",
+      "confidence": 0.8173820972442627,
+      "position": {
+        "top": "275px",
+        "left": "529px",
+        "width": "131px",
+        "height": "45px"
+      },
+      "bbox": [
+        529,
+        275,
+        660,
+        320
+      ],
+      "area": 5895,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-8",
+      "confidence": 0.8161020278930664,
+      "position": {
+        "top": "389px",
+        "left": "797px",
+        "width": "133px",
+        "height": "36px"
+      },
+      "bbox": [
+        797,
+        389,
+        930,
+        425
+      ],
+      "area": 4788,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-9",
+      "confidence": 0.8147097826004028,
+      "position": {
+        "top": "310px",
+        "left": "1183px",
+        "width": "135px",
+        "height": "36px"
+      },
+      "bbox": [
+        1183,
+        310,
+        1318,
+        346
+      ],
+      "area": 4860,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-10",
+      "confidence": 0.7991874814033508,
+      "position": {
+        "top": "429px",
+        "left": "1183px",
+        "width": "131px",
+        "height": "37px"
+      },
+      "bbox": [
+        1183,
+        429,
+        1314,
+        466
+      ],
+      "area": 4847,
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-11",
+      "confidence": 0.7759271860122681,
+      "position": {
+        "top": "65px",
+        "left": "842px",
+        "width": "101px",
+        "height": "26px"
+      },
+      "bbox": [
+        842,
+        65,
+        943,
+        91
+      ],
+      "area": 2626,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-12",
+      "confidence": 0.7729728817939758,
+      "position": {
+        "top": "270px",
+        "left": "798px",
+        "width": "134px",
+        "height": "36px"
+      },
+      "bbox": [
+        798,
+        270,
+        932,
+        306
+      ],
+      "area": 4824,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-13",
+      "confidence": 0.7722711563110352,
+      "position": {
+        "top": "273px",
+        "left": "662px",
+        "width": "122px",
+        "height": "49px"
+      },
+      "bbox": [
+        662,
+        273,
+        784,
+        322
+      ],
+      "area": 5978,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-14",
+      "confidence": 0.7659640312194824,
+      "position": {
+        "top": "232px",
+        "left": "13px",
+        "width": "138px",
+        "height": "38px"
+      },
+      "bbox": [
+        13,
+        232,
+        151,
+        270
+      ],
+      "area": 5244,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-15",
+      "confidence": 0.7596147656440735,
+      "position": {
+        "top": "269px",
+        "left": "1188px",
+        "width": "126px",
+        "height": "39px"
+      },
+      "bbox": [
+        1188,
+        269,
+        1314,
+        308
+      ],
+      "area": 4914,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-16",
+      "confidence": 0.7519807815551758,
+      "position": {
+        "top": "308px",
+        "left": "798px",
+        "width": "133px",
+        "height": "38px"
+      },
+      "bbox": [
+        798,
+        308,
+        931,
+        346
+      ],
+      "area": 5054,
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-17",
+      "confidence": 0.7498457431793213,
+      "position": {
+        "top": "98px",
+        "left": "1200px",
+        "width": "110px",
+        "height": "28px"
+      },
+      "bbox": [
+        1200,
+        98,
+        1310,
+        126
+      ],
+      "area": 3080,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-18",
+      "confidence": 0.7441126108169556,
+      "position": {
+        "top": "272px",
+        "left": "270px",
+        "width": "133px",
+        "height": "47px"
+      },
+      "bbox": [
+        270,
+        272,
+        403,
+        319
+      ],
+      "area": 6251,
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-19",
+      "confidence": 0.7392319440841675,
+      "position": {
+        "top": "64px",
+        "left": "957px",
+        "width": "98px",
+        "height": "27px"
+      },
+      "bbox": [
+        957,
+        64,
+        1055,
+        91
+      ],
+      "area": 2646,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-20",
+      "confidence": 0.7370473146438599,
+      "position": {
+        "top": "233px",
+        "left": "529px",
+        "width": "128px",
+        "height": "36px"
+      },
+      "bbox": [
+        529,
+        233,
+        657,
+        269
+      ],
+      "area": 4608,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-21",
+      "confidence": 0.7260791063308716,
+      "position": {
+        "top": "97px",
+        "left": "752px",
+        "width": "85px",
+        "height": "31px"
+      },
+      "bbox": [
+        752,
+        97,
+        837,
+        128
+      ],
+      "area": 2635,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-22",
+      "confidence": 0.7165345549583435,
+      "position": {
+        "top": "233px",
+        "left": "796px",
+        "width": "133px",
+        "height": "35px"
+      },
+      "bbox": [
+        796,
+        233,
+        929,
+        268
+      ],
+      "area": 4655,
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-23",
+      "confidence": 0.7123594880104065,
+      "position": {
+        "top": "316px",
+        "left": "1323px",
+        "width": "108px",
+        "height": "24px"
+      },
+      "bbox": [
+        1323,
+        316,
+        1431,
+        340
+      ],
+      "area": 2592,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-24",
+      "confidence": 0.701384425163269,
+      "position": {
+        "top": "232px",
+        "left": "1486px",
+        "width": "71px",
+        "height": "31px"
+      },
+      "bbox": [
+        1486,
+        232,
+        1557,
+        263
+      ],
+      "area": 2201,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-25",
+      "confidence": 0.6938050985336304,
+      "position": {
+        "top": "196px",
+        "left": "1430px",
+        "width": "66px",
+        "height": "25px"
+      },
+      "bbox": [
+        1430,
+        196,
+        1496,
+        221
+      ],
+      "area": 1650,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-26",
+      "confidence": 0.6913679838180542,
+      "position": {
+        "top": "133px",
+        "left": "1474px",
+        "width": "64px",
+        "height": "29px"
+      },
+      "bbox": [
+        1474,
+        133,
+        1538,
+        162
+      ],
+      "area": 1856,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-27",
+      "confidence": 0.6829713582992554,
+      "position": {
+        "top": "95px",
+        "left": "14px",
+        "width": "95px",
+        "height": "34px"
+      },
+      "bbox": [
+        14,
+        95,
+        109,
+        129
+      ],
+      "area": 3230,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-28",
+      "confidence": 0.6803938150405884,
+      "position": {
+        "top": "272px",
+        "left": "150px",
+        "width": "115px",
+        "height": "48px"
+      },
+      "bbox": [
+        150,
+        272,
+        265,
+        320
+      ],
+      "area": 5520,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-29",
+      "confidence": 0.6797438263893127,
+      "position": {
+        "top": "61px",
+        "left": "397px",
+        "width": "75px",
+        "height": "31px"
+      },
+      "bbox": [
+        397,
+        61,
+        472,
+        92
+      ],
+      "area": 2325,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-30",
+      "confidence": 0.6727729439735413,
+      "position": {
+        "top": "98px",
+        "left": "1122px",
+        "width": "70px",
+        "height": "30px"
+      },
+      "bbox": [
+        1122,
+        98,
+        1192,
+        128
+      ],
+      "area": 2100,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-31",
+      "confidence": 0.6671510338783264,
+      "position": {
+        "top": "197px",
+        "left": "1500px",
+        "width": "61px",
+        "height": "23px"
+      },
+      "bbox": [
+        1500,
+        197,
+        1561,
+        220
+      ],
+      "area": 1403,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-32",
+      "confidence": 0.6580473780632019,
+      "position": {
+        "top": "61px",
+        "left": "751px",
+        "width": "86px",
+        "height": "30px"
+      },
+      "bbox": [
+        751,
+        61,
+        837,
+        91
+      ],
+      "area": 2580,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-33",
+      "confidence": 0.6536824703216553,
+      "position": {
+        "top": "273px",
+        "left": "16px",
+        "width": "132px",
+        "height": "47px"
+      },
+      "bbox": [
+        16,
+        273,
+        148,
+        320
+      ],
+      "area": 6204,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-34",
+      "confidence": 0.6433066725730896,
+      "position": {
+        "top": "231px",
+        "left": "270px",
+        "width": "133px",
+        "height": "38px"
+      },
+      "bbox": [
+        270,
+        231,
+        403,
+        269
+      ],
+      "area": 5054,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-35",
+      "confidence": 0.6326823234558105,
       "position": {
         "top": "129px",
-        "left": "30px",
-        "width": "934px",
-        "height": "362px"
+        "left": "16px",
+        "width": "94px",
+        "height": "39px"
       },
       "bbox": [
-        30,
+        16,
         129,
-        964,
-        491
+        110,
+        168
       ],
-      "area": 338108,
+      "area": 3666,
       "children": []
     },
     {
-      "type": "Group",
-      "id": "Group-2",
-      "confidence": 0.1849697083234787,
+      "type": "Output",
+      "id": "Output-36",
+      "confidence": 0.619661808013916,
       "position": {
-        "top": "150px",
-        "left": "146px",
-        "width": "908px",
-        "height": "372px"
+        "top": "99px",
+        "left": "396px",
+        "width": "74px",
+        "height": "30px"
       },
       "bbox": [
-        146,
-        150,
-        1054,
-        522
+        396,
+        99,
+        470,
+        129
       ],
-      "area": 337776,
+      "area": 2220,
       "children": []
     },
     {
-      "type": "Group",
-      "id": "Group-3",
-      "confidence": 0.18145760893821716,
+      "type": "Output",
+      "id": "Output-37",
+      "confidence": 0.5931552648544312,
       "position": {
-        "top": "37px",
-        "left": "132px",
-        "width": "930px",
-        "height": "355px"
+        "top": "231px",
+        "left": "1180px",
+        "width": "134px",
+        "height": "37px"
       },
       "bbox": [
-        132,
-        37,
-        1062,
-        392
+        1180,
+        231,
+        1314,
+        268
       ],
-      "area": 330150,
+      "area": 4958,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-38",
+      "confidence": 0.592498242855072,
+      "position": {
+        "top": "233px",
+        "left": "659px",
+        "width": "125px",
+        "height": "34px"
+      },
+      "bbox": [
+        659,
+        233,
+        784,
+        267
+      ],
+      "area": 4250,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-39",
+      "confidence": 0.570125937461853,
+      "position": {
+        "top": "131px",
+        "left": "1120px",
+        "width": "75px",
+        "height": "33px"
+      },
+      "bbox": [
+        1120,
+        131,
+        1195,
+        164
+      ],
+      "area": 2475,
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-40",
+      "confidence": 0.5627280473709106,
+      "position": {
+        "top": "64px",
+        "left": "1197px",
+        "width": "110px",
+        "height": "27px"
+      },
+      "bbox": [
+        1197,
+        64,
+        1307,
+        91
+      ],
+      "area": 2970,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-41",
+      "confidence": 0.555627167224884,
+      "position": {
+        "top": "196px",
+        "left": "717px",
+        "width": "61px",
+        "height": "25px"
+      },
+      "bbox": [
+        717,
+        196,
+        778,
+        221
+      ],
+      "area": 1525,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-42",
+      "confidence": 0.5483799576759338,
+      "position": {
+        "top": "275px",
+        "left": "412px",
+        "width": "109px",
+        "height": "42px"
+      },
+      "bbox": [
+        412,
+        275,
+        521,
+        317
+      ],
+      "area": 4578,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-43",
+      "confidence": 0.5448442697525024,
+      "position": {
+        "top": "470px",
+        "left": "799px",
+        "width": "136px",
+        "height": "94px"
+      },
+      "bbox": [
+        799,
+        470,
+        935,
+        564
+      ],
+      "area": 12784,
       "children": []
     },
     {
       "type": "Group",
-      "id": "Group-4",
-      "confidence": 0.054156143218278885,
+      "id": "Group-44",
+      "confidence": 0.541181743144989,
       "position": {
-        "top": "81px",
+        "top": "206px",
+        "left": "792px",
+        "width": "778px",
+        "height": "375px"
+      },
+      "bbox": [
+        792,
+        206,
+        1570,
+        581
+      ],
+      "area": 291750,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-45",
+      "confidence": 0.5360851287841797,
+      "position": {
+        "top": "195px",
+        "left": "1333px",
+        "width": "85px",
+        "height": "27px"
+      },
+      "bbox": [
+        1333,
+        195,
+        1418,
+        222
+      ],
+      "area": 2295,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-46",
+      "confidence": 0.532052218914032,
+      "position": {
+        "top": "319px",
+        "left": "15px",
+        "width": "133px",
+        "height": "42px"
+      },
+      "bbox": [
+        15,
+        319,
+        148,
+        361
+      ],
+      "area": 5586,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-47",
+      "confidence": 0.5253068208694458,
+      "position": {
+        "top": "192px",
+        "left": "650px",
+        "width": "64px",
+        "height": "30px"
+      },
+      "bbox": [
+        650,
+        192,
+        714,
+        222
+      ],
+      "area": 1920,
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-48",
+      "confidence": 0.5232630968093872,
+      "position": {
+        "top": "54px",
+        "left": "27px",
+        "width": "1542px",
+        "height": "123px"
+      },
+      "bbox": [
+        27,
+        54,
+        1569,
+        177
+      ],
+      "area": 189666,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-49",
+      "confidence": 0.5232074856758118,
+      "position": {
+        "top": "59px",
+        "left": "1095px",
+        "width": "98px",
+        "height": "33px"
+      },
+      "bbox": [
+        1095,
+        59,
+        1193,
+        92
+      ],
+      "area": 3234,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-50",
+      "confidence": 0.5221374034881592,
+      "position": {
+        "top": "59px",
+        "left": "15px",
+        "width": "96px",
+        "height": "38px"
+      },
+      "bbox": [
+        15,
+        59,
+        111,
+        97
+      ],
+      "area": 3648,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-51",
+      "confidence": 0.4990485608577728,
+      "position": {
+        "top": "223px",
+        "left": "151px",
+        "width": "114px",
+        "height": "45px"
+      },
+      "bbox": [
+        151,
+        223,
+        265,
+        268
+      ],
+      "area": 5130,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-52",
+      "confidence": 0.4925859570503235,
+      "position": {
+        "top": "230px",
+        "left": "412px",
+        "width": "111px",
+        "height": "38px"
+      },
+      "bbox": [
+        412,
+        230,
+        523,
+        268
+      ],
+      "area": 4218,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-53",
+      "confidence": 0.4800208508968353,
+      "position": {
+        "top": "194px",
+        "left": "1264px",
+        "width": "62px",
+        "height": "29px"
+      },
+      "bbox": [
+        1264,
+        194,
+        1326,
+        223
+      ],
+      "area": 1798,
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-54",
+      "confidence": 0.47117772698402405,
+      "position": {
+        "top": "10px",
         "left": "0px",
-        "width": "817px",
-        "height": "441px"
+        "width": "1062px",
+        "height": "41px"
       },
       "bbox": [
         0,
-        81,
-        817,
-        522
+        10,
+        1062,
+        51
       ],
-      "area": 360297,
+      "area": 43542,
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-55",
+      "confidence": 0.40704724192619324,
+      "position": {
+        "top": "8px",
+        "left": "347px",
+        "width": "1150px",
+        "height": "43px"
+      },
+      "bbox": [
+        347,
+        8,
+        1497,
+        51
+      ],
+      "area": 49450,
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-56",
+      "confidence": 0.3980923295021057,
+      "position": {
+        "top": "236px",
+        "left": "940px",
+        "width": "232px",
+        "height": "33px"
+      },
+      "bbox": [
+        940,
+        236,
+        1172,
+        269
+      ],
+      "area": 7656,
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-57",
+      "confidence": 0.3926992416381836,
+      "position": {
+        "top": "392px",
+        "left": "940px",
+        "width": "111px",
+        "height": "26px"
+      },
+      "bbox": [
+        940,
+        392,
+        1051,
+        418
+      ],
+      "area": 2886,
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-58",
+      "confidence": 0.3818357288837433,
+      "position": {
+        "top": "393px",
+        "left": "1057px",
+        "width": "113px",
+        "height": "25px"
+      },
+      "bbox": [
+        1057,
+        393,
+        1170,
+        418
+      ],
+      "area": 2825,
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-59",
+      "confidence": 0.36909979581832886,
+      "position": {
+        "top": "237px",
+        "left": "1327px",
+        "width": "153px",
+        "height": "30px"
+      },
+      "bbox": [
+        1327,
+        237,
+        1480,
+        267
+      ],
+      "area": 4590,
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-60",
+      "confidence": 0.36889609694480896,
+      "position": {
+        "top": "3px",
+        "left": "150px",
+        "width": "1146px",
+        "height": "48px"
+      },
+      "bbox": [
+        150,
+        3,
+        1296,
+        51
+      ],
+      "area": 55008,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-61",
+      "confidence": 0.36732420325279236,
+      "position": {
+        "top": "468px",
+        "left": "795px",
+        "width": "136px",
+        "height": "63px"
+      },
+      "bbox": [
+        795,
+        468,
+        931,
+        531
+      ],
+      "area": 8568,
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-62",
+      "confidence": 0.3372902274131775,
+      "position": {
+        "top": "59px",
+        "left": "110px",
+        "width": "275px",
+        "height": "31px"
+      },
+      "bbox": [
+        110,
+        59,
+        385,
+        90
+      ],
+      "area": 8525,
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-63",
+      "confidence": 0.3236096203327179,
+      "position": {
+        "top": "1px",
+        "left": "498px",
+        "width": "1074px",
+        "height": "50px"
+      },
+      "bbox": [
+        498,
+        1,
+        1572,
+        51
+      ],
+      "area": 53700,
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-64",
+      "confidence": 0.2770608365535736,
+      "position": {
+        "top": "353px",
+        "left": "1322px",
+        "width": "245px",
+        "height": "26px"
+      },
+      "bbox": [
+        1322,
+        353,
+        1567,
+        379
+      ],
+      "area": 6370,
+      "children": []
+    },
+    {
+      "type": "Grid",
+      "id": "Grid-65",
+      "confidence": 0.2652720510959625,
+      "position": {
+        "top": "361px",
+        "left": "0px",
+        "width": "786px",
+        "height": "233px"
+      },
+      "bbox": [
+        0,
+        361,
+        786,
+        594
+      ],
+      "area": 183138,
+      "children": []
+    },
+    {
+      "type": "TextArea",
+      "id": "TextArea-66",
+      "confidence": 0.26422587037086487,
+      "position": {
+        "top": "480px",
+        "left": "940px",
+        "width": "606px",
+        "height": "71px"
+      },
+      "bbox": [
+        940,
+        480,
+        1546,
+        551
+      ],
+      "area": 43026,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-67",
+      "confidence": 0.25526416301727295,
+      "position": {
+        "top": "183px",
+        "left": "790px",
+        "width": "137px",
+        "height": "46px"
+      },
+      "bbox": [
+        790,
+        183,
+        927,
+        229
+      ],
+      "area": 6302,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-68",
+      "confidence": 0.25489434599876404,
+      "position": {
+        "top": "321px",
+        "left": "151px",
+        "width": "107px",
+        "height": "39px"
+      },
+      "bbox": [
+        151,
+        321,
+        258,
+        360
+      ],
+      "area": 4173,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-69",
+      "confidence": 0.24168333411216736,
+      "position": {
+        "top": "189px",
+        "left": "545px",
+        "width": "94px",
+        "height": "38px"
+      },
+      "bbox": [
+        545,
+        189,
+        639,
+        227
+      ],
+      "area": 3572,
+      "children": []
+    },
+    {
+      "type": "CheckBoxGroup",
+      "id": "CheckBoxGroup-70",
+      "confidence": 0.24084028601646423,
+      "position": {
+        "top": "97px",
+        "left": "851px",
+        "width": "198px",
+        "height": "32px"
+      },
+      "bbox": [
+        851,
+        97,
+        1049,
+        129
+      ],
+      "area": 6336,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-71",
+      "confidence": 0.23620492219924927,
+      "position": {
+        "top": "61px",
+        "left": "1123px",
+        "width": "70px",
+        "height": "31px"
+      },
+      "bbox": [
+        1123,
+        61,
+        1193,
+        92
+      ],
+      "area": 2170,
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-72",
+      "confidence": 0.23103633522987366,
+      "position": {
+        "top": "60px",
+        "left": "469px",
+        "width": "287px",
+        "height": "29px"
+      },
+      "bbox": [
+        469,
+        60,
+        756,
+        89
+      ],
+      "area": 8323,
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-73",
+      "confidence": 0.22823868691921234,
+      "position": {
+        "top": "57px",
+        "left": "470px",
+        "width": "273px",
+        "height": "32px"
+      },
+      "bbox": [
+        470,
+        57,
+        743,
+        89
+      ],
+      "area": 8736,
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-74",
+      "confidence": 0.226167231798172,
+      "position": {
+        "top": "154px",
+        "left": "0px",
+        "width": "1504px",
+        "height": "420px"
+      },
+      "bbox": [
+        0,
+        154,
+        1504,
+        574
+      ],
+      "area": 631680,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-75",
+      "confidence": 0.22275079786777496,
+      "position": {
+        "top": "187px",
+        "left": "790px",
+        "width": "108px",
+        "height": "41px"
+      },
+      "bbox": [
+        790,
+        187,
+        898,
+        228
+      ],
+      "area": 4428,
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-76",
+      "confidence": 0.21349430084228516,
+      "position": {
+        "top": "392px",
+        "left": "1056px",
+        "width": "114px",
+        "height": "27px"
+      },
+      "bbox": [
+        1056,
+        392,
+        1170,
+        419
+      ],
+      "area": 3078,
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-77",
+      "confidence": 0.20180636644363403,
+      "position": {
+        "top": "275px",
+        "left": "924px",
+        "width": "251px",
+        "height": "28px"
+      },
+      "bbox": [
+        924,
+        275,
+        1175,
+        303
+      ],
+      "area": 7028,
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-78",
+      "confidence": 0.2017393559217453,
+      "position": {
+        "top": "313px",
+        "left": "939px",
+        "width": "118px",
+        "height": "27px"
+      },
+      "bbox": [
+        939,
+        313,
+        1057,
+        340
+      ],
+      "area": 3186,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-79",
+      "confidence": 0.1990794539451599,
+      "position": {
+        "top": "231px",
+        "left": "799px",
+        "width": "132px",
+        "height": "64px"
+      },
+      "bbox": [
+        799,
+        231,
+        931,
+        295
+      ],
+      "area": 8448,
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-80",
+      "confidence": 0.1906418353319168,
+      "position": {
+        "top": "356px",
+        "left": "899px",
+        "width": "663px",
+        "height": "215px"
+      },
+      "bbox": [
+        899,
+        356,
+        1562,
+        571
+      ],
+      "area": 142545,
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-81",
+      "confidence": 0.17599159479141235,
+      "position": {
+        "top": "276px",
+        "left": "938px",
+        "width": "233px",
+        "height": "28px"
+      },
+      "bbox": [
+        938,
+        276,
+        1171,
+        304
+      ],
+      "area": 6524,
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-82",
+      "confidence": 0.17567558586597443,
+      "position": {
+        "top": "12px",
+        "left": "0px",
+        "width": "862px",
+        "height": "35px"
+      },
+      "bbox": [
+        0,
+        12,
+        862,
+        47
+      ],
+      "area": 30170,
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-83",
+      "confidence": 0.16891616582870483,
+      "position": {
+        "top": "428px",
+        "left": "940px",
+        "width": "238px",
+        "height": "37px"
+      },
+      "bbox": [
+        940,
+        428,
+        1178,
+        465
+      ],
+      "area": 8806,
+      "children": []
+    },
+    {
+      "type": "SearchInput",
+      "id": "SearchInput-84",
+      "confidence": 0.16043245792388916,
+      "position": {
+        "top": "97px",
+        "left": "118px",
+        "width": "270px",
+        "height": "30px"
+      },
+      "bbox": [
+        118,
+        97,
+        388,
+        127
+      ],
+      "area": 8100,
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-85",
+      "confidence": 0.1595069020986557,
+      "position": {
+        "top": "132px",
+        "left": "311px",
+        "width": "829px",
+        "height": "32px"
+      },
+      "bbox": [
+        311,
+        132,
+        1140,
+        164
+      ],
+      "area": 26528,
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-86",
+      "confidence": 0.1556902676820755,
+      "position": {
+        "top": "134px",
+        "left": "115px",
+        "width": "207px",
+        "height": "25px"
+      },
+      "bbox": [
+        115,
+        134,
+        322,
+        159
+      ],
+      "area": 5175,
+      "children": []
+    },
+    {
+      "type": "SearchInput",
+      "id": "SearchInput-87",
+      "confidence": 0.150728240609169,
+      "position": {
+        "top": "352px",
+        "left": "1322px",
+        "width": "236px",
+        "height": "29px"
+      },
+      "bbox": [
+        1322,
+        352,
+        1558,
+        381
+      ],
+      "area": 6844,
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-88",
+      "confidence": 0.14786258339881897,
+      "position": {
+        "top": "134px",
+        "left": "117px",
+        "width": "196px",
+        "height": "28px"
+      },
+      "bbox": [
+        117,
+        134,
+        313,
+        162
+      ],
+      "area": 5488,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-89",
+      "confidence": 0.1476113647222519,
+      "position": {
+        "top": "56px",
+        "left": "14px",
+        "width": "104px",
+        "height": "53px"
+      },
+      "bbox": [
+        14,
+        56,
+        118,
+        109
+      ],
+      "area": 5512,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-90",
+      "confidence": 0.1434876024723053,
+      "position": {
+        "top": "229px",
+        "left": "661px",
+        "width": "120px",
+        "height": "55px"
+      },
+      "bbox": [
+        661,
+        229,
+        781,
+        284
+      ],
+      "area": 6600,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-91",
+      "confidence": 0.14220653474330902,
+      "position": {
+        "top": "390px",
+        "left": "797px",
+        "width": "135px",
+        "height": "62px"
+      },
+      "bbox": [
+        797,
+        390,
+        932,
+        452
+      ],
+      "area": 8370,
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-92",
+      "confidence": 0.14124520123004913,
+      "position": {
+        "top": "466px",
+        "left": "938px",
+        "width": "631px",
+        "height": "104px"
+      },
+      "bbox": [
+        938,
+        466,
+        1569,
+        570
+      ],
+      "area": 65624,
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-93",
+      "confidence": 0.13016332685947418,
+      "position": {
+        "top": "96px",
+        "left": "113px",
+        "width": "289px",
+        "height": "30px"
+      },
+      "bbox": [
+        113,
+        96,
+        402,
+        126
+      ],
+      "area": 8670,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-94",
+      "confidence": 0.1244654655456543,
+      "position": {
+        "top": "497px",
+        "left": "800px",
+        "width": "131px",
+        "height": "69px"
+      },
+      "bbox": [
+        800,
+        497,
+        931,
+        566
+      ],
+      "area": 9039,
+      "children": []
+    },
+    {
+      "type": "NumberEditor",
+      "id": "NumberEditor-95",
+      "confidence": 0.12363303452730179,
+      "position": {
+        "top": "276px",
+        "left": "932px",
+        "width": "239px",
+        "height": "28px"
+      },
+      "bbox": [
+        932,
+        276,
+        1171,
+        304
+      ],
+      "area": 6692,
+      "children": []
+    },
+    {
+      "type": "NumberEditor",
+      "id": "NumberEditor-96",
+      "confidence": 0.12345163524150848,
+      "position": {
+        "top": "276px",
+        "left": "1324px",
+        "width": "227px",
+        "height": "28px"
+      },
+      "bbox": [
+        1324,
+        276,
+        1551,
+        304
+      ],
+      "area": 6356,
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-97",
+      "confidence": 0.12105933576822281,
+      "position": {
+        "top": "59px",
+        "left": "97px",
+        "width": "290px",
+        "height": "29px"
+      },
+      "bbox": [
+        97,
+        59,
+        387,
+        88
+      ],
+      "area": 8410,
+      "children": []
+    },
+    {
+      "type": "FormTitle",
+      "id": "FormTitle-98",
+      "confidence": 0.11989805847406387,
+      "position": {
+        "top": "176px",
+        "left": "5px",
+        "width": "670px",
+        "height": "40px"
+      },
+      "bbox": [
+        5,
+        176,
+        675,
+        216
+      ],
+      "area": 26800,
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-99",
+      "confidence": 0.11754843592643738,
+      "position": {
+        "top": "353px",
+        "left": "1318px",
+        "width": "240px",
+        "height": "29px"
+      },
+      "bbox": [
+        1318,
+        353,
+        1558,
+        382
+      ],
+      "area": 6960,
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-100",
+      "confidence": 0.11323604732751846,
+      "position": {
+        "top": "275px",
+        "left": "939px",
+        "width": "231px",
+        "height": "29px"
+      },
+      "bbox": [
+        939,
+        275,
+        1170,
+        304
+      ],
+      "area": 6699,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-101",
+      "confidence": 0.10936059057712555,
+      "position": {
+        "top": "488px",
+        "left": "800px",
+        "width": "134px",
+        "height": "57px"
+      },
+      "bbox": [
+        800,
+        488,
+        934,
+        545
+      ],
+      "area": 7638,
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-102",
+      "confidence": 0.1091311052441597,
+      "position": {
+        "top": "390px",
+        "left": "1324px",
+        "width": "239px",
+        "height": "33px"
+      },
+      "bbox": [
+        1324,
+        390,
+        1563,
+        423
+      ],
+      "area": 7887,
+      "children": []
+    },
+    {
+      "type": "FormTitle",
+      "id": "FormTitle-103",
+      "confidence": 0.10670015960931778,
+      "position": {
+        "top": "171px",
+        "left": "541px",
+        "width": "1004px",
+        "height": "47px"
+      },
+      "bbox": [
+        541,
+        171,
+        1545,
+        218
+      ],
+      "area": 47188,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-104",
+      "confidence": 0.10512828081846237,
+      "position": {
+        "top": "231px",
+        "left": "1187px",
+        "width": "128px",
+        "height": "55px"
+      },
+      "bbox": [
+        1187,
+        231,
+        1315,
+        286
+      ],
+      "area": 7040,
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-105",
+      "confidence": 0.10129623860120773,
+      "position": {
+        "top": "429px",
+        "left": "1321px",
+        "width": "237px",
+        "height": "36px"
+      },
+      "bbox": [
+        1321,
+        429,
+        1558,
+        465
+      ],
+      "area": 8532,
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-106",
+      "confidence": 0.10107939690351486,
+      "position": {
+        "top": "391px",
+        "left": "942px",
+        "width": "182px",
+        "height": "27px"
+      },
+      "bbox": [
+        942,
+        391,
+        1124,
+        418
+      ],
+      "area": 4914,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-107",
+      "confidence": 0.10044625401496887,
+      "position": {
+        "top": "59px",
+        "left": "1063px",
+        "width": "136px",
+        "height": "34px"
+      },
+      "bbox": [
+        1063,
+        59,
+        1199,
+        93
+      ],
+      "area": 4624,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-108",
+      "confidence": 0.09986311942338943,
+      "position": {
+        "top": "468px",
+        "left": "799px",
+        "width": "136px",
+        "height": "40px"
+      },
+      "bbox": [
+        799,
+        468,
+        935,
+        508
+      ],
+      "area": 5440,
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-109",
+      "confidence": 0.09946803748607635,
+      "position": {
+        "top": "153px",
+        "left": "0px",
+        "width": "997px",
+        "height": "428px"
+      },
+      "bbox": [
+        0,
+        153,
+        997,
+        581
+      ],
+      "area": 426716,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-110",
+      "confidence": 0.0990431159734726,
+      "position": {
+        "top": "269px",
+        "left": "1180px",
+        "width": "136px",
+        "height": "61px"
+      },
+      "bbox": [
+        1180,
+        269,
+        1316,
+        330
+      ],
+      "area": 8296,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-111",
+      "confidence": 0.09865713119506836,
+      "position": {
+        "top": "180px",
+        "left": "6px",
+        "width": "148px",
+        "height": "47px"
+      },
+      "bbox": [
+        6,
+        180,
+        154,
+        227
+      ],
+      "area": 6956,
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-112",
+      "confidence": 0.09765718877315521,
+      "position": {
+        "top": "96px",
+        "left": "115px",
+        "width": "274px",
+        "height": "29px"
+      },
+      "bbox": [
+        115,
+        96,
+        389,
+        125
+      ],
+      "area": 7946,
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-113",
+      "confidence": 0.09682240337133408,
+      "position": {
+        "top": "276px",
+        "left": "1325px",
+        "width": "232px",
+        "height": "28px"
+      },
+      "bbox": [
+        1325,
+        276,
+        1557,
+        304
+      ],
+      "area": 6496,
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-114",
+      "confidence": 0.09429827332496643,
+      "position": {
+        "top": "173px",
+        "left": "605px",
+        "width": "967px",
+        "height": "45px"
+      },
+      "bbox": [
+        605,
+        173,
+        1572,
+        218
+      ],
+      "area": 43515,
+      "children": []
+    },
+    {
+      "type": "CheckBoxGroup",
+      "id": "CheckBoxGroup-115",
+      "confidence": 0.09344347566366196,
+      "position": {
+        "top": "97px",
+        "left": "901px",
+        "width": "159px",
+        "height": "31px"
+      },
+      "bbox": [
+        901,
+        97,
+        1060,
+        128
+      ],
+      "area": 4929,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-116",
+      "confidence": 0.09281812608242035,
+      "position": {
+        "top": "309px",
+        "left": "797px",
+        "width": "135px",
+        "height": "71px"
+      },
+      "bbox": [
+        797,
+        309,
+        932,
+        380
+      ],
+      "area": 9585,
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-117",
+      "confidence": 0.09049149602651596,
+      "position": {
+        "top": "313px",
+        "left": "1434px",
+        "width": "127px",
+        "height": "28px"
+      },
+      "bbox": [
+        1434,
+        313,
+        1561,
+        341
+      ],
+      "area": 3556,
+      "children": []
+    },
+    {
+      "type": "TextArea",
+      "id": "TextArea-118",
+      "confidence": 0.09044667333364487,
+      "position": {
+        "top": "468px",
+        "left": "937px",
+        "width": "632px",
+        "height": "102px"
+      },
+      "bbox": [
+        937,
+        468,
+        1569,
+        570
+      ],
+      "area": 64464,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-119",
+      "confidence": 0.09010540693998337,
+      "position": {
+        "top": "102px",
+        "left": "15px",
+        "width": "95px",
+        "height": "64px"
+      },
+      "bbox": [
+        15,
+        102,
+        110,
+        166
+      ],
+      "area": 6080,
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-120",
+      "confidence": 0.08557645976543427,
+      "position": {
+        "top": "52px",
+        "left": "6px",
+        "width": "848px",
+        "height": "123px"
+      },
+      "bbox": [
+        6,
+        52,
+        854,
+        175
+      ],
+      "area": 104304,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-121",
+      "confidence": 0.08523426204919815,
+      "position": {
+        "top": "187px",
+        "left": "795px",
+        "width": "136px",
+        "height": "74px"
+      },
+      "bbox": [
+        795,
+        187,
+        931,
+        261
+      ],
+      "area": 10064,
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-122",
+      "confidence": 0.07433325052261353,
+      "position": {
+        "top": "9px",
+        "left": "782px",
+        "width": "776px",
+        "height": "43px"
+      },
+      "bbox": [
+        782,
+        9,
+        1558,
+        52
+      ],
+      "area": 33368,
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-123",
+      "confidence": 0.0735180675983429,
+      "position": {
+        "top": "311px",
+        "left": "1046px",
+        "width": "129px",
+        "height": "30px"
+      },
+      "bbox": [
+        1046,
+        311,
+        1175,
+        341
+      ],
+      "area": 3870,
+      "children": []
+    },
+    {
+      "type": "FormTitle",
+      "id": "FormTitle-124",
+      "confidence": 0.073202945291996,
+      "position": {
+        "top": "15px",
+        "left": "0px",
+        "width": "795px",
+        "height": "33px"
+      },
+      "bbox": [
+        0,
+        15,
+        795,
+        48
+      ],
+      "area": 26235,
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-125",
+      "confidence": 0.06952221691608429,
+      "position": {
+        "top": "186px",
+        "left": "0px",
+        "width": "788px",
+        "height": "182px"
+      },
+      "bbox": [
+        0,
+        186,
+        788,
+        368
+      ],
+      "area": 143416,
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-126",
+      "confidence": 0.06709983944892883,
+      "position": {
+        "top": "312px",
+        "left": "1432px",
+        "width": "130px",
+        "height": "29px"
+      },
+      "bbox": [
+        1432,
+        312,
+        1562,
+        341
+      ],
+      "area": 3770,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-127",
+      "confidence": 0.06703314185142517,
+      "position": {
+        "top": "349px",
+        "left": "1178px",
+        "width": "138px",
+        "height": "58px"
+      },
+      "bbox": [
+        1178,
+        349,
+        1316,
+        407
+      ],
+      "area": 8004,
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-128",
+      "confidence": 0.0663861632347107,
+      "position": {
+        "top": "0px",
+        "left": "0px",
+        "width": "784px",
+        "height": "41px"
+      },
+      "bbox": [
+        0,
+        0,
+        784,
+        41
+      ],
+      "area": 32144,
+      "children": []
+    },
+    {
+      "type": "NumberEditor",
+      "id": "NumberEditor-129",
+      "confidence": 0.06623126566410065,
+      "position": {
+        "top": "312px",
+        "left": "978px",
+        "width": "198px",
+        "height": "29px"
+      },
+      "bbox": [
+        978,
+        312,
+        1176,
+        341
+      ],
+      "area": 5742,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-130",
+      "confidence": 0.06586740165948868,
+      "position": {
+        "top": "100px",
+        "left": "1321px",
+        "width": "111px",
+        "height": "26px"
+      },
+      "bbox": [
+        1321,
+        100,
+        1432,
+        126
+      ],
+      "area": 2886,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-131",
+      "confidence": 0.06274008005857468,
+      "position": {
+        "top": "82px",
+        "left": "10px",
+        "width": "109px",
+        "height": "47px"
+      },
+      "bbox": [
+        10,
+        82,
+        119,
+        129
+      ],
+      "area": 5123,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-132",
+      "confidence": 0.06211209297180176,
+      "position": {
+        "top": "193px",
+        "left": "482px",
+        "width": "62px",
+        "height": "30px"
+      },
+      "bbox": [
+        482,
+        193,
+        544,
+        223
+      ],
+      "area": 1860,
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-133",
+      "confidence": 0.05957919731736183,
+      "position": {
+        "top": "388px",
+        "left": "1327px",
+        "width": "235px",
+        "height": "35px"
+      },
+      "bbox": [
+        1327,
+        388,
+        1562,
+        423
+      ],
+      "area": 8225,
+      "children": []
+    },
+    {
+      "type": "NumberEditor",
+      "id": "NumberEditor-134",
+      "confidence": 0.05935104191303253,
+      "position": {
+        "top": "313px",
+        "left": "1416px",
+        "width": "144px",
+        "height": "29px"
+      },
+      "bbox": [
+        1416,
+        313,
+        1560,
+        342
+      ],
+      "area": 4176,
+      "children": []
+    },
+    {
+      "type": "FormTitle",
+      "id": "FormTitle-135",
+      "confidence": 0.058857936412096024,
+      "position": {
+        "top": "173px",
+        "left": "634px",
+        "width": "746px",
+        "height": "49px"
+      },
+      "bbox": [
+        634,
+        173,
+        1380,
+        222
+      ],
+      "area": 36554,
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-136",
+      "confidence": 0.058076269924640656,
+      "position": {
+        "top": "0px",
+        "left": "81px",
+        "width": "1030px",
+        "height": "42px"
+      },
+      "bbox": [
+        81,
+        0,
+        1111,
+        42
+      ],
+      "area": 43260,
+      "children": []
+    },
+    {
+      "type": "CheckBoxGroup",
+      "id": "CheckBoxGroup-137",
+      "confidence": 0.05778098478913307,
+      "position": {
+        "top": "98px",
+        "left": "960px",
+        "width": "114px",
+        "height": "30px"
+      },
+      "bbox": [
+        960,
+        98,
+        1074,
+        128
+      ],
+      "area": 3420,
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-138",
+      "confidence": 0.05739283934235573,
+      "position": {
+        "top": "429px",
+        "left": "938px",
+        "width": "159px",
+        "height": "35px"
+      },
+      "bbox": [
+        938,
+        429,
+        1097,
+        464
+      ],
+      "area": 5565,
+      "children": []
+    },
+    {
+      "type": "NumberEditor",
+      "id": "NumberEditor-139",
+      "confidence": 0.05710629001259804,
+      "position": {
+        "top": "314px",
+        "left": "940px",
+        "width": "110px",
+        "height": "26px"
+      },
+      "bbox": [
+        940,
+        314,
+        1050,
+        340
+      ],
+      "area": 2860,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-140",
+      "confidence": 0.05394207313656807,
+      "position": {
+        "top": "226px",
+        "left": "150px",
+        "width": "115px",
+        "height": "60px"
+      },
+      "bbox": [
+        150,
+        226,
+        265,
+        286
+      ],
+      "area": 6900,
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-141",
+      "confidence": 0.05368344113230705,
+      "position": {
+        "top": "223px",
+        "left": "1189px",
+        "width": "383px",
+        "height": "271px"
+      },
+      "bbox": [
+        1189,
+        223,
+        1572,
+        494
+      ],
+      "area": 103793,
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-142",
+      "confidence": 0.053366243839263916,
+      "position": {
+        "top": "96px",
+        "left": "459px",
+        "width": "304px",
+        "height": "31px"
+      },
+      "bbox": [
+        459,
+        96,
+        763,
+        127
+      ],
+      "area": 9424,
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-143",
+      "confidence": 0.052452996373176575,
+      "position": {
+        "top": "347px",
+        "left": "0px",
+        "width": "787px",
+        "height": "247px"
+      },
+      "bbox": [
+        0,
+        347,
+        787,
+        594
+      ],
+      "area": 194389,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-144",
+      "confidence": 0.05234755203127861,
+      "position": {
+        "top": "271px",
+        "left": "797px",
+        "width": "136px",
+        "height": "66px"
+      },
+      "bbox": [
+        797,
+        271,
+        933,
+        337
+      ],
+      "area": 8976,
+      "children": []
+    },
+    {
+      "type": "NumberEditor",
+      "id": "NumberEditor-145",
+      "confidence": 0.05199131742119789,
+      "position": {
+        "top": "99px",
+        "left": "113px",
+        "width": "277px",
+        "height": "26px"
+      },
+      "bbox": [
+        113,
+        99,
+        390,
+        125
+      ],
+      "area": 7202,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-146",
+      "confidence": 0.0515119805932045,
+      "position": {
+        "top": "309px",
+        "left": "1182px",
+        "width": "135px",
+        "height": "57px"
+      },
+      "bbox": [
+        1182,
+        309,
+        1317,
+        366
+      ],
+      "area": 7695,
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-147",
+      "confidence": 0.05143069103360176,
+      "position": {
+        "top": "327px",
+        "left": "152px",
+        "width": "631px",
+        "height": "33px"
+      },
+      "bbox": [
+        152,
+        327,
+        783,
+        360
+      ],
+      "area": 20823,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-148",
+      "confidence": 0.05098842456936836,
+      "position": {
+        "top": "189px",
+        "left": "506px",
+        "width": "137px",
+        "height": "37px"
+      },
+      "bbox": [
+        506,
+        189,
+        643,
+        226
+      ],
+      "area": 5069,
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-149",
+      "confidence": 0.05059073865413666,
+      "position": {
+        "top": "3px",
+        "left": "2px",
+        "width": "442px",
+        "height": "45px"
+      },
+      "bbox": [
+        2,
+        3,
+        444,
+        48
+      ],
+      "area": 19890,
       "children": []
     }
   ],
   "summary": {
-    "total_elements": 5,
-    "unique_types": 1,
-    "total_area": 1660521
+    "total_elements": 150,
+    "unique_types": 13,
+    "total_area": 3811410,
+    "class_counts": {
+      "DateInput": 12,
+      "Output": 62,
+      "InputBox": 13,
+      "Button": 10,
+      "Group": 10,
+      "AppHeader": 11,
+      "ComboBox": 14,
+      "Grid": 1,
+      "TextArea": 2,
+      "CheckBoxGroup": 3,
+      "SearchInput": 2,
+      "NumberEditor": 6,
+      "FormTitle": 4
+    }
   }
 }

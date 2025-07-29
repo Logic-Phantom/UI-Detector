@@ -16,7 +16,7 @@ with open(CLASSES_PATH, 'r', encoding='utf-8') as f:
     CLASS_NAMES = [line.strip() for line in f if line.strip()]
 
 class ImprovedUIDetector:
-    def __init__(self, model_path="runs/detect/train4/weights/best.pt"):
+    def __init__(self, model_path="runs/detect/train_aug_clean/weights/best.pt"):
         self.model_path = model_path
         if not os.path.exists(model_path):
             print(f"Warning: Custom model not found at {model_path}")
@@ -195,7 +195,7 @@ def main():
     print("=" * 50)
     # 테스트 이미지 경로 예시 (실제 데이터셋 기준)
     image_path = os.path.join(IMAGES_PATH, 'workScr4.png')
-    detector = ImprovedUIDetector()
+    detector = ImprovedUIDetector(model_path="runs/detect/train_aug_clean/weights/best.pt")
     print(f"📸 Processing image: {image_path}")
     ui_json = detector.detect_with_multiple_thresholds(image_path)
     if ui_json:
