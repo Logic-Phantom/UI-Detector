@@ -4,6 +4,7 @@ import numpy as np
 from ultralytics import YOLO
 import os
 from pathlib import Path
+import datetime
 
 # 실제 학습 데이터셋 기준 경로
 DATASET_PATH = 'yolo/datasets/screenshots/start'
@@ -191,24 +192,53 @@ class ImprovedUIDetector:
         print(f"  Largest element: {max(areas):,} pixels")
 
 def main():
-    print("🚀 Improved UI Detector (실제 학습 데이터셋 기준)")
+    print("🚀 Improved UI Detector (screenshots/ 하위 이미지 전체 테스트)")
     print("=" * 50)
-    # 테스트 이미지 경로 예시 (실제 데이터셋 기준)
-    image_path = os.path.join(IMAGES_PATH, 'workScr4.png')
     detector = ImprovedUIDetector(model_path="runs/detect/train_aug_clean/weights/best.pt")
-    print(f"📸 Processing image: {image_path}")
-    ui_json = detector.detect_with_multiple_thresholds(image_path)
-    if ui_json:
-        detector.analyze_results(ui_json)
-        output_path = './json/improved_detection_results.json'
-        os.makedirs(os.path.dirname(output_path), exist_ok=True)
-        with open(output_path, 'w', encoding='utf-8') as f:
-            json.dump(ui_json, f, indent=2, ensure_ascii=False)
-        print(f"\n💾 Results saved to: {output_path}")
-        print("\n📄 Detection Results:")
-        print(json.dumps(ui_json, indent=2, ensure_ascii=False))
-    else:
-        print("❌ Detection failed!")
+    image_dir = './screenshots/'
+    today = datetime.datetime.now().strftime('%Y-%m-%d')
+    json_dir = f'./json/{today}'
+    png_dir = f'./result/{today}'
+    os.makedirs(json_dir, exist_ok=True)
+    os.makedirs(png_dir, exist_ok=True)
+    for root, dirs, files in os.walk(image_dir):
+        for file in files:
+            if file.lower().endswith(('.png', '.jpg', '.jpeg')):
+                image_path = os.path.join(root, file)
+                print(f"\n📸 Processing image: {image_path}")
+                ui_json = detector.detect_with_multiple_thresholds(image_path, save_visualization=False)
+                if ui_json:
+                    detector.analyze_results(ui_json)
+                    # JSON 저장
+                    output_json = os.path.join(json_dir, f'{Path(file).stem}_detection.json')
+                    with open(output_json, 'w', encoding='utf-8') as f:
+                        json.dump(ui_json, f, indent=2, ensure_ascii=False)
+                    print(f"\n💾 Results saved to: {output_json}")
+                    # PNG 저장 (시각화)
+                    img = cv2.imread(image_path)
+                    results = detector.model(img, conf=ui_json['detection_info']['threshold'], verbose=False)
+                    if len(results) > 0:
+                        result_img = img.copy()
+                        result = results[0]
+                        if hasattr(result, 'boxes') and result.boxes is not None:
+                            boxes = result.boxes
+                            for i, box in enumerate(boxes):
+                                x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
+                                x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
+                                cls = int(box.cls[0].cpu().numpy())
+                                conf = float(box.conf[0].cpu().numpy())
+                                label = CLASS_NAMES[cls] if cls < len(CLASS_NAMES) else f'class_{cls}'
+                                color = detector._get_color(cls)
+                                cv2.rectangle(result_img, (x1, y1), (x2, y2), color, 2)
+                                label_text = f"{label}: {conf:.2f}"
+                                (text_width, text_height), _ = cv2.getTextSize(label_text, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 2)
+                                cv2.rectangle(result_img, (x1, y1 - text_height - 10), (x1 + text_width, y1), color, -1)
+                                cv2.putText(result_img, label_text, (x1, y1 - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+                        output_png = os.path.join(png_dir, f'{Path(file).stem}_detection.png')
+                        cv2.imwrite(output_png, result_img)
+                        print(f"🖼️  Visualization saved to: {output_png}")
+                else:
+                    print("❌ Detection failed!")
 
 if __name__ == "__main__":
     main() 
