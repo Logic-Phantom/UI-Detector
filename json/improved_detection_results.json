@@ -1,0 +1,113 @@
+{
+  "name": "test",
+  "image_path": "./screenshots/test.png",
+  "detection_info": {
+    "threshold": 0.05,
+    "total_detections": 5,
+    "average_confidence": 0.2075748212635517,
+    "detection_score": 1.0378741063177586,
+    "model_path": "runs/detect/train4/weights/best.pt"
+  },
+  "elements": [
+    {
+      "type": "Group",
+      "id": "Group-0",
+      "confidence": 0.39815402030944824,
+      "position": {
+        "top": "111px",
+        "left": "75px",
+        "width": "949px",
+        "height": "310px"
+      },
+      "bbox": [
+        75,
+        111,
+        1024,
+        421
+      ],
+      "area": 294190,
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-1",
+      "confidence": 0.21913662552833557,
+      "position": {
+        "top": "129px",
+        "left": "30px",
+        "width": "934px",
+        "height": "362px"
+      },
+      "bbox": [
+        30,
+        129,
+        964,
+        491
+      ],
+      "area": 338108,
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-2",
+      "confidence": 0.1849697083234787,
+      "position": {
+        "top": "150px",
+        "left": "146px",
+        "width": "908px",
+        "height": "372px"
+      },
+      "bbox": [
+        146,
+        150,
+        1054,
+        522
+      ],
+      "area": 337776,
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-3",
+      "confidence": 0.18145760893821716,
+      "position": {
+        "top": "37px",
+        "left": "132px",
+        "width": "930px",
+        "height": "355px"
+      },
+      "bbox": [
+        132,
+        37,
+        1062,
+        392
+      ],
+      "area": 330150,
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-4",
+      "confidence": 0.054156143218278885,
+      "position": {
+        "top": "81px",
+        "left": "0px",
+        "width": "817px",
+        "height": "441px"
+      },
+      "bbox": [
+        0,
+        81,
+        817,
+        522
+      ],
+      "area": 360297,
+      "children": []
+    }
+  ],
+  "summary": {
+    "total_elements": 5,
+    "unique_types": 1,
+    "total_area": 1660521
+  }
+}

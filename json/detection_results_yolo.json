@@ -1,0 +1,17 @@
+{
+  "name": "test",
+  "elements": [
+    {
+      "type": "laptop",
+      "id": "laptop-0",
+      "confidence": 0.6022745370864868,
+      "position": {
+        "top": "285px",
+        "left": "546px",
+        "width": "1016px",
+        "height": "473px"
+      },
+      "children": []
+    }
+  ]
+}

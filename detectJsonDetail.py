@@ -1,304 +1,217 @@
-import torch
-from ultralytics import YOLO
 import json
-import uuid
-from datetime import datetime, timezone
-import os
-from collections import defaultdict
 import cv2
 import numpy as np
-from PIL import Image, ImageStat
+from ultralytics import YOLO
+import os
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+from pathlib import Path
 
-class DetectionJsonBuilder:
-    def __init__(self):
-        # YOLO 모델 초기화
-        self.model = YOLO("runs/detect/train4/weights/best.pt")  # 모델 로딩
-        
-    def generate_id(self):
-        # Figma 스타일의 ID 생성 (예: "3:47")
-        return f"{uuid.uuid4().int % 100}:{uuid.uuid4().int % 1000}"
-    
-    def extract_styles(self, image, bbox):
+class UIDetector:
+    def __init__(self, model_path="runs/detect/train6/weights/best.pt"):
         """
-        이미지에서 객체의 스타일 정보를 추출
-        bbox: [x1, y1, x2, y2]
+        UI 요소 탐지기 초기화
+        
+        Args:
+            model_path: 학습된 모델 경로
         """
-        x1, y1, x2, y2 = map(int, bbox)
-        
-        # 바운딩 박스 영역 추출
-        roi = image[y1:y2, x1:x2]
-        if roi.size == 0:
-            return None
-            
-        # PIL Image로 변환
-        roi_pil = Image.fromarray(cv2.cvtColor(roi, cv2.COLOR_BGR2RGB))
-        
-        # 평균 색상 추출
-        stat = ImageStat.Stat(roi_pil)
-        r, g, b = stat.mean
-        
-        # 테두리 감지
-        edges = cv2.Canny(roi, 100, 200)
-        has_border = np.sum(edges) > 0
-        
-        # 배경색과 전경색 분리
-        gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
-        _, binary = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-        
-        # 전경 픽셀의 평균 색상
-        fg_mask = binary > 0
-        if np.any(fg_mask):
-            fg_color = np.mean(roi[fg_mask], axis=0)
+        self.model_path = model_path
+        if not os.path.exists(model_path):
+            print(f"Warning: Custom model not found at {model_path}")
+            print("Using default YOLOv5s model...")
+            self.model = YOLO("yolov5s.pt")
         else:
-            fg_color = [r, g, b]
-            
-        # 배경 픽셀의 평균 색상
-        bg_mask = binary == 0
-        if np.any(bg_mask):
-            bg_color = np.mean(roi[bg_mask], axis=0)
-        else:
-            bg_color = [r, g, b]
-            
-        return {
-            "dominantColor": {
-                "r": r / 255.0,
-                "g": g / 255.0,
-                "b": b / 255.0,
-                "a": 1.0
-            },
-            "foregroundColor": {
-                "r": fg_color[2] / 255.0,
-                "g": fg_color[1] / 255.0,
-                "b": fg_color[0] / 255.0,
-                "a": 1.0
-            },
-            "backgroundColor": {
-                "r": bg_color[2] / 255.0,
-                "g": bg_color[1] / 255.0,
-                "b": bg_color[0] / 255.0,
-                "a": 1.0
-            },
-            "hasBorder": has_border,
-            "borderThickness": 1.0 if has_border else 0.0
-        }
-    
-    def create_base_structure(self):
-        # 기본 JSON 구조 생성
-        return {
-            "document": {
-                "id": "0:0",
-                "name": "Document",
-                "type": "DOCUMENT",
-                "scrollBehavior": "SCROLLS",
-                "children": []
-            },
-            "components": {},
-            "componentSets": {},
-            "schemaVersion": 0,
-            "styles": {
-                "46:4": {
-                    "key": "73a861256d166682302af8bab3eccf4cc5d45333",
-                    "name": "Colors/Pink",
-                    "styleType": "FILL",
-                    "remote": True,
-                    "description": ""
-                }
-            },
-            "name": "Detection Results",
-            "lastModified": datetime.now(timezone.utc).isoformat(),
-            "version": str(uuid.uuid4().int),
-            "role": "owner",
-            "editorType": "detection"
-        }
-    
-    def create_rectangle(self, x1, y1, x2, y2, class_name, styles):
-        return {
-            "id": self.generate_id(),
-            "name": f"Rectangle {self.generate_id()}",
-            "type": "RECTANGLE",
-            "scrollBehavior": "SCROLLS",
-            "boundVariables": {
-                "fills": [{
-                    "type": "VARIABLE_ALIAS",
-                    "id": f"VariableID:{uuid.uuid4()}"
-                }]
-            },
-            "blendMode": "PASS_THROUGH",
-            "fills": [{
-                "blendMode": "NORMAL",
-                "type": "SOLID",
-                "color": styles["dominantColor"]
-            }],
-            "strokes": [] if not styles["hasBorder"] else [{
-                "blendMode": "NORMAL",
-                "type": "SOLID",
-                "color": styles["foregroundColor"],
-                "thickness": styles["borderThickness"]
-            }],
-            "strokeWeight": styles["borderThickness"],
-            "strokeAlign": "INSIDE",
-            "styles": {
-                "fill": "46:4"
-            },
-            "cornerRadius": 4.0,
-            "cornerSmoothing": 0.0,
-            "absoluteBoundingBox": {
-                "x": x1,
-                "y": y1,
-                "width": x2 - x1,
-                "height": y2 - y1
-            },
-            "absoluteRenderBounds": {
-                "x": x1,
-                "y": y1,
-                "width": x2 - x1,
-                "height": y2 - y1
-            },
-            "constraints": {
-                "vertical": "TOP",
-                "horizontal": "LEFT"
-            },
-            "effects": [],
-            "interactions": []
-        }
-
-    def create_text(self, x1, y1, text, styles):
-        return {
-            "id": self.generate_id(),
-            "name": text,
-            "type": "TEXT",
-            "scrollBehavior": "SCROLLS",
-            "blendMode": "PASS_THROUGH",
-            "fills": [{
-                "blendMode": "NORMAL",
-                "type": "SOLID",
-                "color": styles["foregroundColor"]
-            }],
-            "strokes": [],
-            "strokeWeight": 1.0,
-            "strokeAlign": "OUTSIDE",
-            "styles": {
-                "fill": "3:43",
-                "text": "3:44"
-            },
-            "absoluteBoundingBox": {
-                "x": x1,
-                "y": y1 - 20,
-                "width": 100,
-                "height": 20
-            },
-            "constraints": {
-                "vertical": "TOP",
-                "horizontal": "LEFT"
-            },
-            "characters": text,
-            "style": {
-                "fontFamily": "Pretendard",
-                "fontPostScriptName": "Pretendard-SemiBold",
-                "fontStyle": "SemiBold",
-                "fontWeight": 600,
-                "fontSize": 16.0,
-                "textAlignHorizontal": "LEFT",
-                "textAlignVertical": "CENTER",
-                "letterSpacing": -0.2800000011920929,
-                "lineHeightPx": 20.0,
-                "lineHeightPercent": 104.17266082763672,
-                "lineHeightPercentFontSize": 125.0,
-                "lineHeightUnit": "PIXELS"
-            }
-        }
-
-    def create_class_group(self, class_name, detections, image):
-        group_id = self.generate_id()
-        children = []
+            self.model = YOLO(model_path)
         
-        for detection in detections:
-            x1, y1, x2, y2 = detection.xyxy[0].tolist()
-            conf = detection.conf[0]
-            
-            # 객체의 스타일 추출
-            styles = self.extract_styles(image, [x1, y1, x2, y2])
-            if styles is None:
-                continue
-                
-            # Rectangle과 Text 추가
-            rect = self.create_rectangle(x1, y1, x2, y2, class_name, styles)
-            text = self.create_text(x1, y1, f"{conf:.2f}", styles)
-            children.extend([rect, text])
+        print(f"Model loaded: {self.model_path}")
+        print(f"Available classes: {self.model.names}")
+    
+    def detect_with_visualization(self, image_path, conf_threshold=0.25, save_result=True):
+        """
+        UI 요소를 탐지하고 결과를 시각화합니다.
         
-        return {
-            "id": group_id,
-            "name": f"Group {class_name}",
-            "type": "GROUP",
-            "scrollBehavior": "SCROLLS",
-            "children": children,
-            "blendMode": "PASS_THROUGH",
-            "clipsContent": False,
-            "background": [],
-            "fills": [],
-            "strokes": [],
-            "cornerRadius": 4.0,
-            "cornerSmoothing": 0.0,
-            "strokeWeight": 1.0,
-            "strokeAlign": "INSIDE",
-            "backgroundColor": {
-                "r": 0.0,
-                "g": 0.0,
-                "b": 0.0,
-                "a": 0.0
-            },
-            "effects": [],
-            "interactions": []
-        }
-
-    def detect_and_create_json(self, image_path):
+        Args:
+            image_path: 이미지 경로
+            conf_threshold: 신뢰도 임계값
+            save_result: 결과 이미지 저장 여부
+        """
         # 이미지 로드
-        image = cv2.imread(image_path)
-        if image is None:
-            raise ValueError(f"Failed to load image: {image_path}")
-            
-        results = self.model(image_path)
-        json_data = self.create_base_structure()
+        if not os.path.exists(image_path):
+            print(f"Error: Image file not found at {image_path}")
+            return None
         
-        canvas = {
-            "id": "0:1",
-            "name": "Page 1",
-            "type": "CANVAS",
-            "scrollBehavior": "SCROLLS",
-            "children": [],
-            "backgroundColor": {
-                "r": 0.9607843160629272,
-                "g": 0.9607843160629272,
-                "b": 0.9607843160629272,
-                "a": 1.0
+        img = cv2.imread(image_path)
+        if img is None:
+            print(f"Error: Failed to load image from {image_path}")
+            return None
+        
+        print(f"Image loaded: {img.shape}")
+        
+        # 탐지 수행
+        results = self.model(img, conf=conf_threshold, verbose=True)
+        
+        # 결과 분석
+        detected_elements = []
+        result_img = img.copy()
+        
+        if len(results) > 0:
+            result = results[0]
+            if hasattr(result, 'boxes') and result.boxes is not None:
+                boxes = result.boxes
+                if len(boxes) > 0:
+                    print(f"Detected {len(boxes)} objects")
+                    
+                    for i, box in enumerate(boxes):
+                        # 박스 좌표
+                        x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
+                        x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
+                        
+                        # 클래스 정보
+                        cls = int(box.cls[0].cpu().numpy())
+                        conf = float(box.conf[0].cpu().numpy())
+                        label = self.model.names[cls]
+                        
+                        print(f"  {i}: {label} (conf: {conf:.3f}) at ({x1}, {y1}, {x2}, {y2})")
+                        
+                        # JSON 데이터 생성
+                        element = {
+                            "type": label,
+                            "id": f"{label}-{i}",
+                            "confidence": conf,
+                            "position": {
+                                "top": f"{y1}px",
+                                "left": f"{x1}px",
+                                "width": f"{x2 - x1}px",
+                                "height": f"{y2 - y1}px"
+                            },
+                            "bbox": [x1, y1, x2, y2],
+                            "children": []
+                        }
+                        detected_elements.append(element)
+                        
+                        # 시각화
+                        color = self._get_color(cls)
+                        cv2.rectangle(result_img, (x1, y1), (x2, y2), color, 2)
+                        
+                        # 라벨 텍스트
+                        label_text = f"{label}: {conf:.2f}"
+                        (text_width, text_height), _ = cv2.getTextSize(label_text, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 2)
+                        cv2.rectangle(result_img, (x1, y1 - text_height - 10), (x1 + text_width, y1), color, -1)
+                        cv2.putText(result_img, label_text, (x1, y1 - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+                else:
+                    print("No objects detected with current threshold")
+            else:
+                print("No detection results found")
+        else:
+            print("No detection results")
+        
+        # 결과 저장
+        if save_result and len(detected_elements) > 0:
+            output_dir = Path("result")
+            output_dir.mkdir(exist_ok=True)
+            
+            # 시각화 결과 저장
+            result_path = output_dir / "detected_result.png"
+            cv2.imwrite(str(result_path), result_img)
+            print(f"Visualization saved to: {result_path}")
+        
+        # JSON 결과 생성
+        ui_json = {
+            "name": Path(image_path).stem,
+            "image_path": image_path,
+            "detection_settings": {
+                "confidence_threshold": conf_threshold,
+                "model_path": self.model_path
+            },
+            "elements": detected_elements,
+            "summary": {
+                "total_elements": len(detected_elements),
+                "unique_types": len(set([elem["type"] for elem in detected_elements]))
             }
         }
         
-        # 클래스별로 탐지 결과 그룹화
-        class_detections = defaultdict(list)
-        for result in results:
-            for detection in result.boxes:
-                class_id = int(detection.cls[0])
-                class_name = result.names[class_id]
-                class_detections[class_name].append(detection)
+        return ui_json, result_img
+    
+    def _get_color(self, class_id):
+        """클래스별 색상 반환"""
+        colors = [
+            (255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0),
+            (255, 0, 255), (0, 255, 255), (128, 0, 0), (0, 128, 0),
+            (0, 0, 128), (128, 128, 0), (128, 0, 128), (0, 128, 128),
+            (64, 0, 0), (0, 64, 0), (0, 0, 64), (64, 64, 0),
+            (64, 0, 64), (0, 64, 64), (192, 0, 0), (0, 192, 0),
+            (0, 0, 192), (192, 192, 0), (192, 0, 192), (0, 192, 192)
+        ]
+        return colors[class_id % len(colors)]
+    
+    def analyze_detection_results(self, ui_json):
+        """탐지 결과를 분석하고 통계를 출력합니다."""
+        if not ui_json or "elements" not in ui_json:
+            print("No detection results to analyze")
+            return
         
-        # 각 클래스별로 그룹 생성
-        for class_name, detections in class_detections.items():
-            class_group = self.create_class_group(class_name, detections, image)
-            canvas["children"].append(class_group)
+        elements = ui_json["elements"]
+        if len(elements) == 0:
+            print("No elements detected")
+            return
         
-        json_data["document"]["children"] = [canvas]
-        return json_data
+        # 타입별 통계
+        type_counts = {}
+        confidence_scores = []
+        
+        for elem in elements:
+            elem_type = elem["type"]
+            type_counts[elem_type] = type_counts.get(elem_type, 0) + 1
+            confidence_scores.append(elem["confidence"])
+        
+        print("\n=== Detection Analysis ===")
+        print(f"Total elements detected: {len(elements)}")
+        print(f"Unique element types: {len(type_counts)}")
+        print(f"Average confidence: {np.mean(confidence_scores):.3f}")
+        print(f"Min confidence: {np.min(confidence_scores):.3f}")
+        print(f"Max confidence: {np.max(confidence_scores):.3f}")
+        
+        print("\nElement types distribution:")
+        for elem_type, count in sorted(type_counts.items(), key=lambda x: x[1], reverse=True):
+            print(f"  {elem_type}: {count}")
+        
+        # 신뢰도 분포
+        print(f"\nConfidence distribution:")
+        conf_ranges = [(0.0, 0.3), (0.3, 0.5), (0.5, 0.7), (0.7, 0.9), (0.9, 1.0)]
+        for low, high in conf_ranges:
+            count = sum(1 for conf in confidence_scores if low <= conf < high)
+            print(f"  {low:.1f}-{high:.1f}: {count} elements")
 
 def main():
-    detector = DetectionJsonBuilder()
-    image_path = "./screenshots/test.png"  # 실제 이미지 경로
-    json_result = detector.detect_and_create_json(image_path)
+    """메인 실행 함수"""
+    # 탐지기 초기화
+    detector = UIDetector()
     
-    # JSON 결과 저장
-    os.makedirs("json", exist_ok=True)
-    with open("json/detection_results.json", "w", encoding="utf-8") as f:
-        json.dump(json_result, f, ensure_ascii=False, indent=2)
+    # 테스트 이미지 경로
+    image_path = './screenshots/test.png'
+    
+    print("Starting detailed UI detection...")
+    print(f"Image path: {image_path}")
+    
+    # 탐지 수행
+    ui_json, result_img = detector.detect_with_visualization(image_path, conf_threshold=0.25)
+    
+    if ui_json:
+        # 결과 분석
+        detector.analyze_detection_results(ui_json)
+        
+        # JSON 결과 저장
+        output_path = './json/detection_results_detailed.json'
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(ui_json, f, indent=2, ensure_ascii=False)
+        print(f"\nDetailed results saved to: {output_path}")
+        
+        # JSON 결과 출력
+        print("\n=== Detection Results ===")
+        print(json.dumps(ui_json, indent=2, ensure_ascii=False))
+    else:
+        print("Detection failed!")
 
 if __name__ == "__main__":
     main() 
