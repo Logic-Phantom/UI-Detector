@@ -231,14 +231,16 @@ def yolo_results_to_figma_json(image_path, results):
         "editorType": "figma",
         "linkAccess": "view"
     }
-    return figma_json
+    return figma_json, detected_elements_df
 
 def main():
     print("🚀 YOLO to Figma JSON Converter v2 (screenshots/ 하위 이미지 전체)")
     print("=" * 50)
     today = datetime.datetime.now().strftime('%Y-%m-%d')
     figma_json_dir = f'./figma_json_v2/{today}'
+    figma_png_dir = f'./result_v2/{today}'
     os.makedirs(figma_json_dir, exist_ok=True)
+    os.makedirs(figma_png_dir, exist_ok=True)
     image_dir = './screenshots/'
     for root, dirs, files in os.walk(image_dir):
         for file in files:
@@ -250,11 +252,23 @@ def main():
                     print(f"❌ Error: Failed to load image from {image_path}")
                     continue
                 results = model(img, conf=0.05, verbose=False)
-                figma_json = yolo_results_to_figma_json(image_path, results)
+                figma_json, detected_elements_df = yolo_results_to_figma_json(image_path, results)
                 output_json = os.path.join(figma_json_dir, f'{Path(file).stem}_figma.json')
                 with open(output_json, 'w', encoding='utf-8') as f:
                     json.dump(figma_json, f, indent=2, ensure_ascii=False)
                 print(f"💾 Figma JSON saved to: {output_json}")
+                # 시각화 PNG 저장
+                result_img = img.copy()
+                for idx, row in detected_elements_df.iterrows():
+                    box = row['box']
+                    xmin, ymin, xmax, ymax = int(box['x1']), int(box['y1']), int(box['x2']), int(box['y2'])
+                    label = row['name']
+                    color = (0, 255, 0)
+                    cv2.rectangle(result_img, (xmin, ymin), (xmax, ymax), color, 2)
+                    cv2.putText(result_img, label, (xmin, ymin-10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
+                output_png = os.path.join(figma_png_dir, f'{Path(file).stem}_figma.png')
+                cv2.imwrite(output_png, result_img)
+                print(f"🖼️  Visualization saved to: {output_png}")
 
 if __name__ == "__main__":
     main() 
