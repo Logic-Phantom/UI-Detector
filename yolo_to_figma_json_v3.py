@@ -24,7 +24,7 @@ if not os.path.exists(MODEL_PATH):
     exit(1)
 model = YOLO(MODEL_PATH)
 
-# YOLO 클래스명 → Figma type 매핑 예시
+# YOLO 클래스명 → Figma type 매핑
 YOLO_TO_FIGMA_TYPE = {
     'Button': 'RECTANGLE',
     'InputBox': 'RECTANGLE',
@@ -40,11 +40,31 @@ YOLO_TO_FIGMA_TYPE = {
     'Grid': 'RECTANGLE',
     'GridTitle': 'TEXT',
     'FormTitle': 'TEXT',
-    # ... 필요시 추가
+    'Frame': 'FRAME',
+    'Container': 'FRAME',
+    'Panel': 'FRAME',
+    'Section': 'FRAME',
+    'Header': 'FRAME',
+    'Footer': 'FRAME',
+    'Sidebar': 'FRAME',
+    'MainContent': 'FRAME',
+    'Navigation': 'FRAME',
+    'SearchArea': 'FRAME',
+    'FilterArea': 'FRAME',
+    'ResultArea': 'FRAME',
+    'FormArea': 'FRAME',
+    'ButtonGroup': 'GROUP',
+    'InputGroup': 'GROUP',
+    'LabelGroup': 'GROUP',
+    'ControlGroup': 'GROUP',
 }
 
 # 그룹 컨트롤로 인식할 클래스들
-GROUP_CONTROLS = ['Group', 'CheckBoxGroup', 'Grid']
+GROUP_CONTROLS = ['Group', 'CheckBoxGroup', 'ButtonGroup', 'InputGroup', 'LabelGroup', 'ControlGroup']
+
+# 프레임 컨트롤로 인식할 클래스들
+FRAME_CONTROLS = ['Frame', 'Container', 'Panel', 'Section', 'Header', 'Footer', 'Sidebar', 
+                  'MainContent', 'Navigation', 'SearchArea', 'FilterArea', 'ResultArea', 'FormArea']
 
 # 고유 ID 생성 (Figma 스타일)
 def make_figma_id():
@@ -67,6 +87,7 @@ def yolo_to_figma_node(idx, row, image_w, image_h):
     figma_type = YOLO_TO_FIGMA_TYPE.get(label, 'RECTANGLE')
     box = row['box']
     xmin, ymin, xmax, ymax = box['x1'], box['y1'], box['x2'], box['y2']
+    
     node = {
         "id": make_figma_id(),
         "name": f"{label}-{idx}",
@@ -91,7 +112,8 @@ def yolo_to_figma_node(idx, row, image_w, image_h):
         "strokeAlign": "INSIDE",
         "children": []
     }
-    # 텍스트 노드라면 characters 필드 샘플 추가
+    
+    # 텍스트 노드라면 characters 필드 추가
     if figma_type == 'TEXT':
         node["characters"] = label
         node["style"] = {
@@ -101,35 +123,106 @@ def yolo_to_figma_node(idx, row, image_w, image_h):
             "textAlignHorizontal": "LEFT",
             "textAlignVertical": "CENTER"
         }
+    
+    # FRAME 타입이라면 추가 속성 설정
+    if figma_type == 'FRAME':
+        node["clipsContent"] = False
+        node["background"] = []
+        node["backgroundColor"] = {
+            "r": 0.0, "g": 0.0, "b": 0.0, "a": 0.0
+        }
+        node["layoutMode"] = "HORIZONTAL"
+        node["counterAxisSizingMode"] = "FIXED"
+        node["primaryAxisSizingMode"] = "FIXED"
+        node["layoutWrap"] = "NO_WRAP"
+        node["layoutAlign"] = "INHERIT"
+        node["layoutGrow"] = 0.0
+        node["layoutSizingHorizontal"] = "FIXED"
+        node["layoutSizingVertical"] = "FIXED"
+        node["effects"] = []
+        node["interactions"] = []
+    
     return node
 
 def build_hierarchical_structure(detected_elements_df):
     """
-    감지된 요소들을 계층 구조로 정리
+    감지된 요소들을 복잡한 계층 구조로 정리
     """
     # 모든 요소를 노드로 변환
     nodes = []
     for idx, row in detected_elements_df.iterrows():
-        node = yolo_to_figma_node(idx, row, 0, 0)  # image_w, image_h는 여기서는 사용하지 않음
-        node['original_row'] = row  # 원본 데이터 보존
+        node = yolo_to_figma_node(idx, row, 0, 0)
+        node['original_row'] = row
         nodes.append(node)
     
-    # 그룹 컨트롤과 일반 요소 분리
+    # 프레임, 그룹, 일반 요소 분리
+    frame_nodes = []
     group_nodes = []
     regular_nodes = []
     
     for node in nodes:
         label = node['original_row']['name']
-        if label in GROUP_CONTROLS:
+        if label in FRAME_CONTROLS:
+            frame_nodes.append(node)
+        elif label in GROUP_CONTROLS:
             group_nodes.append(node)
         else:
             regular_nodes.append(node)
     
-    # 각 그룹에 포함되는 요소들 찾기
+    # 각 프레임에 포함되는 요소들 찾기 (그룹과 일반 요소 모두)
+    for frame_node in frame_nodes:
+        frame_box = frame_node['original_row']['box']
+        
+        # 이 프레임에 포함되는 그룹들 찾기
+        contained_groups = []
+        remaining_groups = []
+        
+        for group_node in group_nodes:
+            if is_contained(frame_box, group_node['original_row']['box']):
+                contained_groups.append(group_node)
+            else:
+                remaining_groups.append(group_node)
+        
+        # 이 프레임에 포함되는 일반 요소들 찾기
+        contained_regulars = []
+        remaining_regulars = []
+        
+        for regular_node in regular_nodes:
+            if is_contained(frame_box, regular_node['original_row']['box']):
+                contained_regulars.append(regular_node)
+            else:
+                remaining_regulars.append(regular_node)
+        
+        # 각 그룹에 포함되는 일반 요소들 찾기
+        for group_node in contained_groups:
+            group_box = group_node['original_row']['box']
+            
+            group_contained = []
+            group_remaining = []
+            
+            for regular_node in contained_regulars:
+                if is_contained(group_box, regular_node['original_row']['box']):
+                    group_contained.append(regular_node)
+                else:
+                    group_remaining.append(regular_node)
+            
+            # 그룹의 children에 포함된 요소들 추가
+            group_node['children'] = group_contained
+            
+            # 그룹에 포함되지 않은 요소들은 프레임의 직접 children으로
+            contained_regulars = group_remaining
+        
+        # 프레임의 children에 그룹들과 포함되지 않은 일반 요소들 추가
+        frame_node['children'] = contained_groups + contained_regulars
+        
+        # 포함되지 않은 요소들만 남김
+        group_nodes = remaining_groups
+        regular_nodes = remaining_regulars
+    
+    # 남은 그룹들에 포함되는 요소들 찾기
     for group_node in group_nodes:
         group_box = group_node['original_row']['box']
         
-        # 이 그룹에 포함되는 일반 요소들 찾기
         contained_nodes = []
         remaining_nodes = []
         
@@ -139,29 +232,27 @@ def build_hierarchical_structure(detected_elements_df):
             else:
                 remaining_nodes.append(regular_node)
         
-        # 그룹의 children에 포함된 요소들 추가
         group_node['children'] = contained_nodes
-        
-        # 포함되지 않은 요소들만 남김
         regular_nodes = remaining_nodes
     
-    # 최종 결과: 그룹들 + 포함되지 않은 일반 요소들
-    final_nodes = group_nodes + regular_nodes
+    # 최종 결과: 프레임들 + 포함되지 않은 그룹들 + 포함되지 않은 일반 요소들
+    final_nodes = frame_nodes + group_nodes + regular_nodes
     
     # original_row 제거 (JSON 직렬화를 위해)
-    for node in final_nodes:
+    def clean_node(node):
         if 'original_row' in node:
             del node['original_row']
-        # children도 정리
         for child in node.get('children', []):
-            if 'original_row' in child:
-                del child['original_row']
+            clean_node(child)
+    
+    for node in final_nodes:
+        clean_node(node)
     
     return final_nodes
 
 def yolo_results_to_figma_json(image_path, results):
     """
-    YOLO 감지 결과를 Figma REST API 스타일 JSON으로 변환 (계층 구조 포함)
+    YOLO 감지 결과를 Figma REST API 스타일 JSON으로 변환 (복잡한 계층 구조 포함)
     """
     img = cv2.imread(image_path)
     image_h, image_w = img.shape[:2]
@@ -204,28 +295,63 @@ def yolo_results_to_figma_json(image_path, results):
     }
     return figma_json
 
+def save_detection_result_with_image(image_path, results, output_dir):
+    """
+    감지 결과를 JSON과 PNG로 저장
+    """
+    # JSON 저장
+    figma_json = yolo_results_to_figma_json(image_path, results)
+    json_filename = f'{Path(image_path).stem}_figma.json'
+    json_path = os.path.join(output_dir, json_filename)
+    
+    with open(json_path, 'w', encoding='utf-8') as f:
+        json.dump(figma_json, f, indent=2, ensure_ascii=False)
+    
+    # PNG 저장 (감지 결과 시각화)
+    img = cv2.imread(image_path)
+    annotated_img = results[0].plot()
+    
+    png_filename = f'{Path(image_path).stem}_detection.png'
+    png_path = os.path.join(output_dir, png_filename)
+    
+    cv2.imwrite(png_path, annotated_img)
+    
+    return json_path, png_path
+
 def main():
-    print("🚀 YOLO to Figma JSON Converter (계층 구조 포함)")
-    print("=" * 50)
+    print("🚀 YOLO to Figma JSON Converter v3 (복잡한 계층 구조 + PNG 저장)")
+    print("=" * 60)
+    
     today = datetime.datetime.now().strftime('%Y-%m-%d')
-    figma_json_dir = f'./figma_json/{today}'
-    os.makedirs(figma_json_dir, exist_ok=True)
+    output_dir = f'./figma_json/{today}'
+    os.makedirs(output_dir, exist_ok=True)
+    
     image_dir = './screenshots/'
+    processed_count = 0
+    
     for root, dirs, files in os.walk(image_dir):
         for file in files:
             if file.lower().endswith(('.png', '.jpg', '.jpeg')):
                 image_path = os.path.join(root, file)
                 print(f"\n📸 Processing image: {image_path}")
+                
                 img = cv2.imread(image_path)
                 if img is None:
                     print(f"❌ Error: Failed to load image from {image_path}")
                     continue
+                
                 results = model(img, conf=0.05, verbose=False)
-                figma_json = yolo_results_to_figma_json(image_path, results)
-                output_json = os.path.join(figma_json_dir, f'{Path(file).stem}_figma.json')
-                with open(output_json, 'w', encoding='utf-8') as f:
-                    json.dump(figma_json, f, indent=2, ensure_ascii=False)
-                print(f"💾 Figma JSON saved to: {output_json}")
+                
+                try:
+                    json_path, png_path = save_detection_result_with_image(image_path, results, output_dir)
+                    print(f"💾 JSON saved to: {json_path}")
+                    print(f"🖼️  PNG saved to: {png_path}")
+                    processed_count += 1
+                except Exception as e:
+                    print(f"❌ Error processing {image_path}: {str(e)}")
+    
+    print(f"\n✅ Processing complete! {processed_count} files processed.")
+    print(f"📁 Output directory: {output_dir}")
 
 if __name__ == "__main__":
     main() 
