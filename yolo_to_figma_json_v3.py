@@ -81,17 +81,29 @@ def is_contained(box1, box2):
 
 def yolo_to_figma_node(idx, row, image_w, image_h):
     """
-    YOLO 감지 결과(row)를 Figma node(dict)로 변환
+    YOLO 감지 결과(row)를 Figma node(dict)로 변환 (rest.json 스타일)
     """
     label = row['name']
     figma_type = YOLO_TO_FIGMA_TYPE.get(label, 'RECTANGLE')
     box = row['box']
     xmin, ymin, xmax, ymax = box['x1'], box['y1'], box['x2'], box['y2']
-    
+
     node = {
         "id": make_figma_id(),
         "name": f"{label}-{idx}",
         "type": figma_type,
+        "scrollBehavior": "SCROLLS",
+        "blendMode": "PASS_THROUGH",
+        "fills": [{
+            "blendMode": "NORMAL",
+            "type": "SOLID",
+            "color": {
+                "r": 1.0, "g": 1.0, "b": 1.0, "a": 1.0
+            }
+        }] if figma_type in ["RECTANGLE", "FRAME", "GROUP"] else [],
+        "strokes": [],
+        "strokeWeight": 1.0,
+        "strokeAlign": "OUTSIDE",
         "absoluteBoundingBox": {
             "x": float(xmin),
             "y": float(ymin),
@@ -104,18 +116,21 @@ def yolo_to_figma_node(idx, row, image_w, image_h):
             "width": float(xmax - xmin),
             "height": float(ymax - ymin)
         },
-        "scrollBehavior": "SCROLLS",
-        "blendMode": "PASS_THROUGH",
-        "fills": [],
-        "strokes": [],
-        "strokeWeight": 1.0,
-        "strokeAlign": "INSIDE",
+        "constraints": {
+            "vertical": "TOP",
+            "horizontal": "LEFT"
+        },
         "children": []
     }
-    
-    # 텍스트 노드라면 characters 필드 추가
+
+    # TEXT 노드라면 rest.json 스타일 필드 추가
     if figma_type == 'TEXT':
         node["characters"] = label
+        node["styles"] = {
+            "fill": "1:3172",
+            "text": "1:4305"
+        }
+        node["characterStyleOverrides"] = []
         node["style"] = {
             "fontFamily": "Pretendard",
             "fontWeight": 400,
@@ -123,13 +138,13 @@ def yolo_to_figma_node(idx, row, image_w, image_h):
             "textAlignHorizontal": "LEFT",
             "textAlignVertical": "CENTER"
         }
-    
+
     # FRAME 타입이라면 추가 속성 설정
     if figma_type == 'FRAME':
         node["clipsContent"] = False
         node["background"] = []
         node["backgroundColor"] = {
-            "r": 0.0, "g": 0.0, "b": 0.0, "a": 0.0
+            "r": 1.0, "g": 1.0, "b": 1.0, "a": 1.0
         }
         node["layoutMode"] = "HORIZONTAL"
         node["counterAxisSizingMode"] = "FIXED"
@@ -141,7 +156,7 @@ def yolo_to_figma_node(idx, row, image_w, image_h):
         node["layoutSizingVertical"] = "FIXED"
         node["effects"] = []
         node["interactions"] = []
-    
+
     return node
 
 def build_hierarchical_structure(detected_elements_df):
