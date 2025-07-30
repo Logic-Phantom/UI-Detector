@@ -81,13 +81,14 @@ def is_contained(box1, box2):
 
 def yolo_to_figma_node(idx, row, image_w, image_h):
     """
-    YOLO 감지 결과(row)를 Figma node(dict)로 변환 (rest.json 스타일)
+    YOLO 감지 결과(row)를 Figma node(dict)로 변환 (rest.json과 완전히 동일한 구조)
     """
     label = row['name']
     figma_type = YOLO_TO_FIGMA_TYPE.get(label, 'RECTANGLE')
     box = row['box']
     xmin, ymin, xmax, ymax = box['x1'], box['y1'], box['x2'], box['y2']
 
+    # 기본 노드 구조 (rest.json과 완전히 동일)
     node = {
         "id": make_figma_id(),
         "name": f"{label}-{idx}",
@@ -123,7 +124,7 @@ def yolo_to_figma_node(idx, row, image_w, image_h):
         "children": []
     }
 
-    # TEXT 노드라면 rest.json 스타일 필드 추가
+    # TEXT 노드라면 rest.json과 완전히 동일한 구조
     if figma_type == 'TEXT':
         node["characters"] = label
         node["styles"] = {
@@ -138,8 +139,10 @@ def yolo_to_figma_node(idx, row, image_w, image_h):
             "textAlignHorizontal": "LEFT",
             "textAlignVertical": "CENTER"
         }
+        # TEXT 노드의 overriddenFields 추가 (rest.json과 동일)
+        node["overriddenFields"] = ["characters", "text", "textAutoResize"]
 
-    # FRAME 타입이라면 추가 속성 설정
+    # FRAME 타입이라면 rest.json과 완전히 동일한 구조
     if figma_type == 'FRAME':
         node["clipsContent"] = False
         node["background"] = []
@@ -156,12 +159,22 @@ def yolo_to_figma_node(idx, row, image_w, image_h):
         node["layoutSizingVertical"] = "FIXED"
         node["effects"] = []
         node["interactions"] = []
+        # FRAME 노드의 overriddenFields 추가 (rest.json과 동일)
+        node["overriddenFields"] = ["height", "width", "visible"]
+
+    # GROUP 타입이라면 rest.json과 완전히 동일한 구조
+    if figma_type == 'GROUP':
+        node["overriddenFields"] = ["visible"]
+
+    # RECTANGLE 타입이라면 rest.json과 완전히 동일한 구조
+    if figma_type == 'RECTANGLE':
+        node["overriddenFields"] = ["fills", "height", "width"]
 
     return node
 
 def build_hierarchical_structure(detected_elements_df):
     """
-    감지된 요소들을 복잡한 계층 구조로 정리
+    감지된 요소들을 복잡한 계층 구조로 정리 (rest.json 스타일)
     """
     # 모든 요소를 노드로 변환
     nodes = []
