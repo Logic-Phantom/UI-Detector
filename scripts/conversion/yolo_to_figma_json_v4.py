@@ -151,19 +151,73 @@ def extract_text_from_region(image, box):
                 # 노이즈 제거
                 denoised = cv2.medianBlur(gray, 3)
                 
-                # 이진화
-                _, binary = cv2.threshold(denoised, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+                # 이미지 크기 확대 (텍스트 인식률 향상)
+                scale_factor = 3
+                enlarged = cv2.resize(denoised, None, fx=scale_factor, fy=scale_factor, interpolation=cv2.INTER_CUBIC)
                 
-                # OCR 수행
-                custom_config = r'--oem 3 --psm 6 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,!?@#$%^&*()_+-=[]{}|;:,.<>?/ '
-                text = pytesseract.image_to_string(binary, config=custom_config, lang='eng')
+                # 여러 전처리 방법 시도
+                preprocessed_images = []
+                
+                # 1. 적응형 이진화
+                binary1 = cv2.adaptiveThreshold(enlarged, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+                preprocessed_images.append(binary1)
+                
+                # 2. Otsu 이진화
+                _, binary2 = cv2.threshold(enlarged, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+                preprocessed_images.append(binary2)
+                
+                # 3. 가우시안 블러 후 이진화
+                blurred = cv2.GaussianBlur(enlarged, (5, 5), 0)
+                _, binary3 = cv2.threshold(blurred, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+                preprocessed_images.append(binary3)
+                
+                # 4. 모폴로지 연산으로 노이즈 제거
+                kernel = np.ones((2, 2), np.uint8)
+                binary4 = cv2.morphologyEx(binary1, cv2.MORPH_CLOSE, kernel)
+                preprocessed_images.append(binary4)
+                
+                # OCR 수행 (여러 설정과 이미지 조합 시도)
+                configs = [
+                    '--oem 3 --psm 6',  # 기본 설정
+                    '--oem 3 --psm 8',  # 단일 단어
+                    '--oem 3 --psm 7',  # 단일 텍스트 라인
+                    '--oem 1 --psm 6',  # 레거시 엔진
+                    '--oem 3 --psm 13'  # 원시 텍스트
+                ]
+                
+                best_text = ""
+                best_confidence = 0
+                
+                for img_idx, preprocessed_img in enumerate(preprocessed_images):
+                    for config in configs:
+                        try:
+                            # OCR 수행
+                            text = pytesseract.image_to_string(preprocessed_img, config=config, lang='eng')
+                            text = text.strip()
+                            
+                            if text and len(text) > 1:
+                                # 신뢰도 확인 (간단한 휴리스틱)
+                                confidence = len(text) * (1 if any(c.isalpha() for c in text) else 0.5)
+                                
+                                if confidence > best_confidence:
+                                    best_text = text
+                                    best_confidence = confidence
+                                    
+                        except Exception as e:
+                            continue
                 
                 # 텍스트 정리
-                text = text.strip()
-                text = re.sub(r'\s+', ' ', text)  # 여러 공백을 하나로
-                
-                if text:
-                    return text
+                if best_text:
+                    # 특수문자 제거 및 정리
+                    cleaned_text = re.sub(r'[^\w\s가-힣]', '', best_text)
+                    cleaned_text = re.sub(r'\s+', ' ', cleaned_text).strip()
+                    
+                    if cleaned_text and len(cleaned_text) > 1:
+                        print(f"✅ OCR 성공: '{cleaned_text}' (신뢰도: {best_confidence:.1f})")
+                        return cleaned_text
+                    else:
+                        print(f"⚠️ OCR 결과 정리 후 빈 텍스트: '{best_text}'")
+                        
             except Exception as e:
                 print(f"OCR Error: {e}")
         
@@ -190,10 +244,10 @@ def estimate_text_from_label(box, image):
         # 영역 크기와 비율을 기반으로 텍스트 추정
         if width > 100 and height > 20:
             # 큰 영역은 제목이나 긴 텍스트일 가능성
-            return "Sample Text"
+            return "텍스트 입력"
         elif width > 50 and height > 15:
             # 중간 크기 영역은 버튼이나 입력 필드일 가능성
-            return "Button"
+            return "버튼"
         else:
             # 작은 영역은 아이콘이나 작은 텍스트일 가능성
             return ""
