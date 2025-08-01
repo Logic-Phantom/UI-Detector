@@ -119,10 +119,13 @@ COMPONENT_TYPE_MAPPING = {
 }
 
 def extract_text_from_region(image, box):
-    """특정 영역에서 텍스트를 추출합니다."""
+    """
+    특정 영역에서 텍스트를 추출합니다.
+    """
     try:
         x1, y1, x2, y2 = int(box['x1']), int(box['y1']), int(box['x2']), int(box['y2'])
         
+        # 이미지 크기 확인
         height, width = image.shape[:2]
         x1 = max(0, min(x1, width))
         y1 = max(0, min(y1, height))
@@ -132,49 +135,291 @@ def extract_text_from_region(image, box):
         if x1 >= x2 or y1 >= y2:
             return ""
         
+        # ROI 추출
         roi = image[y1:y2, x1:x2]
         
         if roi.size == 0:
             return ""
         
-        # 간단한 텍스트 추정
-        width_px = x2 - x1
-        height_px = y2 - y1
+        # Tesseract OCR이 사용 가능한 경우
+        if TESSERACT_AVAILABLE:
+            try:
+                # 그레이스케일 변환
+                gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
+                
+                # 노이즈 제거
+                denoised = cv2.medianBlur(gray, 3)
+                
+                # 이미지 크기 확대 (텍스트 인식률 향상)
+                scale_factor = 3
+                enlarged = cv2.resize(denoised, None, fx=scale_factor, fy=scale_factor, interpolation=cv2.INTER_CUBIC)
+                
+                # 여러 전처리 방법 시도
+                preprocessed_images = []
+                
+                # 1. 적응형 이진화
+                binary1 = cv2.adaptiveThreshold(enlarged, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+                preprocessed_images.append(binary1)
+                
+                # 2. Otsu 이진화
+                _, binary2 = cv2.threshold(enlarged, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+                preprocessed_images.append(binary2)
+                
+                # 3. 가우시안 블러 후 이진화
+                blurred = cv2.GaussianBlur(enlarged, (5, 5), 0)
+                _, binary3 = cv2.threshold(blurred, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+                preprocessed_images.append(binary3)
+                
+                # 4. 모폴로지 연산으로 노이즈 제거
+                kernel = np.ones((2, 2), np.uint8)
+                binary4 = cv2.morphologyEx(binary1, cv2.MORPH_CLOSE, kernel)
+                preprocessed_images.append(binary4)
+                
+                # OCR 수행 (여러 설정과 이미지 조합 시도)
+                configs = [
+                    '--oem 3 --psm 6',  # 기본 설정
+                    '--oem 3 --psm 8',  # 단일 단어
+                    '--oem 3 --psm 7',  # 단일 텍스트 라인
+                    '--oem 1 --psm 6',  # 레거시 엔진
+                    '--oem 3 --psm 13'  # 원시 텍스트
+                ]
+                
+                best_text = ""
+                best_confidence = 0
+                
+                for img_idx, preprocessed_img in enumerate(preprocessed_images):
+                    for config in configs:
+                        try:
+                            # OCR 수행
+                            text = pytesseract.image_to_string(preprocessed_img, config=config, lang='eng')
+                            text = text.strip()
+                            
+                            if text and len(text) > 1:
+                                # 신뢰도 확인 (간단한 휴리스틱)
+                                confidence = len(text) * (1 if any(c.isalpha() for c in text) else 0.5)
+                                
+                                if confidence > best_confidence:
+                                    best_text = text
+                                    best_confidence = confidence
+                                    
+                        except Exception as e:
+                            continue
+                
+                # 텍스트 정리
+                if best_text:
+                    # 특수문자 제거 및 정리
+                    cleaned_text = re.sub(r'[^\w\s가-힣]', '', best_text)
+                    cleaned_text = re.sub(r'\s+', ' ', cleaned_text).strip()
+                    
+                    if cleaned_text and len(cleaned_text) > 1:
+                        print(f"✅ OCR 성공: '{cleaned_text}' (신뢰도: {best_confidence:.1f})")
+                        return cleaned_text
+                    else:
+                        print(f"⚠️ OCR 결과 정리 후 빈 텍스트: '{best_text}'")
+                        
+            except Exception as e:
+                print(f"OCR Error: {e}")
         
-        if width_px > 100 and height_px > 20:
-            return "텍스트 입력"
-        elif width_px > 50 and height_px > 15:
-            return "버튼"
-        else:
-            return ""
+        # OCR이 실패하거나 사용할 수 없는 경우, 라벨 기반 텍스트 추정
+        return estimate_text_from_label(box, image)
             
     except Exception as e:
         print(f"Text extraction error: {e}")
         return ""
 
+def estimate_text_from_label(box, image):
+    """
+    라벨과 영역 크기를 기반으로 텍스트를 추정합니다.
+    """
+    try:
+        x1, y1, x2, y2 = int(box['x1']), int(box['y1']), int(box['x2']), int(box['y2'])
+        width = x2 - x1
+        height = y2 - y1
+        
+        # 영역이 너무 작으면 텍스트가 없을 가능성이 높음
+        if width < 20 or height < 10:
+            return ""
+        
+        # 영역 크기와 비율을 기반으로 텍스트 추정
+        if width > 100 and height > 20:
+            # 큰 영역은 제목이나 긴 텍스트일 가능성
+            return "텍스트 입력"
+        elif width > 50 and height > 15:
+            # 중간 크기 영역은 버튼이나 입력 필드일 가능성
+            return "버튼"
+        else:
+            # 작은 영역은 아이콘이나 작은 텍스트일 가능성
+            return ""
+            
+    except Exception as e:
+        print(f"Text estimation error: {e}")
+        return ""
+
+def analyze_style_from_region(image, box):
+    """
+    특정 영역의 스타일을 분석합니다 (색상, 폰트 크기 등).
+    """
+    try:
+        x1, y1, x2, y2 = int(box['x1']), int(box['y1']), int(box['x2']), int(box['y2'])
+        
+        # 이미지 크기 확인
+        height, width = image.shape[:2]
+        x1 = max(0, min(x1, width))
+        y1 = max(0, min(y1, height))
+        x2 = max(0, min(x2, width))
+        y2 = max(0, min(y2, height))
+        
+        if x1 >= x2 or y1 >= y2:
+            return {}
+        
+        # ROI 추출
+        roi = image[y1:y2, x1:x2]
+        
+        if roi.size == 0:
+            return {}
+        
+        # 색상 분석
+        colors = analyze_colors(roi)
+        
+        # 크기 분석
+        width_px = x2 - x1
+        height_px = y2 - y1
+        
+        # 폰트 크기 추정 (텍스트 영역의 높이 기반)
+        estimated_font_size = max(12, min(48, height_px // 2))
+        
+        return {
+            'colors': colors,
+            'width': width_px,
+            'height': height_px,
+            'font_size': estimated_font_size,
+            'background_color': colors.get('dominant', {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 1.0}),
+            'text_color': colors.get('text', {'r': 0.0, 'g': 0.0, 'b': 0.0, 'a': 1.0})
+        }
+        
+    except Exception as e:
+        print(f"Style analysis error: {e}")
+        return {}
+
+def analyze_colors(image):
+    """
+    이미지에서 주요 색상들을 분석합니다.
+    """
+    try:
+        # 이미지를 RGB로 변환
+        rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        
+        # 이미지를 1차원 배열로 변환
+        pixels = rgb_image.reshape(-1, 3)
+        
+        if SKLEARN_AVAILABLE:
+            # K-means 클러스터링으로 주요 색상 추출
+            n_colors = min(5, len(pixels))
+            if n_colors < 2:
+                return get_fallback_colors()
+                
+            kmeans = KMeans(n_clusters=n_colors, random_state=42, n_init=10)
+            kmeans.fit(pixels)
+            
+            # 클러스터 중심점들을 색상으로 변환
+            colors = kmeans.cluster_centers_.astype(int)
+            
+            # 각 색상의 빈도 계산
+            labels = kmeans.labels_
+            color_counts = np.bincount(labels)
+            
+            # 빈도순으로 정렬
+            sorted_indices = np.argsort(color_counts)[::-1]
+            sorted_colors = colors[sorted_indices]
+            sorted_counts = color_counts[sorted_indices]
+            
+            # Figma 색상 형식으로 변환 (0-1 범위)
+            figma_colors = []
+            for color in sorted_colors:
+                r, g, b = color
+                figma_color = {
+                    'r': r / 255.0,
+                    'g': g / 255.0,
+                    'b': b / 255.0,
+                    'a': 1.0
+                }
+                figma_colors.append(figma_color)
+            
+            # 텍스트 색상 추정 (가장 어두운 색상)
+            text_color = min(figma_colors, key=lambda c: (c['r'] + c['g'] + c['b']) / 3)
+            
+            # 배경 색상 추정 (가장 밝은 색상)
+            background_color = max(figma_colors, key=lambda c: (c['r'] + c['g'] + c['b']) / 3)
+            
+            return {
+                'dominant': figma_colors[0] if figma_colors else {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 1.0},
+                'text': text_color,
+                'background': background_color,
+                'all_colors': figma_colors
+            }
+        else:
+            return get_fallback_colors()
+        
+    except Exception as e:
+        print(f"Color analysis error: {e}")
+        return get_fallback_colors()
+
+def get_fallback_colors():
+    """
+    색상 분석이 실패할 때 사용할 기본 색상들
+    """
+    return {
+        'dominant': {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 1.0},
+        'text': {'r': 0.0, 'g': 0.0, 'b': 0.0, 'a': 1.0},
+        'background': {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 1.0},
+        'all_colors': []
+    }
+
 def detect_component_type(label, parent_label=None):
-    """컴포넌트 타입을 결정"""
+    """
+    Java 코드의 타입 감지 로직을 참고하여 컴포넌트 타입을 결정
+    """
     lower_label = label.lower()
     lower_parent = parent_label.lower() if parent_label else ""
     
+    # ComboBox/SelectBox 감지
     if ('combobox' in lower_label or 'selectbox' in lower_label or 
-        'combobox' in lower_parent or 'selectbox' in lower_parent):
+        'combobox' in lower_parent or 'selectbox' in lower_parent or
+        ('input' in lower_label and has_vector_in_right(lower_label))):
         return 'combobox'
     
+    # InputBox 감지
     if ('input' in lower_label or 'inputbox' in lower_label or
         'input' in lower_parent or 'inputbox' in lower_parent):
         return 'inputbox'
     
+    # Pagination 감지
     if 'pagination' in lower_label or 'pageindexer' in lower_label:
         return 'pageindexer'
     
-    if ('radio' in lower_label or 'radiobutton' in lower_label):
+    # RadioButton 감지
+    if ('radio' in lower_label or 'radiobutton' in lower_label or
+        check_if_radio_button(lower_label)):
         return 'radiobutton'
     
+    # Output 감지
     if 'output' in lower_label:
         return 'output'
     
+    # 기본적으로 Button으로 처리
     return 'button'
+
+def has_vector_in_right(label):
+    """
+    오른쪽에 벡터가 있는지 확인 (Java 코드 참고)
+    """
+    return 'right' in label and 'vector' in label
+
+def check_if_radio_button(label):
+    """
+    라디오 버튼인지 확인 (Java 코드 참고)
+    """
+    return 'radio' in label
 
 def make_figma_id():
     """고유 ID 생성 (rest.json과 동일한 형식)"""
@@ -200,6 +445,9 @@ def yolo_to_figma_node_v5(idx, row, image_w, image_h, image, parent_label=None):
 
     # 텍스트 추출
     extracted_text = extract_text_from_region(image, box)
+    
+    # 스타일 분석
+    style_info = analyze_style_from_region(image, box)
 
     # 기본 노드 구조 (rest.json과 동일)
     node = {
@@ -211,9 +459,9 @@ def yolo_to_figma_node_v5(idx, row, image_w, image_h, image, parent_label=None):
         "fills": [{
             "blendMode": "NORMAL",
             "type": "SOLID",
-            "color": {
+            "color": style_info.get('background_color', {
                 "r": 1.0, "g": 1.0, "b": 1.0, "a": 1.0
-            }
+            })
         }] if figma_type in ["RECTANGLE", "FRAME", "GROUP"] else [],
         "strokes": [],
         "strokeWeight": 1.0,
@@ -317,8 +565,9 @@ def yolo_to_figma_node_v5(idx, row, image_w, image_h, image, parent_label=None):
         }
         node["characterStyleOverrides"] = []
         
-        font_size = 16.0
-        text_color = {'r': 0.0, 'g': 0.0, 'b': 0.0, 'a': 1.0}
+        # 스타일 정보를 기반으로 폰트 설정
+        font_size = style_info.get('font_size', 16.0)
+        text_color = style_info.get('text_color', {'r': 0.0, 'g': 0.0, 'b': 0.0, 'a': 1.0})
         
         node["style"] = {
             "fontFamily": "Pretendard",
@@ -350,9 +599,9 @@ def yolo_to_figma_node_v5(idx, row, image_w, image_h, image, parent_label=None):
     if figma_type == 'FRAME':
         node["clipsContent"] = False
         node["background"] = []
-        node["backgroundColor"] = {
+        node["backgroundColor"] = style_info.get('background_color', {
             "r": 1.0, "g": 1.0, "b": 1.0, "a": 1.0
-        }
+        })
         node["layoutMode"] = "HORIZONTAL"
         node["counterAxisSizingMode"] = "FIXED"
         node["primaryAxisSizingMode"] = "FIXED"
@@ -734,13 +983,26 @@ def save_detection_result_with_image_v5(image_path, results, output_dir):
     return json_path, png_path
 
 def main():
-    print("🚀 YOLO to Figma JSON Converter v5 (rest.json과 동일한 구조)")
+    print("🚀 YOLO to Figma JSON Converter v5 (텍스트 감지 + 스타일 분석)")
     print("=" * 60)
     
+    # 라이브러리 상태 출력
+    if TESSERACT_AVAILABLE:
+        print("✅ Tesseract OCR available")
+    else:
+        print("⚠️  Tesseract OCR not available. Using fallback text detection.")
+    
+    if SKLEARN_AVAILABLE:
+        print("✅ Scikit-learn available for color analysis")
+    else:
+        print("⚠️  Scikit-learn not available. Using fallback color analysis.")
+    
+    # 작업 디렉토리 확인 및 출력
     import os
     current_dir = os.getcwd()
     print(f"📁 Current working directory: {current_dir}")
     
+    # 이미지 디렉토리 확인
     image_dir = './screenshots/'
     if not os.path.exists(image_dir):
         print(f"⚠️  Warning: {image_dir} not found. Trying alternative paths...")
