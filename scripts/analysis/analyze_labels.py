@@ -5,8 +5,30 @@ import sys
 
 def analyze_label_distribution(labels_dir, classes_path, output_path=None):
     # 클래스명 로드
-    with open(classes_path, 'r', encoding='utf-8') as f:
-        class_names = [line.strip() for line in f if line.strip()]
+    try:
+        with open(classes_path, 'r', encoding='utf-8') as f:
+            class_names = [line.strip() for line in f if line.strip()]
+    except FileNotFoundError:
+        # 대안 경로 시도
+        alternative_paths = [
+            'screenshots/start/labels/classes.txt',
+            'output/result/classes.txt',
+            'yolo/datasets/screenshots/val/labels/classes.txt'
+        ]
+        
+        class_names = []
+        for alt_path in alternative_paths:
+            try:
+                with open(alt_path, 'r', encoding='utf-8') as f:
+                    class_names = [line.strip() for line in f if line.strip()]
+                    print(f"✅ Loaded classes from: {alt_path}")
+                    break
+            except FileNotFoundError:
+                continue
+        
+        if not class_names:
+            print("⚠️  Warning: Could not find classes.txt file. Using default class names.")
+            class_names = ['Button', 'InputBox', 'TextArea', 'Group', 'Frame']
     
     label_counter = Counter()
     total_labels = 0

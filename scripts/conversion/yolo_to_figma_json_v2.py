@@ -14,8 +14,30 @@ LABELS_PATH = os.path.join(DATASET_PATH, 'labels')
 CLASSES_PATH = os.path.join(LABELS_PATH, 'classes.txt')
 
 # 클래스명 로드
-with open(CLASSES_PATH, 'r', encoding='utf-8') as f:
-    CLASS_NAMES = [line.strip() for line in f if line.strip()]
+try:
+    with open(CLASSES_PATH, 'r', encoding='utf-8') as f:
+        CLASS_NAMES = [line.strip() for line in f if line.strip()]
+except FileNotFoundError:
+    # 대안 경로 시도
+    alternative_paths = [
+        'screenshots/start/labels/classes.txt',
+        'output/result/classes.txt',
+        'yolo/datasets/screenshots/val/labels/classes.txt'
+    ]
+    
+    CLASS_NAMES = []
+    for alt_path in alternative_paths:
+        try:
+            with open(alt_path, 'r', encoding='utf-8') as f:
+                CLASS_NAMES = [line.strip() for line in f if line.strip()]
+                print(f"✅ Loaded classes from: {alt_path}")
+                break
+        except FileNotFoundError:
+            continue
+    
+    if not CLASS_NAMES:
+        print("⚠️  Warning: Could not find classes.txt file. Using default class names.")
+        CLASS_NAMES = ['Button', 'InputBox', 'TextArea', 'Group', 'Frame']
 
 # YOLO 모델 로드
 MODEL_PATH = "runs/detect/train_aug_clean/weights/best.pt"

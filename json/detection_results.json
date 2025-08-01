@@ -1,17 +1,1416 @@
 {
-  "name": "test",
+  "name": "workScr4",
   "elements": [
     {
-      "type": "Group",
-      "id": "Group-0",
-      "confidence": 0.39815,
+      "type": "DateInput",
+      "id": "DateInput-0",
+      "confidence": 0.90963,
       "position": {
-        "top": "111px",
-        "left": "75px",
-        "width": "948px",
-        "height": "309px"
+        "top": "353px",
+        "left": "940px",
+        "width": "109px",
+        "height": "27px"
+      },
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-1",
+      "confidence": 0.87222,
+      "position": {
+        "top": "353px",
+        "left": "1056px",
+        "width": "113px",
+        "height": "26px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-2",
+      "confidence": 0.86378,
+      "position": {
+        "top": "349px",
+        "left": "1181px",
+        "width": "133px",
+        "height": "36px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-3",
+      "confidence": 0.84826,
+      "position": {
+        "top": "427px",
+        "left": "794px",
+        "width": "136px",
+        "height": "40px"
+      },
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-4",
+      "confidence": 0.84654,
+      "position": {
+        "top": "98px",
+        "left": "1322px",
+        "width": "110px",
+        "height": "28px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-5",
+      "confidence": 0.84278,
+      "position": {
+        "top": "388px",
+        "left": "1181px",
+        "width": "132px",
+        "height": "36px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-6",
+      "confidence": 0.83838,
+      "position": {
+        "top": "348px",
+        "left": "794px",
+        "width": "137px",
+        "height": "38px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-7",
+      "confidence": 0.81738,
+      "position": {
+        "top": "275px",
+        "left": "529px",
+        "width": "130px",
+        "height": "45px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-8",
+      "confidence": 0.8161,
+      "position": {
+        "top": "389px",
+        "left": "797px",
+        "width": "132px",
+        "height": "35px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-9",
+      "confidence": 0.81471,
+      "position": {
+        "top": "310px",
+        "left": "1183px",
+        "width": "135px",
+        "height": "36px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-10",
+      "confidence": 0.79919,
+      "position": {
+        "top": "429px",
+        "left": "1183px",
+        "width": "131px",
+        "height": "37px"
+      },
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-11",
+      "confidence": 0.77593,
+      "position": {
+        "top": "65px",
+        "left": "842px",
+        "width": "100px",
+        "height": "25px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-12",
+      "confidence": 0.77297,
+      "position": {
+        "top": "270px",
+        "left": "798px",
+        "width": "134px",
+        "height": "36px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-13",
+      "confidence": 0.77227,
+      "position": {
+        "top": "273px",
+        "left": "662px",
+        "width": "121px",
+        "height": "49px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-14",
+      "confidence": 0.76596,
+      "position": {
+        "top": "232px",
+        "left": "13px",
+        "width": "138px",
+        "height": "38px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-15",
+      "confidence": 0.75961,
+      "position": {
+        "top": "269px",
+        "left": "1188px",
+        "width": "125px",
+        "height": "39px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-16",
+      "confidence": 0.75198,
+      "position": {
+        "top": "308px",
+        "left": "798px",
+        "width": "133px",
+        "height": "37px"
+      },
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-17",
+      "confidence": 0.74985,
+      "position": {
+        "top": "98px",
+        "left": "1200px",
+        "width": "109px",
+        "height": "28px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-18",
+      "confidence": 0.74411,
+      "position": {
+        "top": "272px",
+        "left": "270px",
+        "width": "132px",
+        "height": "47px"
+      },
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-19",
+      "confidence": 0.73923,
+      "position": {
+        "top": "64px",
+        "left": "957px",
+        "width": "97px",
+        "height": "27px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-20",
+      "confidence": 0.73705,
+      "position": {
+        "top": "233px",
+        "left": "529px",
+        "width": "127px",
+        "height": "35px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-21",
+      "confidence": 0.72608,
+      "position": {
+        "top": "97px",
+        "left": "752px",
+        "width": "85px",
+        "height": "30px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-22",
+      "confidence": 0.71653,
+      "position": {
+        "top": "233px",
+        "left": "796px",
+        "width": "133px",
+        "height": "35px"
+      },
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-23",
+      "confidence": 0.71236,
+      "position": {
+        "top": "316px",
+        "left": "1323px",
+        "width": "108px",
+        "height": "24px"
+      },
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-24",
+      "confidence": 0.70138,
+      "position": {
+        "top": "232px",
+        "left": "1486px",
+        "width": "71px",
+        "height": "30px"
+      },
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-25",
+      "confidence": 0.69381,
+      "position": {
+        "top": "196px",
+        "left": "1430px",
+        "width": "66px",
+        "height": "24px"
+      },
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-26",
+      "confidence": 0.69137,
+      "position": {
+        "top": "133px",
+        "left": "1474px",
+        "width": "64px",
+        "height": "28px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-27",
+      "confidence": 0.68297,
+      "position": {
+        "top": "95px",
+        "left": "14px",
+        "width": "95px",
+        "height": "33px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-28",
+      "confidence": 0.68039,
+      "position": {
+        "top": "272px",
+        "left": "150px",
+        "width": "114px",
+        "height": "47px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-29",
+      "confidence": 0.67974,
+      "position": {
+        "top": "61px",
+        "left": "397px",
+        "width": "74px",
+        "height": "30px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-30",
+      "confidence": 0.67277,
+      "position": {
+        "top": "98px",
+        "left": "1122px",
+        "width": "70px",
+        "height": "30px"
+      },
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-31",
+      "confidence": 0.66715,
+      "position": {
+        "top": "197px",
+        "left": "1500px",
+        "width": "61px",
+        "height": "22px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-32",
+      "confidence": 0.65805,
+      "position": {
+        "top": "61px",
+        "left": "751px",
+        "width": "85px",
+        "height": "29px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-33",
+      "confidence": 0.65368,
+      "position": {
+        "top": "273px",
+        "left": "16px",
+        "width": "132px",
+        "height": "47px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-34",
+      "confidence": 0.64331,
+      "position": {
+        "top": "231px",
+        "left": "270px",
+        "width": "133px",
+        "height": "37px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-35",
+      "confidence": 0.63268,
+      "position": {
+        "top": "129px",
+        "left": "16px",
+        "width": "94px",
+        "height": "39px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-36",
+      "confidence": 0.61966,
+      "position": {
+        "top": "99px",
+        "left": "396px",
+        "width": "73px",
+        "height": "30px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-37",
+      "confidence": 0.59316,
+      "position": {
+        "top": "231px",
+        "left": "1180px",
+        "width": "133px",
+        "height": "36px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-38",
+      "confidence": 0.5925,
+      "position": {
+        "top": "233px",
+        "left": "659px",
+        "width": "124px",
+        "height": "34px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-39",
+      "confidence": 0.57013,
+      "position": {
+        "top": "131px",
+        "left": "1120px",
+        "width": "75px",
+        "height": "32px"
+      },
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-40",
+      "confidence": 0.56273,
+      "position": {
+        "top": "64px",
+        "left": "1197px",
+        "width": "110px",
+        "height": "26px"
+      },
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-41",
+      "confidence": 0.55563,
+      "position": {
+        "top": "196px",
+        "left": "717px",
+        "width": "61px",
+        "height": "24px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-42",
+      "confidence": 0.54838,
+      "position": {
+        "top": "275px",
+        "left": "412px",
+        "width": "109px",
+        "height": "41px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-43",
+      "confidence": 0.54484,
+      "position": {
+        "top": "470px",
+        "left": "799px",
+        "width": "135px",
+        "height": "94px"
+      },
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-44",
+      "confidence": 0.54118,
+      "position": {
+        "top": "206px",
+        "left": "792px",
+        "width": "778px",
+        "height": "375px"
+      },
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-45",
+      "confidence": 0.53609,
+      "position": {
+        "top": "195px",
+        "left": "1333px",
+        "width": "85px",
+        "height": "27px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-46",
+      "confidence": 0.53205,
+      "position": {
+        "top": "319px",
+        "left": "15px",
+        "width": "132px",
+        "height": "41px"
+      },
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-47",
+      "confidence": 0.52531,
+      "position": {
+        "top": "192px",
+        "left": "650px",
+        "width": "63px",
+        "height": "30px"
+      },
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-48",
+      "confidence": 0.52326,
+      "position": {
+        "top": "54px",
+        "left": "27px",
+        "width": "1541px",
+        "height": "123px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-49",
+      "confidence": 0.52321,
+      "position": {
+        "top": "59px",
+        "left": "1095px",
+        "width": "98px",
+        "height": "33px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-50",
+      "confidence": 0.52214,
+      "position": {
+        "top": "59px",
+        "left": "15px",
+        "width": "95px",
+        "height": "37px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-51",
+      "confidence": 0.49905,
+      "position": {
+        "top": "223px",
+        "left": "151px",
+        "width": "114px",
+        "height": "44px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-52",
+      "confidence": 0.49259,
+      "position": {
+        "top": "230px",
+        "left": "412px",
+        "width": "111px",
+        "height": "38px"
+      },
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-53",
+      "confidence": 0.48002,
+      "position": {
+        "top": "194px",
+        "left": "1264px",
+        "width": "62px",
+        "height": "29px"
+      },
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-54",
+      "confidence": 0.47118,
+      "position": {
+        "top": "10px",
+        "left": "0px",
+        "width": "1062px",
+        "height": "41px"
+      },
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-55",
+      "confidence": 0.40705,
+      "position": {
+        "top": "8px",
+        "left": "347px",
+        "width": "1150px",
+        "height": "42px"
+      },
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-56",
+      "confidence": 0.39809,
+      "position": {
+        "top": "236px",
+        "left": "940px",
+        "width": "232px",
+        "height": "32px"
+      },
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-57",
+      "confidence": 0.3927,
+      "position": {
+        "top": "392px",
+        "left": "940px",
+        "width": "111px",
+        "height": "25px"
+      },
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-58",
+      "confidence": 0.38184,
+      "position": {
+        "top": "393px",
+        "left": "1057px",
+        "width": "112px",
+        "height": "24px"
+      },
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-59",
+      "confidence": 0.3691,
+      "position": {
+        "top": "237px",
+        "left": "1327px",
+        "width": "153px",
+        "height": "30px"
+      },
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-60",
+      "confidence": 0.33729,
+      "position": {
+        "top": "59px",
+        "left": "110px",
+        "width": "274px",
+        "height": "30px"
+      },
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-61",
+      "confidence": 0.27706,
+      "position": {
+        "top": "353px",
+        "left": "1322px",
+        "width": "245px",
+        "height": "26px"
+      },
+      "children": []
+    },
+    {
+      "type": "Grid",
+      "id": "Grid-62",
+      "confidence": 0.26527,
+      "position": {
+        "top": "361px",
+        "left": "0px",
+        "width": "786px",
+        "height": "232px"
+      },
+      "children": []
+    },
+    {
+      "type": "TextArea",
+      "id": "TextArea-63",
+      "confidence": 0.26423,
+      "position": {
+        "top": "480px",
+        "left": "940px",
+        "width": "605px",
+        "height": "71px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-64",
+      "confidence": 0.25526,
+      "position": {
+        "top": "183px",
+        "left": "790px",
+        "width": "136px",
+        "height": "45px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-65",
+      "confidence": 0.25489,
+      "position": {
+        "top": "321px",
+        "left": "151px",
+        "width": "106px",
+        "height": "38px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-66",
+      "confidence": 0.24168,
+      "position": {
+        "top": "189px",
+        "left": "545px",
+        "width": "94px",
+        "height": "38px"
+      },
+      "children": []
+    },
+    {
+      "type": "CheckBoxGroup",
+      "id": "CheckBoxGroup-67",
+      "confidence": 0.24084,
+      "position": {
+        "top": "97px",
+        "left": "851px",
+        "width": "198px",
+        "height": "31px"
+      },
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-68",
+      "confidence": 0.23104,
+      "position": {
+        "top": "60px",
+        "left": "469px",
+        "width": "287px",
+        "height": "29px"
+      },
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-69",
+      "confidence": 0.22824,
+      "position": {
+        "top": "57px",
+        "left": "470px",
+        "width": "272px",
+        "height": "31px"
+      },
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-70",
+      "confidence": 0.22617,
+      "position": {
+        "top": "154px",
+        "left": "0px",
+        "width": "1504px",
+        "height": "419px"
+      },
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-71",
+      "confidence": 0.21349,
+      "position": {
+        "top": "392px",
+        "left": "1056px",
+        "width": "114px",
+        "height": "27px"
+      },
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-72",
+      "confidence": 0.20181,
+      "position": {
+        "top": "275px",
+        "left": "924px",
+        "width": "251px",
+        "height": "28px"
+      },
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-73",
+      "confidence": 0.20174,
+      "position": {
+        "top": "313px",
+        "left": "939px",
+        "width": "117px",
+        "height": "26px"
+      },
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-74",
+      "confidence": 0.17599,
+      "position": {
+        "top": "276px",
+        "left": "938px",
+        "width": "232px",
+        "height": "27px"
+      },
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-75",
+      "confidence": 0.16892,
+      "position": {
+        "top": "428px",
+        "left": "940px",
+        "width": "238px",
+        "height": "36px"
+      },
+      "children": []
+    },
+    {
+      "type": "SearchInput",
+      "id": "SearchInput-76",
+      "confidence": 0.16043,
+      "position": {
+        "top": "97px",
+        "left": "118px",
+        "width": "270px",
+        "height": "29px"
+      },
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-77",
+      "confidence": 0.15951,
+      "position": {
+        "top": "132px",
+        "left": "311px",
+        "width": "829px",
+        "height": "31px"
+      },
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-78",
+      "confidence": 0.15569,
+      "position": {
+        "top": "134px",
+        "left": "115px",
+        "width": "206px",
+        "height": "24px"
+      },
+      "children": []
+    },
+    {
+      "type": "SearchInput",
+      "id": "SearchInput-79",
+      "confidence": 0.15073,
+      "position": {
+        "top": "352px",
+        "left": "1322px",
+        "width": "235px",
+        "height": "29px"
+      },
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-80",
+      "confidence": 0.14786,
+      "position": {
+        "top": "134px",
+        "left": "117px",
+        "width": "196px",
+        "height": "27px"
+      },
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-81",
+      "confidence": 0.14125,
+      "position": {
+        "top": "466px",
+        "left": "938px",
+        "width": "631px",
+        "height": "104px"
+      },
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-82",
+      "confidence": 0.13016,
+      "position": {
+        "top": "96px",
+        "left": "113px",
+        "width": "289px",
+        "height": "29px"
+      },
+      "children": []
+    },
+    {
+      "type": "NumberEditor",
+      "id": "NumberEditor-83",
+      "confidence": 0.12363,
+      "position": {
+        "top": "276px",
+        "left": "932px",
+        "width": "239px",
+        "height": "27px"
+      },
+      "children": []
+    },
+    {
+      "type": "NumberEditor",
+      "id": "NumberEditor-84",
+      "confidence": 0.12345,
+      "position": {
+        "top": "276px",
+        "left": "1324px",
+        "width": "226px",
+        "height": "28px"
+      },
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-85",
+      "confidence": 0.12106,
+      "position": {
+        "top": "59px",
+        "left": "97px",
+        "width": "290px",
+        "height": "29px"
+      },
+      "children": []
+    },
+    {
+      "type": "FormTitle",
+      "id": "FormTitle-86",
+      "confidence": 0.1199,
+      "position": {
+        "top": "176px",
+        "left": "5px",
+        "width": "670px",
+        "height": "40px"
+      },
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-87",
+      "confidence": 0.11755,
+      "position": {
+        "top": "353px",
+        "left": "1318px",
+        "width": "240px",
+        "height": "28px"
+      },
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-88",
+      "confidence": 0.11324,
+      "position": {
+        "top": "275px",
+        "left": "939px",
+        "width": "231px",
+        "height": "29px"
+      },
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-89",
+      "confidence": 0.10913,
+      "position": {
+        "top": "390px",
+        "left": "1324px",
+        "width": "239px",
+        "height": "32px"
+      },
+      "children": []
+    },
+    {
+      "type": "FormTitle",
+      "id": "FormTitle-90",
+      "confidence": 0.1067,
+      "position": {
+        "top": "171px",
+        "left": "541px",
+        "width": "1003px",
+        "height": "46px"
+      },
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-91",
+      "confidence": 0.1013,
+      "position": {
+        "top": "429px",
+        "left": "1321px",
+        "width": "237px",
+        "height": "35px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-92",
+      "confidence": 0.09986,
+      "position": {
+        "top": "468px",
+        "left": "799px",
+        "width": "135px",
+        "height": "39px"
+      },
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-93",
+      "confidence": 0.09866,
+      "position": {
+        "top": "180px",
+        "left": "6px",
+        "width": "148px",
+        "height": "47px"
+      },
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-94",
+      "confidence": 0.09766,
+      "position": {
+        "top": "96px",
+        "left": "115px",
+        "width": "274px",
+        "height": "29px"
+      },
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-95",
+      "confidence": 0.09682,
+      "position": {
+        "top": "276px",
+        "left": "1325px",
+        "width": "232px",
+        "height": "28px"
+      },
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-96",
+      "confidence": 0.0943,
+      "position": {
+        "top": "173px",
+        "left": "605px",
+        "width": "966px",
+        "height": "44px"
+      },
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-97",
+      "confidence": 0.09049,
+      "position": {
+        "top": "313px",
+        "left": "1434px",
+        "width": "126px",
+        "height": "28px"
+      },
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-98",
+      "confidence": 0.07352,
+      "position": {
+        "top": "311px",
+        "left": "1046px",
+        "width": "129px",
+        "height": "29px"
+      },
+      "children": []
+    },
+    {
+      "type": "FormTitle",
+      "id": "FormTitle-99",
+      "confidence": 0.0732,
+      "position": {
+        "top": "15px",
+        "left": "0px",
+        "width": "795px",
+        "height": "32px"
+      },
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-100",
+      "confidence": 0.06952,
+      "position": {
+        "top": "186px",
+        "left": "0px",
+        "width": "788px",
+        "height": "181px"
+      },
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-101",
+      "confidence": 0.0671,
+      "position": {
+        "top": "312px",
+        "left": "1432px",
+        "width": "129px",
+        "height": "29px"
+      },
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-102",
+      "confidence": 0.06639,
+      "position": {
+        "top": "0px",
+        "left": "0px",
+        "width": "784px",
+        "height": "41px"
+      },
+      "children": []
+    },
+    {
+      "type": "NumberEditor",
+      "id": "NumberEditor-103",
+      "confidence": 0.06623,
+      "position": {
+        "top": "312px",
+        "left": "978px",
+        "width": "197px",
+        "height": "29px"
+      },
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-104",
+      "confidence": 0.06587,
+      "position": {
+        "top": "100px",
+        "left": "1321px",
+        "width": "111px",
+        "height": "26px"
+      },
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-105",
+      "confidence": 0.06211,
+      "position": {
+        "top": "193px",
+        "left": "482px",
+        "width": "62px",
+        "height": "30px"
+      },
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-106",
+      "confidence": 0.05958,
+      "position": {
+        "top": "388px",
+        "left": "1327px",
+        "width": "234px",
+        "height": "34px"
+      },
+      "children": []
+    },
+    {
+      "type": "NumberEditor",
+      "id": "NumberEditor-107",
+      "confidence": 0.05935,
+      "position": {
+        "top": "313px",
+        "left": "1416px",
+        "width": "144px",
+        "height": "28px"
+      },
+      "children": []
+    },
+    {
+      "type": "CheckBoxGroup",
+      "id": "CheckBoxGroup-108",
+      "confidence": 0.05778,
+      "position": {
+        "top": "98px",
+        "left": "960px",
+        "width": "113px",
+        "height": "29px"
+      },
+      "children": []
+    },
+    {
+      "type": "NumberEditor",
+      "id": "NumberEditor-109",
+      "confidence": 0.05711,
+      "position": {
+        "top": "314px",
+        "left": "940px",
+        "width": "109px",
+        "height": "25px"
+      },
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-110",
+      "confidence": 0.05368,
+      "position": {
+        "top": "223px",
+        "left": "1189px",
+        "width": "382px",
+        "height": "270px"
+      },
+      "children": []
+    },
+    {
+      "type": "ComboBox",
+      "id": "ComboBox-111",
+      "confidence": 0.05337,
+      "position": {
+        "top": "96px",
+        "left": "459px",
+        "width": "303px",
+        "height": "30px"
+      },
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-112",
+      "confidence": 0.05245,
+      "position": {
+        "top": "347px",
+        "left": "0px",
+        "width": "786px",
+        "height": "246px"
+      },
+      "children": []
+    },
+    {
+      "type": "NumberEditor",
+      "id": "NumberEditor-113",
+      "confidence": 0.05199,
+      "position": {
+        "top": "99px",
+        "left": "113px",
+        "width": "277px",
+        "height": "26px"
+      },
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-114",
+      "confidence": 0.05143,
+      "position": {
+        "top": "327px",
+        "left": "152px",
+        "width": "630px",
+        "height": "33px"
+      },
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-115",
+      "confidence": 0.05059,
+      "position": {
+        "top": "3px",
+        "left": "2px",
+        "width": "442px",
+        "height": "45px"
       },
       "children": []
     }
-  ]
+  ],
+  "summary": {
+    "total_elements": 116,
+    "unique_types": 13,
+    "class_counts": {
+      "DateInput": 11,
+      "Output": 41,
+      "InputBox": 13,
+      "Button": 10,
+      "Group": 7,
+      "AppHeader": 6,
+      "ComboBox": 13,
+      "Grid": 1,
+      "TextArea": 1,
+      "CheckBoxGroup": 2,
+      "SearchInput": 2,
+      "NumberEditor": 6,
+      "FormTitle": 3
+    }
+  }
 }
