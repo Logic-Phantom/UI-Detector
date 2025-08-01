@@ -83,7 +83,7 @@ def analyze_label_distribution(labels_dir, classes_path, output_path=None):
         print(f"분석 결과가 {output_path}에 저장되었습니다.")
 
 def main():
-    labels_dir = './yolo/datasets/screenshots/start/labels'
+    labels_dir = '../../yolo/datasets/screenshots/start/labels'
     classes_path = os.path.join(labels_dir, 'classes.txt')
     output_path = './label_analysis_result.txt'
     if not os.path.exists(labels_dir) or not os.path.exists(classes_path):

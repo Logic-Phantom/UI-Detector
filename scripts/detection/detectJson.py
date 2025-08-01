@@ -6,7 +6,7 @@ import os
 from pathlib import Path
 
 # 실제 학습 데이터셋 기준 경로
-DATASET_PATH = 'yolo/datasets/screenshots/start'
+DATASET_PATH = '../../yolo/datasets/screenshots/start'
 IMAGES_PATH = os.path.join(DATASET_PATH, 'images')
 LABELS_PATH = os.path.join(DATASET_PATH, 'labels')
 CLASSES_PATH = os.path.join(LABELS_PATH, 'classes.txt')
@@ -18,9 +18,9 @@ try:
 except FileNotFoundError:
     # 대안 경로 시도
     alternative_paths = [
-        'screenshots/start/labels/classes.txt',
-        'output/result/classes.txt',
-        'yolo/datasets/screenshots/val/labels/classes.txt'
+        '../../screenshots/start/labels/classes.txt',
+        '../../output/result/classes.txt',
+        '../../yolo/datasets/screenshots/val/labels/classes.txt'
     ]
     
     CLASS_NAMES = []
@@ -38,7 +38,7 @@ except FileNotFoundError:
         CLASS_NAMES = ['Button', 'InputBox', 'TextArea', 'Group', 'Frame']
 
 # 모델 경로
-model_path = "runs/detect/train_aug_clean/weights/best.pt"
+model_path = "../../runs/detect/train_aug_clean/weights/best.pt"
 if not os.path.exists(model_path):
     print(f"Error: Model file not found at {model_path}")
     exit(1)

@@ -975,11 +975,40 @@ def main():
     else:
         print("⚠️  Scikit-learn not available. Using fallback color analysis.")
     
+    # 작업 디렉토리 확인 및 출력
+    import os
+    current_dir = os.getcwd()
+    print(f"📁 Current working directory: {current_dir}")
+    
+    # 이미지 디렉토리 확인
+    image_dir = './screenshots/'
+    if not os.path.exists(image_dir):
+        print(f"⚠️  Warning: {image_dir} not found. Trying alternative paths...")
+        alternative_image_dirs = [
+            'screenshots/',
+            '../screenshots/',
+            '../../screenshots/',
+            'UI-Detector/screenshots/',
+            os.path.join(current_dir, 'screenshots/')
+        ]
+        
+        for alt_dir in alternative_image_dirs:
+            if os.path.exists(alt_dir):
+                image_dir = alt_dir
+                print(f"✅ Found images directory: {image_dir}")
+                break
+        else:
+            print(f"❌ Error: No screenshots directory found!")
+            print("Available directories:")
+            for root, dirs, files in os.walk('.'):
+                if 'screenshots' in dirs:
+                    print(f"  - {os.path.join(root, 'screenshots')}")
+            return
+    
     today = datetime.datetime.now().strftime('%Y-%m-%d')
     output_dir = f'./figma_json(style)/{today}'
     os.makedirs(output_dir, exist_ok=True)
     
-    image_dir = './screenshots/'
     processed_count = 0
     
     for root, dirs, files in os.walk(image_dir):
