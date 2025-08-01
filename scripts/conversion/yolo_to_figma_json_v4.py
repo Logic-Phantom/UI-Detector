@@ -520,6 +520,12 @@ def yolo_to_figma_node_v4(idx, row, image_w, image_h, image, parent_label=None):
         node["effects"] = []
         node["interactions"] = []
 
+    # 일반 노드 (RECTANGLE, GROUP, FRAME 등)의 경우 name에 텍스트 포함
+    if figma_type in ['RECTANGLE', 'GROUP', 'FRAME'] and extracted_text:
+        # name에 텍스트 정보 추가 (기존 라벨 + 추출된 텍스트)
+        original_name = node["name"]
+        node["name"] = f"{original_name} ({extracted_text})"
+
     # FRAME 타입이라면
     if figma_type == 'FRAME':
         node["clipsContent"] = False
