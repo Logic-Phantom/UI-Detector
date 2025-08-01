@@ -32,6 +32,8 @@ def main():
     if args.diagnose:
         print("🔍 Running model diagnosis...")
         try:
+            import sys
+            sys.path.append('../analysis')
             import model_diagnosis
             model_diagnosis.main()
             print()
@@ -71,6 +73,8 @@ def main():
     
     try:
         # 개선된 탐지기 사용
+        import sys
+        sys.path.append('../detection')
         from improved_detector import ImprovedUIDetector
         
         detector = ImprovedUIDetector(model_path)

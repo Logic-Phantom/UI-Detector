@@ -1,0 +1,1187 @@
+{
+  "name": "testFigma",
+  "image_path": "./screenshots/testFigma.png",
+  "detection_info": {
+    "threshold": 0.05,
+    "total_detections": 61,
+    "average_confidence": 0.18370778229637225,
+    "detection_score": 11.206174720078707,
+    "model_path": "runs/detect/train_aug_clean/weights/best.pt"
+  },
+  "elements": [
+    {
+      "type": "Button",
+      "id": "Button-0",
+      "confidence": 0.7967339158058167,
+      "position": {
+        "top": "192px",
+        "left": "1408px",
+        "width": "92px",
+        "height": "44px"
+      },
+      "bbox": [
+        1408,
+        192,
+        1500,
+        236
+      ],
+      "area": 4048,
+      "children": []
+    },
+    {
+      "type": "Grid",
+      "id": "Grid-1",
+      "confidence": 0.7196651101112366,
+      "position": {
+        "top": "331px",
+        "left": "26px",
+        "width": "1563px",
+        "height": "482px"
+      },
+      "bbox": [
+        26,
+        331,
+        1589,
+        813
+      ],
+      "area": 753366,
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-2",
+      "confidence": 0.6049103736877441,
+      "position": {
+        "top": "149px",
+        "left": "974px",
+        "width": "158px",
+        "height": "36px"
+      },
+      "bbox": [
+        974,
+        149,
+        1132,
+        185
+      ],
+      "area": 5688,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-3",
+      "confidence": 0.5820316672325134,
+      "position": {
+        "top": "196px",
+        "left": "1505px",
+        "width": "93px",
+        "height": "45px"
+      },
+      "bbox": [
+        1505,
+        196,
+        1598,
+        241
+      ],
+      "area": 4185,
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-4",
+      "confidence": 0.5408806204795837,
+      "position": {
+        "top": "70px",
+        "left": "39px",
+        "width": "1583px",
+        "height": "173px"
+      },
+      "bbox": [
+        39,
+        70,
+        1622,
+        243
+      ],
+      "area": 273859,
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-5",
+      "confidence": 0.4492385983467102,
+      "position": {
+        "top": "848px",
+        "left": "1135px",
+        "width": "235px",
+        "height": "43px"
+      },
+      "bbox": [
+        1135,
+        848,
+        1370,
+        891
+      ],
+      "area": 10105,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-6",
+      "confidence": 0.4240849018096924,
+      "position": {
+        "top": "375px",
+        "left": "1527px",
+        "width": "72px",
+        "height": "33px"
+      },
+      "bbox": [
+        1527,
+        375,
+        1599,
+        408
+      ],
+      "area": 2376,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-7",
+      "confidence": 0.3312709927558899,
+      "position": {
+        "top": "728px",
+        "left": "1524px",
+        "width": "75px",
+        "height": "34px"
+      },
+      "bbox": [
+        1524,
+        728,
+        1599,
+        762
+      ],
+      "area": 2550,
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-8",
+      "confidence": 0.3277098834514618,
+      "position": {
+        "top": "141px",
+        "left": "145px",
+        "width": "181px",
+        "height": "43px"
+      },
+      "bbox": [
+        145,
+        141,
+        326,
+        184
+      ],
+      "area": 7783,
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-9",
+      "confidence": 0.2961914539337158,
+      "position": {
+        "top": "849px",
+        "left": "1384px",
+        "width": "235px",
+        "height": "40px"
+      },
+      "bbox": [
+        1384,
+        849,
+        1619,
+        889
+      ],
+      "area": 9400,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-10",
+      "confidence": 0.28288733959198,
+      "position": {
+        "top": "292px",
+        "left": "1505px",
+        "width": "117px",
+        "height": "32px"
+      },
+      "bbox": [
+        1505,
+        292,
+        1622,
+        324
+      ],
+      "area": 3744,
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-11",
+      "confidence": 0.27112168073654175,
+      "position": {
+        "top": "848px",
+        "left": "888px",
+        "width": "234px",
+        "height": "41px"
+      },
+      "bbox": [
+        888,
+        848,
+        1122,
+        889
+      ],
+      "area": 9594,
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-12",
+      "confidence": 0.2572284936904907,
+      "position": {
+        "top": "327px",
+        "left": "55px",
+        "width": "1556px",
+        "height": "465px"
+      },
+      "bbox": [
+        55,
+        327,
+        1611,
+        792
+      ],
+      "area": 723540,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-13",
+      "confidence": 0.23499780893325806,
+      "position": {
+        "top": "454px",
+        "left": "1337px",
+        "width": "91px",
+        "height": "32px"
+      },
+      "bbox": [
+        1337,
+        454,
+        1428,
+        486
+      ],
+      "area": 2912,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-14",
+      "confidence": 0.22904840111732483,
+      "position": {
+        "top": "376px",
+        "left": "1442px",
+        "width": "44px",
+        "height": "31px"
+      },
+      "bbox": [
+        1442,
+        376,
+        1486,
+        407
+      ],
+      "area": 1364,
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-15",
+      "confidence": 0.21055904030799866,
+      "position": {
+        "top": "848px",
+        "left": "639px",
+        "width": "234px",
+        "height": "42px"
+      },
+      "bbox": [
+        639,
+        848,
+        873,
+        890
+      ],
+      "area": 9828,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-16",
+      "confidence": 0.206948384642601,
+      "position": {
+        "top": "416px",
+        "left": "1527px",
+        "width": "73px",
+        "height": "32px"
+      },
+      "bbox": [
+        1527,
+        416,
+        1600,
+        448
+      ],
+      "area": 2336,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-17",
+      "confidence": 0.198240727186203,
+      "position": {
+        "top": "729px",
+        "left": "1439px",
+        "width": "50px",
+        "height": "34px"
+      },
+      "bbox": [
+        1439,
+        729,
+        1489,
+        763
+      ],
+      "area": 1700,
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-18",
+      "confidence": 0.18210221827030182,
+      "position": {
+        "top": "652px",
+        "left": "1336px",
+        "width": "94px",
+        "height": "30px"
+      },
+      "bbox": [
+        1336,
+        652,
+        1430,
+        682
+      ],
+      "area": 2820,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-19",
+      "confidence": 0.17732083797454834,
+      "position": {
+        "top": "417px",
+        "left": "1442px",
+        "width": "46px",
+        "height": "31px"
+      },
+      "bbox": [
+        1442,
+        417,
+        1488,
+        448
+      ],
+      "area": 1426,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-20",
+      "confidence": 0.17708663642406464,
+      "position": {
+        "top": "375px",
+        "left": "1336px",
+        "width": "95px",
+        "height": "33px"
+      },
+      "bbox": [
+        1336,
+        375,
+        1431,
+        408
+      ],
+      "area": 3135,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-21",
+      "confidence": 0.1542598307132721,
+      "position": {
+        "top": "729px",
+        "left": "1334px",
+        "width": "96px",
+        "height": "31px"
+      },
+      "bbox": [
+        1334,
+        729,
+        1430,
+        760
+      ],
+      "area": 2976,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-22",
+      "confidence": 0.14636534452438354,
+      "position": {
+        "top": "787px",
+        "left": "569px",
+        "width": "40px",
+        "height": "37px"
+      },
+      "bbox": [
+        569,
+        787,
+        609,
+        824
+      ],
+      "area": 1480,
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-23",
+      "confidence": 0.14529868960380554,
+      "position": {
+        "top": "146px",
+        "left": "792px",
+        "width": "154px",
+        "height": "38px"
+      },
+      "bbox": [
+        792,
+        146,
+        946,
+        184
+      ],
+      "area": 5852,
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-24",
+      "confidence": 0.14308176934719086,
+      "position": {
+        "top": "613px",
+        "left": "1335px",
+        "width": "93px",
+        "height": "31px"
+      },
+      "bbox": [
+        1335,
+        613,
+        1428,
+        644
+      ],
+      "area": 2883,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-25",
+      "confidence": 0.14283189177513123,
+      "position": {
+        "top": "692px",
+        "left": "1440px",
+        "width": "48px",
+        "height": "30px"
+      },
+      "bbox": [
+        1440,
+        692,
+        1488,
+        722
+      ],
+      "area": 1440,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-26",
+      "confidence": 0.13878700137138367,
+      "position": {
+        "top": "493px",
+        "left": "1337px",
+        "width": "91px",
+        "height": "35px"
+      },
+      "bbox": [
+        1337,
+        493,
+        1428,
+        528
+      ],
+      "area": 3185,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-27",
+      "confidence": 0.13746359944343567,
+      "position": {
+        "top": "292px",
+        "left": "1346px",
+        "width": "139px",
+        "height": "40px"
+      },
+      "bbox": [
+        1346,
+        292,
+        1485,
+        332
+      ],
+      "area": 5560,
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-28",
+      "confidence": 0.13577434420585632,
+      "position": {
+        "top": "826px",
+        "left": "589px",
+        "width": "1040px",
+        "height": "81px"
+      },
+      "bbox": [
+        589,
+        826,
+        1629,
+        907
+      ],
+      "area": 84240,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-29",
+      "confidence": 0.1331186294555664,
+      "position": {
+        "top": "456px",
+        "left": "1440px",
+        "width": "55px",
+        "height": "31px"
+      },
+      "bbox": [
+        1440,
+        456,
+        1495,
+        487
+      ],
+      "area": 1705,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-30",
+      "confidence": 0.1202094778418541,
+      "position": {
+        "top": "101px",
+        "left": "617px",
+        "width": "158px",
+        "height": "115px"
+      },
+      "bbox": [
+        617,
+        101,
+        775,
+        216
+      ],
+      "area": 18170,
+      "children": []
+    },
+    {
+      "type": "Group",
+      "id": "Group-31",
+      "confidence": 0.11930039525032043,
+      "position": {
+        "top": "367px",
+        "left": "1331px",
+        "width": "313px",
+        "height": "398px"
+      },
+      "bbox": [
+        1331,
+        367,
+        1644,
+        765
+      ],
+      "area": 124574,
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-32",
+      "confidence": 0.11147109419107437,
+      "position": {
+        "top": "416px",
+        "left": "1336px",
+        "width": "93px",
+        "height": "33px"
+      },
+      "bbox": [
+        1336,
+        416,
+        1429,
+        449
+      ],
+      "area": 3069,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-33",
+      "confidence": 0.1006062775850296,
+      "position": {
+        "top": "375px",
+        "left": "1492px",
+        "width": "33px",
+        "height": "31px"
+      },
+      "bbox": [
+        1492,
+        375,
+        1525,
+        406
+      ],
+      "area": 1023,
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-34",
+      "confidence": 0.09872177243232727,
+      "position": {
+        "top": "691px",
+        "left": "1335px",
+        "width": "95px",
+        "height": "29px"
+      },
+      "bbox": [
+        1335,
+        691,
+        1430,
+        720
+      ],
+      "area": 2755,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-35",
+      "confidence": 0.09645766019821167,
+      "position": {
+        "top": "415px",
+        "left": "1336px",
+        "width": "94px",
+        "height": "33px"
+      },
+      "bbox": [
+        1336,
+        415,
+        1430,
+        448
+      ],
+      "area": 3102,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-36",
+      "confidence": 0.09368178993463516,
+      "position": {
+        "top": "494px",
+        "left": "1435px",
+        "width": "54px",
+        "height": "34px"
+      },
+      "bbox": [
+        1435,
+        494,
+        1489,
+        528
+      ],
+      "area": 1836,
+      "children": []
+    },
+    {
+      "type": "GridTitle",
+      "id": "GridTitle-37",
+      "confidence": 0.09252209961414337,
+      "position": {
+        "top": "268px",
+        "left": "155px",
+        "width": "1215px",
+        "height": "56px"
+      },
+      "bbox": [
+        155,
+        268,
+        1370,
+        324
+      ],
+      "area": 68040,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-38",
+      "confidence": 0.09067529439926147,
+      "position": {
+        "top": "343px",
+        "left": "1368px",
+        "width": "60px",
+        "height": "24px"
+      },
+      "bbox": [
+        1368,
+        343,
+        1428,
+        367
+      ],
+      "area": 1440,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-39",
+      "confidence": 0.0884314477443695,
+      "position": {
+        "top": "135px",
+        "left": "47px",
+        "width": "80px",
+        "height": "58px"
+      },
+      "bbox": [
+        47,
+        135,
+        127,
+        193
+      ],
+      "area": 4640,
+      "children": []
+    },
+    {
+      "type": "GridTitle",
+      "id": "GridTitle-40",
+      "confidence": 0.08611797541379929,
+      "position": {
+        "top": "268px",
+        "left": "0px",
+        "width": "1156px",
+        "height": "54px"
+      },
+      "bbox": [
+        0,
+        268,
+        1156,
+        322
+      ],
+      "area": 62424,
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-41",
+      "confidence": 0.085806705057621,
+      "position": {
+        "top": "7px",
+        "left": "71px",
+        "width": "1210px",
+        "height": "69px"
+      },
+      "bbox": [
+        71,
+        7,
+        1281,
+        76
+      ],
+      "area": 83490,
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-42",
+      "confidence": 0.08406972140073776,
+      "position": {
+        "top": "777px",
+        "left": "27px",
+        "width": "571px",
+        "height": "72px"
+      },
+      "bbox": [
+        27,
+        777,
+        598,
+        849
+      ],
+      "area": 41112,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-43",
+      "confidence": 0.08098501712083817,
+      "position": {
+        "top": "86px",
+        "left": "55px",
+        "width": "80px",
+        "height": "52px"
+      },
+      "bbox": [
+        55,
+        86,
+        135,
+        138
+      ],
+      "area": 4160,
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-44",
+      "confidence": 0.077006034553051,
+      "position": {
+        "top": "5px",
+        "left": "484px",
+        "width": "1169px",
+        "height": "65px"
+      },
+      "bbox": [
+        484,
+        5,
+        1653,
+        70
+      ],
+      "area": 75985,
+      "children": []
+    },
+    {
+      "type": "Grid",
+      "id": "Grid-45",
+      "confidence": 0.07641983032226562,
+      "position": {
+        "top": "70px",
+        "left": "231px",
+        "width": "1392px",
+        "height": "189px"
+      },
+      "bbox": [
+        231,
+        70,
+        1623,
+        259
+      ],
+      "area": 263088,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-46",
+      "confidence": 0.07083889096975327,
+      "position": {
+        "top": "653px",
+        "left": "1440px",
+        "width": "49px",
+        "height": "31px"
+      },
+      "bbox": [
+        1440,
+        653,
+        1489,
+        684
+      ],
+      "area": 1519,
+      "children": []
+    },
+    {
+      "type": "GridTitle",
+      "id": "GridTitle-47",
+      "confidence": 0.07069779932498932,
+      "position": {
+        "top": "279px",
+        "left": "38px",
+        "width": "1054px",
+        "height": "52px"
+      },
+      "bbox": [
+        38,
+        279,
+        1092,
+        331
+      ],
+      "area": 54808,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-48",
+      "confidence": 0.07044747471809387,
+      "position": {
+        "top": "292px",
+        "left": "1183px",
+        "width": "138px",
+        "height": "37px"
+      },
+      "bbox": [
+        1183,
+        292,
+        1321,
+        329
+      ],
+      "area": 5106,
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-49",
+      "confidence": 0.07036998122930527,
+      "position": {
+        "top": "4px",
+        "left": "280px",
+        "width": "1201px",
+        "height": "68px"
+      },
+      "bbox": [
+        280,
+        4,
+        1481,
+        72
+      ],
+      "area": 81668,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-50",
+      "confidence": 0.0671858862042427,
+      "position": {
+        "top": "689px",
+        "left": "1524px",
+        "width": "76px",
+        "height": "32px"
+      },
+      "bbox": [
+        1524,
+        689,
+        1600,
+        721
+      ],
+      "area": 2432,
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-51",
+      "confidence": 0.06564430892467499,
+      "position": {
+        "top": "819px",
+        "left": "28px",
+        "width": "581px",
+        "height": "80px"
+      },
+      "bbox": [
+        28,
+        819,
+        609,
+        899
+      ],
+      "area": 46480,
+      "children": []
+    },
+    {
+      "type": "InputBox",
+      "id": "InputBox-52",
+      "confidence": 0.06535899639129639,
+      "position": {
+        "top": "99px",
+        "left": "147px",
+        "width": "176px",
+        "height": "35px"
+      },
+      "bbox": [
+        147,
+        99,
+        323,
+        134
+      ],
+      "area": 6160,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-53",
+      "confidence": 0.06476498395204544,
+      "position": {
+        "top": "789px",
+        "left": "501px",
+        "width": "61px",
+        "height": "36px"
+      },
+      "bbox": [
+        501,
+        789,
+        562,
+        825
+      ],
+      "area": 2196,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-54",
+      "confidence": 0.05944187194108963,
+      "position": {
+        "top": "793px",
+        "left": "621px",
+        "width": "24px",
+        "height": "24px"
+      },
+      "bbox": [
+        621,
+        793,
+        645,
+        817
+      ],
+      "area": 576,
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-55",
+      "confidence": 0.056844312697649,
+      "position": {
+        "top": "291px",
+        "left": "1345px",
+        "width": "141px",
+        "height": "41px"
+      },
+      "bbox": [
+        1345,
+        291,
+        1486,
+        332
+      ],
+      "area": 5781,
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-56",
+      "confidence": 0.05557464808225632,
+      "position": {
+        "top": "8px",
+        "left": "0px",
+        "width": "969px",
+        "height": "60px"
+      },
+      "bbox": [
+        0,
+        8,
+        969,
+        68
+      ],
+      "area": 58140,
+      "children": []
+    },
+    {
+      "type": "AppHeader",
+      "id": "AppHeader-57",
+      "confidence": 0.05529000237584114,
+      "position": {
+        "top": "914px",
+        "left": "694px",
+        "width": "931px",
+        "height": "18px"
+      },
+      "bbox": [
+        694,
+        914,
+        1625,
+        932
+      ],
+      "area": 16758,
+      "children": []
+    },
+    {
+      "type": "DateInput",
+      "id": "DateInput-58",
+      "confidence": 0.05243253707885742,
+      "position": {
+        "top": "573px",
+        "left": "1336px",
+        "width": "92px",
+        "height": "32px"
+      },
+      "bbox": [
+        1336,
+        573,
+        1428,
+        605
+      ],
+      "area": 2944,
+      "children": []
+    },
+    {
+      "type": "Button",
+      "id": "Button-59",
+      "confidence": 0.05126307159662247,
+      "position": {
+        "top": "455px",
+        "left": "1528px",
+        "width": "72px",
+        "height": "33px"
+      },
+      "bbox": [
+        1528,
+        455,
+        1600,
+        488
+      ],
+      "area": 2376,
+      "children": []
+    },
+    {
+      "type": "Output",
+      "id": "Output-60",
+      "confidence": 0.050297174602746964,
+      "position": {
+        "top": "415px",
+        "left": "1465px",
+        "width": "61px",
+        "height": "34px"
+      },
+      "bbox": [
+        1465,
+        415,
+        1526,
+        449
+      ],
+      "area": 2074,
+      "children": []
+    }
+  ],
+  "summary": {
+    "total_elements": 61,
+    "unique_types": 8,
+    "total_area": 2993006,
+    "class_counts": {
+      "Button": 20,
+      "Grid": 2,
+      "InputBox": 4,
+      "Group": 4,
+      "DateInput": 10,
+      "Output": 11,
+      "GridTitle": 3,
+      "AppHeader": 7
+    }
+  }
+}

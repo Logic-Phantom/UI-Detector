@@ -38,12 +38,26 @@
 
 ```
 UI-Detector/
-├── 📄 detectJson.py              # 기본 탐지 스크립트
-├── 📄 improved_detector.py       # 개선된 탐지기 (권장)
-├── 📄 model_diagnosis.py         # 모델 진단 도구
 ├── 📄 train.py                   # 모델 학습 스크립트
 ├── 📄 data.yaml                  # 데이터셋 설정
 ├── 📄 requirements.txt           # 의존성 패키지
+├── 📁 scripts/                   # 스크립트 디렉토리
+│   ├── 📁 conversion/            # 변환 스크립트
+│   │   ├── yolo_to_figma_json.py
+│   │   ├── yolo_to_figma_json_v2.py
+│   │   └── yolo_to_figma_json_v3.py
+│   ├── 📁 detection/             # 감지 스크립트
+│   │   ├── improved_detector.py
+│   │   ├── detectJson.py
+│   │   ├── detectJsonDetail.py
+│   │   ├── detectJsonTree.py
+│   │   └── viewDetector.py
+│   ├── 📁 analysis/              # 분석 스크립트
+│   │   ├── analyze_labels.py
+│   │   └── model_diagnosis.py
+│   └── 📁 utils/                 # 유틸리티 스크립트
+│       ├── quick_start.py
+│       └── osStr.py
 ├── 📁 screenshots/               # 테스트 이미지
 │   ├── test.png                  # 메인 테스트 이미지
 │   └── start/                    # 학습 데이터
@@ -51,6 +65,7 @@ UI-Detector/
 │   ├── train4/weights/best.pt    # 최적 모델 (권장)
 │   └── train6/weights/best.pt    # 대안 모델
 ├── 📁 json/                      # 탐지 결과 JSON
+├── 📁 figma_json/                # Figma JSON 변환 결과
 └── 📁 result/                    # 시각화 결과
 ```
 
@@ -65,16 +80,25 @@ pip install -r requirements.txt
 ### 2. 기본 탐지 실행
 ```bash
 # 기본 탐지기 사용
-python detectJson.py
+python scripts/detection/detectJson.py
 
-# 개선된 탐지기 사용 (권장)
-python improved_detector.py
+# 개선된 감지기 사용 (권장)
+python scripts/detection/improved_detector.py
 ```
 
-### 3. 모델 진단
+### 3. JSON 변환 실행
+```bash
+# 기본 변환
+python scripts/conversion/yolo_to_figma_json.py
+
+# v3 변환 (권장 - Java 코드 호환)
+python scripts/conversion/yolo_to_figma_json_v3.py
+```
+
+### 4. 모델 진단
 ```bash
 # 모델 상태 확인
-python model_diagnosis.py
+python scripts/analysis/model_diagnosis.py
 ```
 
 ### 4. 모델 재학습
