@@ -25,7 +25,7 @@ except ImportError:
 import colorsys
 
 # 실제 학습 데이터셋 기준 경로
-DATASET_PATH = 'yolo/datasets/screenshots/start'
+DATASET_PATH = '../../yolo/datasets/screenshots/start'
 IMAGES_PATH = os.path.join(DATASET_PATH, 'images')
 LABELS_PATH = os.path.join(DATASET_PATH, 'labels')
 CLASSES_PATH = os.path.join(LABELS_PATH, 'classes.txt')
@@ -37,9 +37,9 @@ try:
 except FileNotFoundError:
     # 대안 경로 시도
     alternative_paths = [
-        'screenshots/start/labels/classes.txt',
-        'output/result/classes.txt',
-        'yolo/datasets/screenshots/val/labels/classes.txt'
+        '../../screenshots/start/labels/classes.txt',
+        '../../output/result/classes.txt',
+        '../../yolo/datasets/screenshots/val/labels/classes.txt'
     ]
     
     CLASS_NAMES = []
@@ -57,7 +57,7 @@ except FileNotFoundError:
         CLASS_NAMES = ['Button', 'InputBox', 'TextArea', 'Group', 'Frame']
 
 # YOLO 모델 로드
-MODEL_PATH = "runs/detect/train_aug_clean/weights/best.pt"
+MODEL_PATH = "../../runs/detect/train_aug_clean/weights/best.pt"
 if not os.path.exists(MODEL_PATH):
     print(f"Error: Model file not found at {MODEL_PATH}")
     exit(1)
@@ -1006,7 +1006,7 @@ def main():
             return
     
     today = datetime.datetime.now().strftime('%Y-%m-%d')
-    output_dir = f'./figma_json(style)/{today}'
+    output_dir = f'../../figma_json(style)/{today}'
     os.makedirs(output_dir, exist_ok=True)
     
     processed_count = 0
