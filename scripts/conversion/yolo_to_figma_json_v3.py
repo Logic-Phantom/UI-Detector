@@ -187,25 +187,85 @@ def yolo_to_figma_node(idx, row, image_w, image_h, parent_label=None):
             "vertical": "TOP",
             "horizontal": "LEFT"
         },
-        "children": []
+        "children": [],
+        "overriddenFields": []  # 기본적으로 빈 배열
     }
     
-    # INSTANCE 타입인 경우 componentType 정보 추가
-    if figma_type == 'INSTANCE' and component_type:
-        node["componentType"] = component_type
-        # Java 코드의 cl: 타입을 참고하여 추가 속성 설정
+    # INSTANCE 타입인 경우 rest.json과 완전히 동일한 구조
+    if figma_type == 'INSTANCE':
+        # componentId 생성 (실제 Figma ID 형식 - rest.json과 동일)
+        component_id = f"1:{4000 + idx}"  # 실제 Figma ID 범위 사용
+        node["componentId"] = component_id
+        
+        # componentProperties 추가 (rest.json과 동일한 구조)
+        component_properties = {}
+        
         if component_type == 'button':
-            node["value"] = label  # 버튼 텍스트
+            component_properties["Button name#67:81"] = {
+                "value": label,
+                "type": "TEXT"
+            }
+            component_properties["right-Icon#67:215"] = {
+                "value": True,
+                "type": "BOOLEAN"
+            }
         elif component_type == 'inputbox':
-            node["placeholder"] = label  # 입력박스 플레이스홀더
+            component_properties["Text#2020:7"] = {
+                "value": label,
+                "type": "TEXT"
+            }
+            component_properties["SIze"] = {
+                "value": "Small",
+                "type": "VARIANT",
+                "boundVariables": {}
+            }
         elif component_type == 'combobox':
-            node["options"] = []  # 콤보박스 옵션
+            component_properties["Text#2020:7"] = {
+                "value": label,
+                "type": "TEXT"
+            }
+            component_properties["State"] = {
+                "value": "inactive",
+                "type": "VARIANT",
+                "boundVariables": {}
+            }
         elif component_type == 'radiobutton':
-            node["value"] = label  # 라디오버튼 값
+            component_properties["Text#2020:7"] = {
+                "value": label,
+                "type": "TEXT"
+            }
+            component_properties["State"] = {
+                "value": "inactive",
+                "type": "VARIANT",
+                "boundVariables": {}
+            }
         elif component_type == 'pageindexer':
-            node["currentPage"] = 1  # 페이지네이션 현재 페이지
-        elif component_type == 'output':
-            node["value"] = label  # 출력 값
+            component_properties["State"] = {
+                "value": "inactive",
+                "type": "VARIANT",
+                "boundVariables": {}
+            }
+            component_properties["Type"] = {
+                "value": "number",
+                "type": "VARIANT",
+                "boundVariables": {}
+            }
+        
+        node["componentProperties"] = component_properties
+        
+        # overrides 추가 (rest.json과 동일한 구조)
+        node["overrides"] = [{
+            "id": node["id"],
+            "overriddenFields": ["height", "width"]
+        }]
+        
+        # layoutSizing 추가
+        node["layoutSizingHorizontal"] = "FIXED"
+        node["layoutSizingVertical"] = "FIXED"
+        node["layoutAlign"] = "INHERIT"
+        node["layoutGrow"] = 0.0
+        node["effects"] = []
+        node["interactions"] = []
 
     # TEXT 노드라면 rest.json과 완전히 동일한 구조
     if figma_type == 'TEXT':
@@ -220,10 +280,18 @@ def yolo_to_figma_node(idx, row, image_w, image_h, parent_label=None):
             "fontWeight": 400,
             "fontSize": 16.0,
             "textAlignHorizontal": "LEFT",
-            "textAlignVertical": "CENTER"
+            "textAlignVertical": "CENTER",
+            "letterSpacing": 0.0,
+            "lineHeightPx": 25.5,
+            "lineHeightPercent": 125.6955795288086,
+            "lineHeightPercentFontSize": 150.0,
+            "lineHeightUnit": "FONT_SIZE_%"
         }
         # TEXT 노드의 overriddenFields 추가 (rest.json과 동일)
         node["overriddenFields"] = ["characters", "text", "textAutoResize"]
+        node["layoutVersion"] = 4
+        node["effects"] = []
+        node["interactions"] = []
 
     # FRAME 타입이라면 rest.json과 완전히 동일한 구조
     if figma_type == 'FRAME':
@@ -242,29 +310,43 @@ def yolo_to_figma_node(idx, row, image_w, image_h, parent_label=None):
         node["layoutSizingVertical"] = "FIXED"
         node["effects"] = []
         node["interactions"] = []
-        # FRAME 노드의 overriddenFields 추가 (rest.json과 동일)
-        node["overriddenFields"] = ["height", "width", "visible"]
 
     # GROUP 타입이라면 rest.json과 완전히 동일한 구조
     if figma_type == 'GROUP':
-        node["overriddenFields"] = ["visible"]
+        node["layoutSizingHorizontal"] = "FIXED"
+        node["layoutSizingVertical"] = "FIXED"
+        node["layoutAlign"] = "INHERIT"
+        node["layoutGrow"] = 0.0
+        node["effects"] = []
+        node["interactions"] = []
 
     # RECTANGLE 타입이라면 rest.json과 완전히 동일한 구조
     if figma_type == 'RECTANGLE':
-        node["overriddenFields"] = ["fills", "height", "width"]
+        node["rectangleCornerRadii"] = [0.0, 0.0, 0.0, 0.0]
+        node["cornerSmoothing"] = 0.0
+        node["layoutSizingHorizontal"] = "FIXED"
+        node["layoutSizingVertical"] = "FIXED"
+        node["layoutAlign"] = "INHERIT"
+        node["layoutGrow"] = 0.0
+        node["effects"] = []
+        node["interactions"] = []
 
     return node
 
 def build_hierarchical_structure(detected_elements_df):
     """
     감지된 요소들을 복잡한 계층 구조로 정리 (rest.json 스타일)
+    중복 객체 생성 문제 해결
     """
     # 모든 요소를 노드로 변환 (부모 정보 없이 먼저 생성)
     nodes = []
+    node_id_to_node = {}  # ID로 노드를 찾기 위한 딕셔너리
+    
     for idx, row in detected_elements_df.iterrows():
         node = yolo_to_figma_node(idx, row, 0, 0)  # image_w, image_h는 여기서는 사용하지 않음
         node['original_row'] = row  # 원본 데이터 보존
         nodes.append(node)
+        node_id_to_node[node['id']] = node
     
     # 프레임, 그룹, 일반 요소 분리
     frame_nodes = []
@@ -301,19 +383,72 @@ def build_hierarchical_structure(detected_elements_df):
         
         for regular_node in regular_nodes:
             if is_contained(frame_box, regular_node['original_row']['box']):
-                # 부모 정보를 고려하여 노드 재생성
+                # 부모 정보를 고려하여 노드 업데이트 (재생성하지 않고 기존 노드 수정)
                 parent_label = frame_label
                 regular_label = regular_node['original_row']['name']
                 
-                # 부모 정보를 고려한 타입 감지로 노드 재생성
-                new_node = yolo_to_figma_node(
-                    regular_node['original_row'].name,  # idx
-                    regular_node['original_row'],  # row
-                    0, 0,  # image_w, image_h
-                    parent_label  # parent_label
-                )
-                new_node['original_row'] = regular_node['original_row']
-                contained_regulars.append(new_node)
+                # 기존 노드의 타입을 부모 정보를 고려하여 업데이트
+                detected_component_type = detect_component_type(regular_label, parent_label)
+                component_type = COMPONENT_TYPE_MAPPING.get(regular_label, detected_component_type)
+                
+                # INSTANCE 타입인 경우 componentProperties 업데이트
+                if regular_node['type'] == 'INSTANCE':
+                    component_properties = {}
+                    
+                    if component_type == 'button':
+                        component_properties["Button name#67:81"] = {
+                            "value": regular_label,
+                            "type": "TEXT"
+                        }
+                        component_properties["right-Icon#67:215"] = {
+                            "value": True,
+                            "type": "BOOLEAN"
+                        }
+                    elif component_type == 'inputbox':
+                        component_properties["Text#2020:7"] = {
+                            "value": regular_label,
+                            "type": "TEXT"
+                        }
+                        component_properties["SIze"] = {
+                            "value": "Small",
+                            "type": "VARIANT",
+                            "boundVariables": {}
+                        }
+                    elif component_type == 'combobox':
+                        component_properties["Text#2020:7"] = {
+                            "value": regular_label,
+                            "type": "TEXT"
+                        }
+                        component_properties["State"] = {
+                            "value": "inactive",
+                            "type": "VARIANT",
+                            "boundVariables": {}
+                        }
+                    elif component_type == 'radiobutton':
+                        component_properties["Text#2020:7"] = {
+                            "value": regular_label,
+                            "type": "TEXT"
+                        }
+                        component_properties["State"] = {
+                            "value": "inactive",
+                            "type": "VARIANT",
+                            "boundVariables": {}
+                        }
+                    elif component_type == 'pageindexer':
+                        component_properties["State"] = {
+                            "value": "inactive",
+                            "type": "VARIANT",
+                            "boundVariables": {}
+                        }
+                        component_properties["Type"] = {
+                            "value": "number",
+                            "type": "VARIANT",
+                            "boundVariables": {}
+                        }
+                    
+                    regular_node["componentProperties"] = component_properties
+                
+                contained_regulars.append(regular_node)
             else:
                 remaining_regulars.append(regular_node)
         
@@ -327,19 +462,72 @@ def build_hierarchical_structure(detected_elements_df):
             
             for regular_node in contained_regulars:
                 if is_contained(group_box, regular_node['original_row']['box']):
-                    # 그룹 내에서도 부모 정보를 고려하여 노드 재생성
+                    # 그룹 내에서도 부모 정보를 고려하여 노드 업데이트
                     parent_label = group_label
                     regular_label = regular_node['original_row']['name']
                     
-                    # 부모 정보를 고려한 타입 감지로 노드 재생성
-                    new_node = yolo_to_figma_node(
-                        regular_node['original_row'].name,  # idx
-                        regular_node['original_row'],  # row
-                        0, 0,  # image_w, image_h
-                        parent_label  # parent_label
-                    )
-                    new_node['original_row'] = regular_node['original_row']
-                    group_contained.append(new_node)
+                    # 기존 노드의 타입을 부모 정보를 고려하여 업데이트
+                    detected_component_type = detect_component_type(regular_label, parent_label)
+                    component_type = COMPONENT_TYPE_MAPPING.get(regular_label, detected_component_type)
+                    
+                    # INSTANCE 타입인 경우 componentProperties 업데이트
+                    if regular_node['type'] == 'INSTANCE':
+                        component_properties = {}
+                        
+                        if component_type == 'button':
+                            component_properties["Button name#67:81"] = {
+                                "value": regular_label,
+                                "type": "TEXT"
+                            }
+                            component_properties["right-Icon#67:215"] = {
+                                "value": True,
+                                "type": "BOOLEAN"
+                            }
+                        elif component_type == 'inputbox':
+                            component_properties["Text#2020:7"] = {
+                                "value": regular_label,
+                                "type": "TEXT"
+                            }
+                            component_properties["SIze"] = {
+                                "value": "Small",
+                                "type": "VARIANT",
+                                "boundVariables": {}
+                            }
+                        elif component_type == 'combobox':
+                            component_properties["Text#2020:7"] = {
+                                "value": regular_label,
+                                "type": "TEXT"
+                            }
+                            component_properties["State"] = {
+                                "value": "inactive",
+                                "type": "VARIANT",
+                                "boundVariables": {}
+                            }
+                        elif component_type == 'radiobutton':
+                            component_properties["Text#2020:7"] = {
+                                "value": regular_label,
+                                "type": "TEXT"
+                            }
+                            component_properties["State"] = {
+                                "value": "inactive",
+                                "type": "VARIANT",
+                                "boundVariables": {}
+                            }
+                        elif component_type == 'pageindexer':
+                            component_properties["State"] = {
+                                "value": "inactive",
+                                "type": "VARIANT",
+                                "boundVariables": {}
+                            }
+                            component_properties["Type"] = {
+                                "value": "number",
+                                "type": "VARIANT",
+                                "boundVariables": {}
+                            }
+                        
+                        regular_node["componentProperties"] = component_properties
+                    
+                    group_contained.append(regular_node)
                 else:
                     group_remaining.append(regular_node)
             
@@ -372,10 +560,10 @@ def build_hierarchical_structure(detected_elements_df):
         group_node['children'] = contained_nodes
         regular_nodes = remaining_nodes
     
-    # 최종 결과: 프레임들 + 포함되지 않은 그룹들 + 포함되지 않은 일반 요소들
+    # 최종 결과: 프레임들 + 남은 그룹들 + 남은 일반 요소들
     final_nodes = frame_nodes + group_nodes + regular_nodes
     
-    # original_row 제거 (JSON 직렬화를 위해)
+    # original_row 제거 (최종 JSON에는 불필요)
     def clean_node(node):
         if 'original_row' in node:
             del node['original_row']
@@ -434,7 +622,7 @@ def yolo_results_to_figma_json(image_path, results):
 
 def save_detection_result_with_image(image_path, results, output_dir):
     """
-    감지 결과를 JSON과 PNG로 저장
+    감지 결과를 JSON과 PNG로 저장 (개선된 시각화)
     """
     # JSON 저장
     figma_json = yolo_results_to_figma_json(image_path, results)
@@ -444,14 +632,89 @@ def save_detection_result_with_image(image_path, results, output_dir):
     with open(json_path, 'w', encoding='utf-8') as f:
         json.dump(figma_json, f, indent=2, ensure_ascii=False)
     
-    # PNG 저장 (감지 결과 시각화)
+    # PNG 저장 (개선된 감지 결과 시각화)
     img = cv2.imread(image_path)
-    annotated_img = results[0].plot()
+    if img is None:
+        print(f"❌ Error: Failed to load image for PNG generation")
+        return json_path, None
     
+    # 원본 이미지 복사
+    annotated_img = img.copy()
+    
+    # 감지 결과 가져오기
+    detected_elements_df = results[0].to_df()
+    
+    # 각 감지된 요소에 대해 박스와 라벨 그리기
+    for idx, row in detected_elements_df.iterrows():
+        box = row['box']
+        x1, y1, x2, y2 = int(box['x1']), int(box['y1']), int(box['x2']), int(box['y2'])
+        label = row['name']
+        confidence = row['confidence']
+        
+        # 타입 결정
+        figma_type = YOLO_TO_FIGMA_TYPE.get(label, 'RECTANGLE')
+        
+        # 색상 결정 (타입별로 다른 색상)
+        if figma_type == 'INSTANCE':
+            color = (0, 255, 0)  # 초록색 - INSTANCE
+        elif figma_type == 'TEXT':
+            color = (255, 0, 0)  # 빨간색 - TEXT
+        elif figma_type == 'FRAME':
+            color = (0, 0, 255)  # 파란색 - FRAME
+        elif figma_type == 'GROUP':
+            color = (255, 255, 0)  # 노란색 - GROUP
+        else:
+            color = (128, 128, 128)  # 회색 - 기타
+        
+        # 박스 그리기
+        cv2.rectangle(annotated_img, (x1, y1), (x2, y2), color, 2)
+        
+        # 라벨 텍스트 준비
+        label_text = f"{label} ({figma_type})"
+        confidence_text = f"{confidence:.2f}"
+        
+        # 라벨 배경 크기 계산
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        font_scale = 0.5
+        thickness = 1
+        
+        # 라벨 배경 그리기
+        (label_width, label_height), _ = cv2.getTextSize(label_text, font, font_scale, thickness)
+        cv2.rectangle(annotated_img, (x1, y1 - label_height - 10), (x1 + label_width + 10, y1), color, -1)
+        
+        # 라벨 텍스트 그리기
+        cv2.putText(annotated_img, label_text, (x1 + 5, y1 - 5), font, font_scale, (255, 255, 255), thickness)
+        
+        # Confidence 텍스트 그리기
+        (conf_width, conf_height), _ = cv2.getTextSize(confidence_text, font, font_scale, thickness)
+        cv2.rectangle(annotated_img, (x2 - conf_width - 10, y1 - conf_height - 10), (x2, y1), (0, 0, 0), -1)
+        cv2.putText(annotated_img, confidence_text, (x2 - conf_width - 5, y1 - 5), font, font_scale, (255, 255, 255), thickness)
+    
+    # 이미지 크기 조정 (너무 크면 축소)
+    height, width = annotated_img.shape[:2]
+    max_size = 1200
+    
+    if max(height, width) > max_size:
+        scale = max_size / max(height, width)
+        new_width = int(width * scale)
+        new_height = int(height * scale)
+        annotated_img = cv2.resize(annotated_img, (new_width, new_height))
+    
+    # PNG 저장
     png_filename = f'{Path(image_path).stem}_detection.png'
     png_path = os.path.join(output_dir, png_filename)
     
-    cv2.imwrite(png_path, annotated_img)
+    # BGR에서 RGB로 변환 (더 나은 색상 표현을 위해)
+    annotated_img_rgb = cv2.cvtColor(annotated_img, cv2.COLOR_BGR2RGB)
+    
+    # PIL을 사용하여 저장 (더 나은 품질)
+    try:
+        from PIL import Image
+        pil_image = Image.fromarray(annotated_img_rgb)
+        pil_image.save(png_path, 'PNG', quality=95)
+    except ImportError:
+        # PIL이 없으면 OpenCV 사용
+        cv2.imwrite(png_path, annotated_img)
     
     return json_path, png_path
 
