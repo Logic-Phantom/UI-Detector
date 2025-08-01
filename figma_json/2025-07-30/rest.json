@@ -8578,7 +8578,7 @@
                   "interactions" : [ ]
                 }, {
                   "id" : "1:4321",
-                  "name" : "보건소장 위임여부",
+                  "name" : "보건소장위임여부",
                   "type" : "TEXT",
                   "scrollBehavior" : "SCROLLS",
                   "blendMode" : "PASS_THROUGH",
@@ -8615,7 +8615,7 @@
                     "vertical" : "SCALE",
                     "horizontal" : "SCALE"
                   },
-                  "characters" : "보건소장 위임여부",
+                  "characters" : "보건소장위임여부",
                   "characterStyleOverrides" : [ ],
                   "styleOverrideTable" : { },
                   "lineTypes" : [ "NONE" ],
