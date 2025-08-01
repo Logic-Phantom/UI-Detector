@@ -1,8 +1,25 @@
-# YOLOv5 기반 UI 리버스엔지니어링 → .clx 변환 프로젝트
+# YOLOv5 기반 UI 리버스엔지니어링 → Figma JSON 변환 프로젝트
 
 ## 🎯 프로젝트 개요
 
-이 프로젝트는 YOLOv5를 사용하여 UI 스크린샷에서 UI 요소들을 자동으로 감지하고, 이를 JSON 형태로 변환하는 도구입니다. 최종적으로는 CLEOPATRA .clx 형식으로 변환하는 것을 목표로 합니다.
+이 프로젝트는 YOLOv5를 사용하여 UI 스크린샷에서 UI 요소들을 자동으로 감지하고, 텍스트 내용과 스타일 정보를 분석하여 Figma JSON 형태로 변환하는 도구입니다. OCR과 색상 분석을 통해 실제 UI 요소의 텍스트와 스타일을 추출합니다.
+
+## 🏗️ 아키텍처 개요
+
+### 📊 전체 프로세스 플로우
+```
+UI 스크린샷 → YOLO 객체 감지 → 텍스트 추출(OCR) → 스타일 분석 → Figma JSON 생성
+     ↓              ↓              ↓              ↓              ↓
+  이미지 입력    바운딩 박스    텍스트 내용    색상/폰트     rest.json
+```
+
+### 🔧 핵심 컴포넌트
+
+1. **YOLO 객체 감지**: UI 요소의 위치와 타입 감지
+2. **OCR 텍스트 추출**: pytesseract를 사용한 텍스트 인식
+3. **스타일 분석**: K-means 클러스터링으로 색상 분석
+4. **계층 구조 생성**: 프레임/그룹/요소의 부모-자식 관계
+5. **Figma JSON 변환**: rest.json 호환 형식으로 출력
 
 ## ✅ 현재 상태
 
@@ -13,26 +30,34 @@
 - [x] 커스텀 데이터셋(스크린샷 기반) 만들기 및 YOLOv5 재학습
 - [x] 감지 결과를 JSON 또는 구조화된 데이터로 변환
 
-### 🧩 2단계: 감지 결과 → CLEOPATRA .clx 변환기 🔄
-- [x] CLEOPATRA .clx XML 구조 파악
-- [x] UI 요소와 `<cl:*>` 매핑 룰 정의
-- [ ] 요소 위치(x, y, width, height) → `<cl:xylayoutdata>` 생성
-- [ ] 각 UI 요소 유형별 `<cl:button>`, `<cl:inputbox>` 등 생성 코드 작성
-- [ ] 스타일/속성 자동 부여 로직 (필요 시)
+### 🧩 2단계: 텍스트 감지 및 스타일 분석 ✅
+- [x] OCR 텍스트 추출 (pytesseract)
+- [x] 색상 분석 (K-means 클러스터링)
+- [x] 폰트 크기 추정
+- [x] 텍스트/배경 색상 분리
+- [x] 스타일 정보를 Figma JSON에 매핑
+
+### 🎨 3단계: Figma JSON 변환 ✅
+- [x] 복잡한 계층 구조 생성 (프레임/그룹/요소)
+- [x] 컴포넌트 타입별 속성 매핑
+- [x] 텍스트를 characters/componentProperties에 매핑
+- [x] 색상 정보를 fills/background에 매핑
+- [x] 스타일 정보를 style 속성에 매핑
 
 ## 🚀 최근 개선사항
 
 ### 🔧 주요 수정사항
-1. **모델 성능 개선**: train4 모델 사용으로 탐지 성공률 향상
-2. **다중 임계값 탐지**: 여러 신뢰도 임계값으로 최적 결과 선택
-3. **상세한 분석 기능**: 탐지 결과에 대한 통계 및 시각화
-4. **에러 처리 강화**: 파일 존재 확인 및 예외 처리
-5. **경로 문제 해결**: 상대 경로 및 절대 경로 처리 개선
+1. **텍스트 감지 기능**: OCR을 통한 실제 텍스트 추출
+2. **스타일 분석**: 색상, 폰트 크기, 배경색 분석
+3. **계층 구조**: 프레임/그룹/요소의 부모-자식 관계
+4. **Figma 호환성**: rest.json 형식으로 완전 호환
+5. **별도 경로**: 스타일 분석 결과를 `figma_json(style)`에 저장
 
 ### 📊 성능 개선 결과
-- **이전**: 탐지 실패 (0개 객체)
-- **현재**: 평균 5개 객체 탐지 (신뢰도 0.208)
-- **탐지 정확도**: 다양한 임계값으로 최적화된 결과
+- **이전**: 객체 감지만 (텍스트/스타일 없음)
+- **현재**: 객체 + 텍스트 + 스타일 정보 모두 포함
+- **OCR 지원**: Tesseract 설치 시 실제 텍스트 추출
+- **폴백 시스템**: OCR 실패 시 라벨 기반 텍스트 추정
 
 ## 📁 프로젝트 구조
 
@@ -43,9 +68,10 @@ UI-Detector/
 ├── 📄 requirements.txt           # 의존성 패키지
 ├── 📁 scripts/                   # 스크립트 디렉토리
 │   ├── 📁 conversion/            # 변환 스크립트
-│   │   ├── yolo_to_figma_json.py
-│   │   ├── yolo_to_figma_json_v2.py
-│   │   └── yolo_to_figma_json_v3.py
+│   │   ├── yolo_to_figma_json.py          # 기본 변환
+│   │   ├── yolo_to_figma_json_v2.py       # 계층 구조
+│   │   ├── yolo_to_figma_json_v3.py       # Java 호환
+│   │   └── yolo_to_figma_json_v4.py       # 텍스트+스타일 분석 ⭐
 │   ├── 📁 detection/             # 감지 스크립트
 │   │   ├── improved_detector.py
 │   │   ├── detectJson.py
@@ -65,7 +91,8 @@ UI-Detector/
 │   ├── train4/weights/best.pt    # 최적 모델 (권장)
 │   └── train6/weights/best.pt    # 대안 모델
 ├── 📁 json/                      # 탐지 결과 JSON
-├── 📁 figma_json/                # Figma JSON 변환 결과
+├── 📁 figma_json/                # 기본 Figma JSON 변환 결과
+├── 📁 figma_json(style)/         # 텍스트+스타일 분석 결과 ⭐
 └── 📁 result/                    # 시각화 결과
 ```
 
@@ -73,8 +100,11 @@ UI-Detector/
 
 ### 1. 환경 설정
 ```bash
-# 의존성 설치
+# 기본 의존성 설치
 pip install -r requirements.txt
+
+# 텍스트 감지 및 스타일 분석을 위한 추가 라이브러리
+pip install pytesseract scikit-learn
 ```
 
 ### 2. 기본 탐지 실행
@@ -88,11 +118,14 @@ python scripts/detection/improved_detector.py
 
 ### 3. JSON 변환 실행
 ```bash
-# 기본 변환
+# 기본 변환 (객체만)
 python scripts/conversion/yolo_to_figma_json.py
 
-# v3 변환 (권장 - Java 코드 호환)
+# v3 변환 (계층 구조)
 python scripts/conversion/yolo_to_figma_json_v3.py
+
+# v4 변환 (텍스트+스타일 분석) ⭐
+python scripts/conversion/yolo_to_figma_json_v4.py
 ```
 
 ### 4. 모델 진단
@@ -101,49 +134,95 @@ python scripts/conversion/yolo_to_figma_json_v3.py
 python scripts/analysis/model_diagnosis.py
 ```
 
-### 4. 모델 재학습
+### 5. 모델 재학습
 ```bash
 # 새로운 데이터로 모델 학습
 python train.py
 ```
 
+## 🔍 텍스트 감지 및 스타일 분석 기능
+
+### 📝 텍스트 추출 프로세스
+1. **OCR 시도**: pytesseract를 사용한 텍스트 인식
+2. **전처리**: 그레이스케일 변환, 노이즈 제거, 이진화
+3. **폴백 시스템**: OCR 실패 시 라벨 기반 텍스트 추정
+4. **후처리**: 공백 정리, 특수문자 필터링
+
+### 🎨 스타일 분석 프로세스
+1. **색상 분석**: K-means 클러스터링으로 주요 색상 추출
+2. **색상 분류**: 텍스트 색상과 배경 색상 분리
+3. **폰트 크기 추정**: 바운딩 박스 높이 기반
+4. **Figma 형식 변환**: 0-1 범위의 RGB 값으로 변환
+
+### 🔧 기술 스택
+- **OCR**: pytesseract (Tesseract OCR 엔진)
+- **색상 분석**: scikit-learn KMeans
+- **이미지 처리**: OpenCV, PIL
+- **데이터 처리**: NumPy, Pandas
+
 ## 📊 탐지 결과 예시
 
-### JSON 출력 형식
+### v4 JSON 출력 형식 (텍스트+스타일 포함)
 ```json
 {
-  "name": "test",
-  "image_path": "./screenshots/test.png",
-  "detection_info": {
-    "threshold": 0.05,
-    "total_detections": 5,
-    "average_confidence": 0.208,
-    "detection_score": 1.038,
-    "model_path": "runs/detect/train4/weights/best.pt"
-  },
-  "elements": [
-    {
-      "type": "Group",
-      "id": "Group-0",
-      "confidence": 0.398,
-      "position": {
-        "top": "111px",
-        "left": "75px",
-        "width": "949px",
-        "height": "310px"
-      },
-      "bbox": [75, 111, 1024, 421],
-      "area": 294190,
-      "children": []
-    }
-  ],
-  "summary": {
-    "total_elements": 5,
-    "unique_types": 1,
-    "total_area": 1660521
+  "document": {
+    "id": "0:0",
+    "name": "Document",
+    "type": "DOCUMENT",
+    "children": [
+      {
+        "id": "0:1",
+        "name": "test",
+        "type": "CANVAS",
+        "children": [
+          {
+            "id": "97:86078",
+            "name": "Group-4",
+            "type": "GROUP",
+            "fills": [
+              {
+                "blendMode": "NORMAL",
+                "type": "SOLID",
+                "color": {
+                  "r": 0.9294117647058824,
+                  "g": 0.9450980392156862,
+                  "b": 0.9607843137254902,
+                  "a": 1.0
+                }
+              }
+            ],
+            "children": [
+              {
+                "id": "50:39140",
+                "name": "Button-1",
+                "type": "INSTANCE",
+                "componentId": "1:4001",
+                "componentProperties": {
+                  "Button name#67:81": {
+                    "value": "Button",  // 추출된 텍스트
+                    "type": "TEXT"
+                  },
+                  "right-Icon#67:215": {
+                    "value": true,
+                    "type": "BOOLEAN"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 }
 ```
+
+### PNG 시각화 결과
+- **초록색 박스**: INSTANCE (버튼, 입력필드 등)
+- **빨간색 박스**: TEXT (텍스트 요소)
+- **파란색 박스**: FRAME (프레임, 컨테이너)
+- **노란색 박스**: GROUP (그룹 요소)
+- **라벨 텍스트**: 추출된 텍스트 내용 포함
 
 ## 🔍 지원하는 UI 요소 클래스
 
@@ -159,20 +238,21 @@ python train.py
 
 ## 🎯 다음 단계
 
-### ⚙️ 3단계: 전체 파이프라인 통합
-- [ ] 이미지 → YOLOv5 → 감지결과(JSON) → `.clx` 변환까지 자동화
+### ⚙️ 4단계: 전체 파이프라인 통합
+- [ ] 이미지 → YOLOv5 → 감지결과(JSON) → Figma JSON → .clx 변환까지 자동화
 - [ ] 디렉터리 감시 기능 (예: `screenshots/` 폴더에 이미지 생기면 자동 변환)
-- [ ] 변환 결과 미리보기 (선택사항: HTML or CLEOPATRA로 열기)
+- [ ] 변환 결과 미리보기 (선택사항: HTML or Figma로 열기)
 
-### 📦 4단계: 사용자 인터페이스/CLI 및 도구화
+### 📦 5단계: 사용자 인터페이스/CLI 및 도구화
 - [ ] CLI(Command Line Interface) 도구화
 - [ ] 설정파일(`config.json`)에서 클래스 매핑/출력 디렉토리 등 지정
 - [ ] 로그/에러 처리/예외 처리
 
-### 🧪 5단계: 테스트/검증 및 개선
+### 🧪 6단계: 테스트/검증 및 개선
 - [ ] 다양한 스크린샷 테스트
 - [ ] 검출 정확도 평가 (precision/recall)
-- [ ] 오탐/누락된 요소에 대한 보완 (후처리 logic 추가)
+- [ ] OCR 정확도 개선
+- [ ] 스타일 분석 정확도 개선
 
 ## 📈 데이터셋 확장/라벨링 가이드
 
@@ -242,8 +322,6 @@ yolo/datasets/screenshots/start/
 
 ---
 
-(이외에도 데이터 증강 자동화 스크립트, 라벨링 툴 사용법, 라벨 포맷 변환 등 추가 지원이 필요하면 언제든 요청해주세요!)
-
 ## 🔧 문제 해결
 
 ### 일반적인 문제들
@@ -260,6 +338,15 @@ yolo/datasets/screenshots/start/
    - 절대 경로 사용 또는 상대 경로 확인
    - 파일 존재 여부 확인
 
+4. **OCR 오류 (tesseract is not installed)**
+   - Windows: Tesseract 설치 필요 (https://github.com/UB-Mannheim/tesseract/wiki)
+   - 폴백 시스템으로 라벨 기반 텍스트 추정 사용
+   - OCR 없이도 스타일 분석은 정상 작동
+
+5. **색상 분석 경고**
+   - `ConvergenceWarning`: 정상적인 경고, 결과에 영향 없음
+   - 작은 이미지 영역에서 발생하는 일반적인 현상
+
 ### 성능 최적화 팁
 
 1. **더 나은 탐지를 위해**:
@@ -267,7 +354,17 @@ yolo/datasets/screenshots/start/
    - 다양한 임계값으로 테스트
    - 시각화 결과 확인
 
-2. **모델 개선을 위해**:
+2. **텍스트 감지 개선을 위해**:
+   - Tesseract OCR 설치
+   - 이미지 전처리 개선
+   - OCR 설정 튜닝
+
+3. **스타일 분석 개선을 위해**:
+   - 더 많은 색상 클러스터 사용
+   - 이미지 해상도 향상
+   - 색상 공간 변환 개선
+
+4. **모델 개선을 위해**:
    - 더 많은 학습 데이터 수집
    - 데이터 증강(augmentation) 적용
    - 하이퍼파라미터 튜닝
@@ -283,4 +380,4 @@ yolo/datasets/screenshots/start/
 ---
 
 **마지막 업데이트**: 2025년 1월
-**버전**: 2.0 (개선된 탐지기 포함)
+**버전**: 3.0 (텍스트 감지 + 스타일 분석 포함)
