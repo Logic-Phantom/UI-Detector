@@ -12,8 +12,8 @@
         "scrollBehavior": "SCROLLS",
         "children": [
           {
-            "id": "20:47546",
-            "name": "Group-4 (Sample Text)",
+            "id": "57:75555",
+            "name": "Group-4 (텍스트 입력)",
             "type": "GROUP",
             "scrollBehavior": "SCROLLS",
             "blendMode": "PASS_THROUGH",
@@ -50,7 +50,7 @@
             },
             "children": [
               {
-                "id": "45:2885",
+                "id": "69:98480",
                 "name": "Button-1",
                 "type": "INSTANCE",
                 "scrollBehavior": "SCROLLS",
@@ -90,7 +90,7 @@
                 },
                 "overrides": [
                   {
-                    "id": "45:2885",
+                    "id": "69:98480",
                     "overriddenFields": [
                       "height",
                       "width"
@@ -105,7 +105,7 @@
                 "interactions": []
               },
               {
-                "id": "84:78329",
+                "id": "56:92145",
                 "name": "Button-2",
                 "type": "INSTANCE",
                 "scrollBehavior": "SCROLLS",
@@ -145,7 +145,7 @@
                 },
                 "overrides": [
                   {
-                    "id": "84:78329",
+                    "id": "56:92145",
                     "overriddenFields": [
                       "height",
                       "width"
@@ -160,7 +160,7 @@
                 "interactions": []
               },
               {
-                "id": "30:75919",
+                "id": "84:35731",
                 "name": "Button-3",
                 "type": "INSTANCE",
                 "scrollBehavior": "SCROLLS",
@@ -200,7 +200,7 @@
                 },
                 "overrides": [
                   {
-                    "id": "30:75919",
+                    "id": "84:35731",
                     "overriddenFields": [
                       "height",
                       "width"
@@ -215,7 +215,7 @@
                 "interactions": []
               },
               {
-                "id": "33:84319",
+                "id": "69:9009",
                 "name": "InputBox-6",
                 "type": "INSTANCE",
                 "scrollBehavior": "SCROLLS",
@@ -245,7 +245,7 @@
                 "componentId": "1:4006",
                 "componentProperties": {
                   "Text#2020:7": {
-                    "value": "Sample Text",
+                    "value": "텍스트 입력",
                     "type": "TEXT"
                   },
                   "SIze": {
@@ -256,7 +256,7 @@
                 },
                 "overrides": [
                   {
-                    "id": "33:84319",
+                    "id": "69:9009",
                     "overriddenFields": [
                       "height",
                       "width"
@@ -271,7 +271,7 @@
                 "interactions": []
               },
               {
-                "id": "67:70074",
+                "id": "49:4260",
                 "name": "Output-7",
                 "type": "TEXT",
                 "scrollBehavior": "SCROLLS",
@@ -302,7 +302,7 @@
                   "text",
                   "textAutoResize"
                 ],
-                "characters": "Button",
+                "characters": "버튼",
                 "styles": {
                   "fill": "1:3172",
                   "text": "1:4305"
@@ -336,7 +336,7 @@
                 "interactions": []
               },
               {
-                "id": "97:31996",
+                "id": "3:50752",
                 "name": "Output-8",
                 "type": "TEXT",
                 "scrollBehavior": "SCROLLS",
@@ -367,7 +367,7 @@
                   "text",
                   "textAutoResize"
                 ],
-                "characters": "Button",
+                "characters": "버튼",
                 "styles": {
                   "fill": "1:3172",
                   "text": "1:4305"
@@ -401,7 +401,7 @@
                 "interactions": []
               },
               {
-                "id": "8:38406",
+                "id": "9:81014",
                 "name": "Output-9",
                 "type": "TEXT",
                 "scrollBehavior": "SCROLLS",
@@ -466,7 +466,7 @@
                 "interactions": []
               },
               {
-                "id": "4:48032",
+                "id": "86:4333",
                 "name": "DateInput-10",
                 "type": "INSTANCE",
                 "scrollBehavior": "SCROLLS",
@@ -496,7 +496,7 @@
                 "componentId": "1:4010",
                 "componentProperties": {
                   "Text#2020:7": {
-                    "value": "Sample Text",
+                    "value": "텍스트 입력",
                     "type": "TEXT"
                   },
                   "SIze": {
@@ -507,7 +507,7 @@
                 },
                 "overrides": [
                   {
-                    "id": "4:48032",
+                    "id": "86:4333",
                     "overriddenFields": [
                       "height",
                       "width"
@@ -522,7 +522,7 @@
                 "interactions": []
               },
               {
-                "id": "90:85868",
+                "id": "19:13007",
                 "name": "InputBox-11",
                 "type": "INSTANCE",
                 "scrollBehavior": "SCROLLS",
@@ -552,7 +552,7 @@
                 "componentId": "1:4011",
                 "componentProperties": {
                   "Text#2020:7": {
-                    "value": "Sample Text",
+                    "value": "텍스트 입력",
                     "type": "TEXT"
                   },
                   "SIze": {
@@ -563,7 +563,7 @@
                 },
                 "overrides": [
                   {
-                    "id": "90:85868",
+                    "id": "19:13007",
                     "overriddenFields": [
                       "height",
                       "width"
@@ -578,7 +578,7 @@
                 "interactions": []
               },
               {
-                "id": "96:34061",
+                "id": "36:71752",
                 "name": "Output-13",
                 "type": "TEXT",
                 "scrollBehavior": "SCROLLS",
@@ -643,7 +643,7 @@
                 "interactions": []
               },
               {
-                "id": "65:26612",
+                "id": "12:76335",
                 "name": "InputBox-14",
                 "type": "INSTANCE",
                 "scrollBehavior": "SCROLLS",
@@ -673,7 +673,7 @@
                 "componentId": "1:4014",
                 "componentProperties": {
                   "Text#2020:7": {
-                    "value": "Sample Text",
+                    "value": "텍스트 입력",
                     "type": "TEXT"
                   },
                   "SIze": {
@@ -684,7 +684,7 @@
                 },
                 "overrides": [
                   {
-                    "id": "65:26612",
+                    "id": "12:76335",
                     "overriddenFields": [
                       "height",
                       "width"
@@ -699,7 +699,7 @@
                 "interactions": []
               },
               {
-                "id": "98:69995",
+                "id": "9:76187",
                 "name": "DateInput-15",
                 "type": "INSTANCE",
                 "scrollBehavior": "SCROLLS",
@@ -729,7 +729,7 @@
                 "componentId": "1:4015",
                 "componentProperties": {
                   "Text#2020:7": {
-                    "value": "Sample Text",
+                    "value": "텍스트 입력",
                     "type": "TEXT"
                   },
                   "SIze": {
@@ -740,7 +740,7 @@
                 },
                 "overrides": [
                   {
-                    "id": "98:69995",
+                    "id": "9:76187",
                     "overriddenFields": [
                       "height",
                       "width"
@@ -755,7 +755,7 @@
                 "interactions": []
               },
               {
-                "id": "90:62896",
+                "id": "39:53183",
                 "name": "DateInput-19",
                 "type": "INSTANCE",
                 "scrollBehavior": "SCROLLS",
@@ -785,7 +785,7 @@
                 "componentId": "1:4019",
                 "componentProperties": {
                   "Text#2020:7": {
-                    "value": "Sample Text",
+                    "value": "텍스트 입력",
                     "type": "TEXT"
                   },
                   "SIze": {
@@ -796,7 +796,7 @@
                 },
                 "overrides": [
                   {
-                    "id": "90:62896",
+                    "id": "39:53183",
                     "overriddenFields": [
                       "height",
                       "width"
@@ -811,7 +811,7 @@
                 "interactions": []
               },
               {
-                "id": "22:38404",
+                "id": "59:77194",
                 "name": "Button-25",
                 "type": "INSTANCE",
                 "scrollBehavior": "SCROLLS",
@@ -851,7 +851,7 @@
                 },
                 "overrides": [
                   {
-                    "id": "22:38404",
+                    "id": "59:77194",
                     "overriddenFields": [
                       "height",
                       "width"
@@ -866,7 +866,7 @@
                 "interactions": []
               },
               {
-                "id": "50:97722",
+                "id": "79:34250",
                 "name": "Output-30",
                 "type": "TEXT",
                 "scrollBehavior": "SCROLLS",
@@ -897,7 +897,7 @@
                   "text",
                   "textAutoResize"
                 ],
-                "characters": "Button",
+                "characters": "버튼",
                 "styles": {
                   "fill": "1:3172",
                   "text": "1:4305"
@@ -940,8 +940,8 @@
             "interactions": []
           },
           {
-            "id": "2:49952",
-            "name": "Group-5 (Sample Text)",
+            "id": "94:74572",
+            "name": "Group-5 (텍스트 입력)",
             "type": "GROUP",
             "scrollBehavior": "SCROLLS",
             "blendMode": "PASS_THROUGH",
@@ -986,8 +986,8 @@
             "interactions": []
           },
           {
-            "id": "57:6837",
-            "name": "Grid-0 (Sample Text)",
+            "id": "28:67737",
+            "name": "Grid-0 (텍스트 입력)",
             "type": "RECTANGLE",
             "scrollBehavior": "SCROLLS",
             "blendMode": "PASS_THROUGH",
@@ -1039,8 +1039,8 @@
             "interactions": []
           },
           {
-            "id": "12:99473",
-            "name": "AppHeader-12 (Sample Text)",
+            "id": "10:73685",
+            "name": "AppHeader-12 (텍스트 입력)",
             "type": "RECTANGLE",
             "scrollBehavior": "SCROLLS",
             "blendMode": "PASS_THROUGH",
@@ -1092,8 +1092,8 @@
             "interactions": []
           },
           {
-            "id": "47:48133",
-            "name": "AppHeader-16 (Sample Text)",
+            "id": "76:15856",
+            "name": "AppHeader-16 (텍스트 입력)",
             "type": "RECTANGLE",
             "scrollBehavior": "SCROLLS",
             "blendMode": "PASS_THROUGH",
@@ -1145,7 +1145,7 @@
             "interactions": []
           },
           {
-            "id": "36:64699",
+            "id": "63:12028",
             "name": "GridTitle-17",
             "type": "TEXT",
             "scrollBehavior": "SCROLLS",
@@ -1176,7 +1176,7 @@
               "text",
               "textAutoResize"
             ],
-            "characters": "Sample Text",
+            "characters": "텍스트 입력",
             "styles": {
               "fill": "1:3172",
               "text": "1:4305"
@@ -1210,7 +1210,7 @@
             "interactions": []
           },
           {
-            "id": "66:37998",
+            "id": "38:17296",
             "name": "DateInput-18",
             "type": "INSTANCE",
             "scrollBehavior": "SCROLLS",
@@ -1240,7 +1240,7 @@
             "componentId": "1:4018",
             "componentProperties": {
               "Text#2020:7": {
-                "value": "Sample Text",
+                "value": "텍스트 입력",
                 "type": "TEXT"
               },
               "SIze": {
@@ -1251,7 +1251,7 @@
             },
             "overrides": [
               {
-                "id": "66:37998",
+                "id": "38:17296",
                 "overriddenFields": [
                   "height",
                   "width"
@@ -1266,7 +1266,7 @@
             "interactions": []
           },
           {
-            "id": "15:25541",
+            "id": "42:89772",
             "name": "GridTitle-20",
             "type": "TEXT",
             "scrollBehavior": "SCROLLS",
@@ -1297,7 +1297,7 @@
               "text",
               "textAutoResize"
             ],
-            "characters": "Sample Text",
+            "characters": "텍스트 입력",
             "styles": {
               "fill": "1:3172",
               "text": "1:4305"
@@ -1331,8 +1331,8 @@
             "interactions": []
           },
           {
-            "id": "25:12628",
-            "name": "AppHeader-21 (Sample Text)",
+            "id": "1:42777",
+            "name": "AppHeader-21 (텍스트 입력)",
             "type": "RECTANGLE",
             "scrollBehavior": "SCROLLS",
             "blendMode": "PASS_THROUGH",
@@ -1384,7 +1384,7 @@
             "interactions": []
           },
           {
-            "id": "25:41251",
+            "id": "16:40705",
             "name": "GridTitle-22",
             "type": "TEXT",
             "scrollBehavior": "SCROLLS",
@@ -1415,7 +1415,7 @@
               "text",
               "textAutoResize"
             ],
-            "characters": "Sample Text",
+            "characters": "텍스트 입력",
             "styles": {
               "fill": "1:3172",
               "text": "1:4305"
@@ -1449,8 +1449,8 @@
             "interactions": []
           },
           {
-            "id": "5:98770",
-            "name": "AppHeader-23 (Sample Text)",
+            "id": "74:61199",
+            "name": "AppHeader-23 (텍스트 입력)",
             "type": "RECTANGLE",
             "scrollBehavior": "SCROLLS",
             "blendMode": "PASS_THROUGH",
@@ -1502,8 +1502,8 @@
             "interactions": []
           },
           {
-            "id": "2:17520",
-            "name": "AppHeader-24 (Sample Text)",
+            "id": "47:26668",
+            "name": "AppHeader-24 (텍스트 입력)",
             "type": "RECTANGLE",
             "scrollBehavior": "SCROLLS",
             "blendMode": "PASS_THROUGH",
@@ -1555,7 +1555,7 @@
             "interactions": []
           },
           {
-            "id": "54:48153",
+            "id": "4:61934",
             "name": "GridTitle-26",
             "type": "TEXT",
             "scrollBehavior": "SCROLLS",
@@ -1586,7 +1586,7 @@
               "text",
               "textAutoResize"
             ],
-            "characters": "Sample Text",
+            "characters": "텍스트 입력",
             "styles": {
               "fill": "1:3172",
               "text": "1:4305"
@@ -1620,7 +1620,7 @@
             "interactions": []
           },
           {
-            "id": "97:52486",
+            "id": "6:75279",
             "name": "GridTitle-27",
             "type": "TEXT",
             "scrollBehavior": "SCROLLS",
@@ -1651,7 +1651,7 @@
               "text",
               "textAutoResize"
             ],
-            "characters": "Sample Text",
+            "characters": "텍스트 입력",
             "styles": {
               "fill": "1:3172",
               "text": "1:4305"
@@ -1685,7 +1685,7 @@
             "interactions": []
           },
           {
-            "id": "42:1661",
+            "id": "10:77728",
             "name": "GridTitle-28",
             "type": "TEXT",
             "scrollBehavior": "SCROLLS",
@@ -1716,7 +1716,7 @@
               "text",
               "textAutoResize"
             ],
-            "characters": "Sample Text",
+            "characters": "텍스트 입력",
             "styles": {
               "fill": "1:3172",
               "text": "1:4305"
@@ -1750,8 +1750,8 @@
             "interactions": []
           },
           {
-            "id": "12:72262",
-            "name": "AppHeader-29 (Sample Text)",
+            "id": "95:81156",
+            "name": "AppHeader-29 (텍스트 입력)",
             "type": "RECTANGLE",
             "scrollBehavior": "SCROLLS",
             "blendMode": "PASS_THROUGH",
@@ -1803,8 +1803,8 @@
             "interactions": []
           },
           {
-            "id": "94:6746",
-            "name": "AppHeader-31 (Sample Text)",
+            "id": "3:50572",
+            "name": "AppHeader-31 (텍스트 입력)",
             "type": "RECTANGLE",
             "scrollBehavior": "SCROLLS",
             "blendMode": "PASS_THROUGH",
@@ -1856,8 +1856,8 @@
             "interactions": []
           },
           {
-            "id": "12:17614",
-            "name": "AppHeader-32 (Sample Text)",
+            "id": "75:20916",
+            "name": "AppHeader-32 (텍스트 입력)",
             "type": "RECTANGLE",
             "scrollBehavior": "SCROLLS",
             "blendMode": "PASS_THROUGH",
@@ -1909,8 +1909,8 @@
             "interactions": []
           },
           {
-            "id": "25:46905",
-            "name": "AppHeader-33 (Sample Text)",
+            "id": "40:23789",
+            "name": "AppHeader-33 (텍스트 입력)",
             "type": "RECTANGLE",
             "scrollBehavior": "SCROLLS",
             "blendMode": "PASS_THROUGH",
@@ -1962,8 +1962,8 @@
             "interactions": []
           },
           {
-            "id": "32:97925",
-            "name": "AppHeader-34 (Sample Text)",
+            "id": "95:5802",
+            "name": "AppHeader-34 (텍스트 입력)",
             "type": "RECTANGLE",
             "scrollBehavior": "SCROLLS",
             "blendMode": "PASS_THROUGH",
@@ -2015,8 +2015,8 @@
             "interactions": []
           },
           {
-            "id": "49:13182",
-            "name": "AppHeader-35 (Sample Text)",
+            "id": "31:35306",
+            "name": "AppHeader-35 (텍스트 입력)",
             "type": "RECTANGLE",
             "scrollBehavior": "SCROLLS",
             "blendMode": "PASS_THROUGH",
@@ -2068,8 +2068,8 @@
             "interactions": []
           },
           {
-            "id": "33:30798",
-            "name": "AppHeader-36 (Sample Text)",
+            "id": "30:87736",
+            "name": "AppHeader-36 (텍스트 입력)",
             "type": "RECTANGLE",
             "scrollBehavior": "SCROLLS",
             "blendMode": "PASS_THROUGH",
@@ -2135,9 +2135,9 @@
   "schemaVersion": 0,
   "styles": {},
   "name": "workScr",
-  "lastModified": "2025-08-01T14:23:57.666045",
+  "lastModified": "2025-08-01T14:31:32.107425",
   "thumbnailUrl": "",
-  "version": "5023ea67-2217-4e5b-89ba-70e99f5cc93c",
+  "version": "6997dee3-28d9-476b-995f-095e1202538d",
   "role": "owner",
   "editorType": "figma",
   "linkAccess": "view"
