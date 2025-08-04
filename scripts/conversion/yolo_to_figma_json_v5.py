@@ -453,7 +453,7 @@ def is_contained(box1, box2):
     return (x1_1 <= x1_2 and y1_1 <= y1_2 and x2_1 >= x2_2 and y2_1 >= y2_2)
 
 def yolo_to_figma_node_v5(idx, row, image_w, image_h, image, parent_label=None):
-    """YOLO 감지 결과를 Figma node로 변환 (Java 코드 기반으로 수정)"""
+    """YOLO 감지 결과를 Figma node로 변환 (2025-08-04.json 구조 기반)"""
     label = row['name']
     
     # Java 코드 기반 name 검사로 타입 재정의
@@ -514,65 +514,65 @@ def yolo_to_figma_node_v5(idx, row, image_w, image_h, image, parent_label=None):
         "overriddenFields": []
     }
     
-    # INSTANCE 타입인 경우 (rest.json과 동일한 구조)
+    # INSTANCE 타입인 경우 (2025-08-04.json과 동일한 구조)
     if figma_type == 'INSTANCE':
         component_id = f"1:{4000 + idx}"
         node["componentId"] = component_id
         
-        component_properties = {}
+        component_property_references = {}
         
         if component_type == 'button':
-            component_properties["Button name#67:81"] = {
+            component_property_references["Button name#67:81"] = {
                 "value": extracted_text if extracted_text else "버튼",
                 "type": "TEXT"
             }
-            component_properties["right-Icon#67:215"] = {
+            component_property_references["right-Icon#67:215"] = {
                 "value": True,
                 "type": "BOOLEAN"
             }
         elif component_type == 'inputbox':
-            component_properties["Text#2020:7"] = {
+            component_property_references["Text#2020:7"] = {
                 "value": extracted_text if extracted_text else "텍스트 입력",
                 "type": "TEXT"
             }
-            component_properties["SIze"] = {
+            component_property_references["SIze"] = {
                 "value": "Small",
                 "type": "VARIANT",
                 "boundVariables": {}
             }
         elif component_type == 'combobox':
-            component_properties["Text#2020:7"] = {
+            component_property_references["Text#2020:7"] = {
                 "value": extracted_text if extracted_text else "텍스트 입력",
                 "type": "TEXT"
             }
-            component_properties["State"] = {
+            component_property_references["State"] = {
                 "value": "inactive",
                 "type": "VARIANT",
                 "boundVariables": {}
             }
         elif component_type == 'radiobutton':
-            component_properties["Text#2020:7"] = {
+            component_property_references["Text#2020:7"] = {
                 "value": extracted_text if extracted_text else "텍스트 입력",
                 "type": "TEXT"
             }
-            component_properties["State"] = {
+            component_property_references["State"] = {
                 "value": "inactive",
                 "type": "VARIANT",
                 "boundVariables": {}
             }
         elif component_type == 'pageindexer':
-            component_properties["State"] = {
+            component_property_references["State"] = {
                 "value": "inactive",
                 "type": "VARIANT",
                 "boundVariables": {}
             }
-            component_properties["Type"] = {
+            component_property_references["Type"] = {
                 "value": "number",
                 "type": "VARIANT",
                 "boundVariables": {}
             }
         
-        node["componentProperties"] = component_properties
+        node["componentPropertyReferences"] = component_property_references
         node["overrides"] = [{
             "id": node["id"],
             "overriddenFields": ["height", "width"]
@@ -584,36 +584,39 @@ def yolo_to_figma_node_v5(idx, row, image_w, image_h, image, parent_label=None):
         node["effects"] = []
         node["interactions"] = []
 
-    # TEXT 노드라면 (rest.json과 동일한 구조)
+    # TEXT 노드라면 (2025-08-04.json과 동일한 구조)
     if figma_type == 'TEXT':
         node["characters"] = extracted_text if extracted_text else label
-        node["styles"] = {
-            "fill": "1:3172",
-            "text": "1:4305"
-        }
         node["characterStyleOverrides"] = []
+        node["styleOverrideTable"] = {}
+        node["lineTypes"] = ["NONE"]
         
         # 스타일 정보를 기반으로 폰트 설정
         font_size = style_info.get('font_size', 16.0)
-        text_color = style_info.get('text_color', {'r': 0.0, 'g': 0.0, 'b': 0.0, 'a': 1.0})
+        text_color = style_info.get('text_color', {'r': 0.11372549086809158, 'g': 0.11372549086809158, 'b': 0.11372549086809158, 'a': 1.0})
         
+        # fills 배열에 텍스트 색상 추가
+        node["fills"] = [{
+            "blendMode": "NORMAL",
+            "type": "SOLID",
+            "color": text_color
+        }]
+        
+        # 텍스트 스타일 설정
         node["style"] = {
             "fontFamily": "Pretendard",
             "fontWeight": 400,
             "fontSize": float(font_size),
             "textAlignHorizontal": "LEFT",
-            "textAlignVertical": "CENTER",
+            "textAlignVertical": "TOP",
             "letterSpacing": 0.0,
             "lineHeightPx": font_size * 1.6,
             "lineHeightPercent": 125.6955795288086,
             "lineHeightPercentFontSize": 150.0,
-            "lineHeightUnit": "FONT_SIZE_%",
-            "fills": [{
-                "type": "SOLID",
-                "color": text_color
-            }]
+            "lineHeightUnit": "FONT_SIZE_%"
         }
-        node["overriddenFields"] = ["characters", "text", "textAutoResize"]
+        
+        node["overriddenFields"] = ["characters", "characterStyleOverrides", "inheritFillStyleId", "inheritTextStyleId", "layoutGrow", "lineIndentations", "lineTypes", "styleOverrideTable", "text", "textAutoResize"]
         node["layoutVersion"] = 4
         node["effects"] = []
         node["interactions"] = []
@@ -623,7 +626,7 @@ def yolo_to_figma_node_v5(idx, row, image_w, image_h, image, parent_label=None):
         original_name = node["name"]
         node["name"] = f"{original_name} ({extracted_text})"
 
-    # FRAME 타입이라면 (rest.json과 동일한 구조)
+    # FRAME 타입이라면 (2025-08-04.json과 동일한 구조)
     if figma_type == 'FRAME':
         node["clipsContent"] = False
         node["background"] = []
@@ -640,8 +643,10 @@ def yolo_to_figma_node_v5(idx, row, image_w, image_h, image, parent_label=None):
         node["layoutSizingVertical"] = "FIXED"
         node["effects"] = []
         node["interactions"] = []
+        node["cornerRadius"] = 0.0
+        node["cornerSmoothing"] = 0.0
 
-    # GROUP 타입이라면
+    # GROUP 타입이라면 (2025-08-04.json과 동일한 구조)
     if figma_type == 'GROUP':
         node["layoutSizingHorizontal"] = "FIXED"
         node["layoutSizingVertical"] = "FIXED"
@@ -650,7 +655,7 @@ def yolo_to_figma_node_v5(idx, row, image_w, image_h, image, parent_label=None):
         node["effects"] = []
         node["interactions"] = []
 
-    # RECTANGLE 타입이라면
+    # RECTANGLE 타입이라면 (2025-08-04.json과 동일한 구조)
     if figma_type == 'RECTANGLE':
         node["rectangleCornerRadii"] = [0.0, 0.0, 0.0, 0.0]
         node["cornerSmoothing"] = 0.0
@@ -664,7 +669,7 @@ def yolo_to_figma_node_v5(idx, row, image_w, image_h, image, parent_label=None):
     return node
 
 def build_hierarchical_structure_v5(detected_elements_df, image):
-    """감지된 요소들을 rest.json과 동일한 계층 구조로 정리"""
+    """감지된 요소들을 2025-08-04.json과 동일한 계층 구조로 정리"""
     nodes = []
     
     for idx, row in detected_elements_df.iterrows():
@@ -1096,7 +1101,7 @@ def save_detection_result_with_image_v5(image_path, results, output_dir):
     return json_path, png_path
 
 def main():
-    print("🚀 YOLO to Figma JSON Converter v5 (Java 코드 기반 + 텍스트 감지 + 스타일 분석)")
+    print("🚀 YOLO to Figma JSON Converter v5 (2025-08-04.json 구조 기반)")
     print("=" * 60)
     print("✨ 특별 기능:")
     print("  • Java 코드 기반 타입 감지: name 기반 AppHeader/Grid 변환")
@@ -1104,6 +1109,9 @@ def main():
     print("  • GridTitle (FRAME): Grid 바로 위에 1개씩 배치")
     print("  • Grid (FRAME): table name 기반 감지")
     print("  • Grid 내부 객체: 자동 필터링")
+    print("  • 2025-08-04.json 구조 완벽 매칭")
+    print("  • componentPropertyReferences 사용")
+    print("  • characters 필드 사용 (TEXT 노드)")
     print("=" * 60)
     
     # 라이브러리 상태 출력
