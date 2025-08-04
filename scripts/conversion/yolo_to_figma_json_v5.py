@@ -62,12 +62,12 @@ if not os.path.exists(MODEL_PATH):
     exit(1)
 model = YOLO(MODEL_PATH)
 
-# YOLO 클래스명 → Figma type 매핑 (rest.json과 동일하게)
+# YOLO 클래스명 → Figma type 매핑 (Java 코드 기반으로 수정)
 YOLO_TO_FIGMA_TYPE = {
     'Button': 'INSTANCE',
     'InputBox': 'INSTANCE',
     'TextArea': 'TEXT',
-    'AppHeader': 'RECTANGLE',
+    'AppHeader': 'FRAME',  # Java 코드: title이 포함된 name은 AppHeader로 변환
     'ComboBox': 'INSTANCE',
     'CheckBox': 'RECTANGLE',
     'CheckBoxGroup': 'GROUP',
@@ -75,8 +75,8 @@ YOLO_TO_FIGMA_TYPE = {
     'DateInput': 'INSTANCE',
     'Output': 'TEXT',
     'Group': 'GROUP',
-    'Grid': 'RECTANGLE',
-    'GridTitle': 'TEXT',
+    'Grid': 'FRAME',  # Java 코드: table이 포함된 name은 Grid로 변환
+    'GridTitle': 'FRAME',  # Java 코드: FRAME 타입으로 변경
     'FormTitle': 'TEXT',
     'Frame': 'FRAME',
     'Container': 'FRAME',
@@ -102,9 +102,10 @@ YOLO_TO_FIGMA_TYPE = {
 # 그룹 컨트롤로 인식할 클래스들
 GROUP_CONTROLS = ['Group', 'CheckBoxGroup', 'ButtonGroup', 'InputGroup', 'LabelGroup', 'ControlGroup']
 
-# 프레임 컨트롤로 인식할 클래스들
+# 프레임 컨트롤로 인식할 클래스들 (Java 코드 기반으로 확장)
 FRAME_CONTROLS = ['Frame', 'Container', 'Panel', 'Section', 'Header', 'Footer', 'Sidebar', 
-                  'MainContent', 'Navigation', 'SearchArea', 'FilterArea', 'ResultArea', 'FormArea']
+                  'MainContent', 'Navigation', 'SearchArea', 'FilterArea', 'ResultArea', 'FormArea',
+                  'AppHeader', 'Grid', 'GridTitle']  # Java 코드 기반 추가
 
 # 컴포넌트 타입 매핑 (rest.json과 동일하게)
 COMPONENT_TYPE_MAPPING = {
@@ -117,6 +118,25 @@ COMPONENT_TYPE_MAPPING = {
     'Pagination': 'pageindexer',
     'Output': 'output'
 }
+
+def detect_frame_type_by_name(name):
+    """
+    Java 코드의 convertElement 로직을 참고하여 name 기반으로 타입을 결정
+    """
+    if not name:
+        return None
+    
+    name_lower = name.lower()
+    
+    # Java 코드: name.equalsIgnoreCase("table") → Grid
+    if name_lower == "table":
+        return "Grid"
+    
+    # Java 코드: name.toLowerCase().contains("title") → AppHeader
+    if "title" in name_lower:
+        return "AppHeader"
+    
+    return None
 
 def extract_text_from_region(image, box):
     """
@@ -433,8 +453,16 @@ def is_contained(box1, box2):
     return (x1_1 <= x1_2 and y1_1 <= y1_2 and x2_1 >= x2_2 and y2_1 >= y2_2)
 
 def yolo_to_figma_node_v5(idx, row, image_w, image_h, image, parent_label=None):
-    """YOLO 감지 결과를 Figma node로 변환 (rest.json과 동일한 구조)"""
+    """YOLO 감지 결과를 Figma node로 변환 (Java 코드 기반으로 수정)"""
     label = row['name']
+    
+    # Java 코드 기반 name 검사로 타입 재정의
+    detected_frame_type = detect_frame_type_by_name(label)
+    if detected_frame_type:
+        # name 기반으로 감지된 타입이 있으면 우선 적용
+        label = detected_frame_type
+        print(f"✅ Name 기반 타입 감지: '{row['name']}' → '{detected_frame_type}'")
+    
     figma_type = YOLO_TO_FIGMA_TYPE.get(label, 'RECTANGLE')
     
     detected_component_type = detect_component_type(label, parent_label)
@@ -644,7 +672,7 @@ def build_hierarchical_structure_v5(detected_elements_df, image):
         node['original_row'] = row
         nodes.append(node)
     
-    # AppHeader 처리: 최상단에만 1개 유지
+    # AppHeader 처리: 최상단에만 1개 유지 (Java 코드 기반)
     app_headers = [node for node in nodes if node['original_row']['name'] == 'AppHeader']
     if len(app_headers) > 1:
         # 가장 위쪽에 있는 AppHeader만 유지
@@ -652,13 +680,15 @@ def build_hierarchical_structure_v5(detected_elements_df, image):
         keep_header = app_headers[0]
         nodes = [node for node in nodes if node['original_row']['name'] != 'AppHeader']
         nodes.append(keep_header)
-        print(f"✅ AppHeader: 최상단 1개만 유지 (총 {len(app_headers)}개 중)")
+        print(f"✅ AppHeader (FRAME): 최상단 1개만 유지 (총 {len(app_headers)}개 중)")
+    elif len(app_headers) == 1:
+        print(f"✅ AppHeader (FRAME): 1개 감지됨")
     
-    # Grid와 GridTitle 처리
+    # Grid와 GridTitle 처리 (Java 코드 기반)
     grids = [node for node in nodes if node['original_row']['name'] == 'Grid']
     grid_titles = [node for node in nodes if node['original_row']['name'] == 'GridTitle']
     
-    print(f"📊 감지된 Grid: {len(grids)}개, GridTitle: {len(grid_titles)}개")
+    print(f"📊 감지된 Grid (FRAME): {len(grids)}개, GridTitle (FRAME): {len(grid_titles)}개")
     
     # GridTitle을 각 Grid 위에 배치
     for i, grid in enumerate(grids):
@@ -1066,11 +1096,13 @@ def save_detection_result_with_image_v5(image_path, results, output_dir):
     return json_path, png_path
 
 def main():
-    print("🚀 YOLO to Figma JSON Converter v5 (텍스트 감지 + 스타일 분석)")
+    print("🚀 YOLO to Figma JSON Converter v5 (Java 코드 기반 + 텍스트 감지 + 스타일 분석)")
     print("=" * 60)
     print("✨ 특별 기능:")
-    print("  • AppHeader: 최상단에만 1개 생성")
-    print("  • GridTitle: Grid 바로 위에 1개씩 배치")
+    print("  • Java 코드 기반 타입 감지: name 기반 AppHeader/Grid 변환")
+    print("  • AppHeader (FRAME): 최상단에만 1개 생성")
+    print("  • GridTitle (FRAME): Grid 바로 위에 1개씩 배치")
+    print("  • Grid (FRAME): table name 기반 감지")
     print("  • Grid 내부 객체: 자동 필터링")
     print("=" * 60)
     
