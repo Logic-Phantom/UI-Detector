@@ -12,7 +12,7 @@
         "scrollBehavior": "SCROLLS",
         "children": [
           {
-            "id": "99:26182",
+            "id": "98:79582",
             "name": "Grid-1 (텍스트 입력)",
             "type": "FRAME",
             "scrollBehavior": "SCROLLS",
@@ -67,10 +67,12 @@
             "layoutSizingHorizontal": "FIXED",
             "layoutSizingVertical": "FIXED",
             "effects": [],
-            "interactions": []
+            "interactions": [],
+            "cornerRadius": 0.0,
+            "cornerSmoothing": 0.0
           },
           {
-            "id": "87:62427",
+            "id": "62:29445",
             "name": "AppHeader-40 (텍스트 입력)",
             "type": "FRAME",
             "scrollBehavior": "SCROLLS",
@@ -125,10 +127,12 @@
             "layoutSizingHorizontal": "FIXED",
             "layoutSizingVertical": "FIXED",
             "effects": [],
-            "interactions": []
+            "interactions": [],
+            "cornerRadius": 0.0,
+            "cornerSmoothing": 0.0
           },
           {
-            "id": "93:25958",
+            "id": "85:10103",
             "name": "Grid-45 (텍스트 입력)",
             "type": "FRAME",
             "scrollBehavior": "SCROLLS",
@@ -183,10 +187,12 @@
             "layoutSizingHorizontal": "FIXED",
             "layoutSizingVertical": "FIXED",
             "effects": [],
-            "interactions": []
+            "interactions": [],
+            "cornerRadius": 0.0,
+            "cornerSmoothing": 0.0
           },
           {
-            "id": "66:40816",
+            "id": "27:93705",
             "name": "AppHeader-47 (텍스트 입력)",
             "type": "FRAME",
             "scrollBehavior": "SCROLLS",
@@ -241,10 +247,12 @@
             "layoutSizingHorizontal": "FIXED",
             "layoutSizingVertical": "FIXED",
             "effects": [],
-            "interactions": []
+            "interactions": [],
+            "cornerRadius": 0.0,
+            "cornerSmoothing": 0.0
           },
           {
-            "id": "68:67758",
+            "id": "51:14589",
             "name": "AppHeader-49 (텍스트 입력)",
             "type": "FRAME",
             "scrollBehavior": "SCROLLS",
@@ -299,10 +307,12 @@
             "layoutSizingHorizontal": "FIXED",
             "layoutSizingVertical": "FIXED",
             "effects": [],
-            "interactions": []
+            "interactions": [],
+            "cornerRadius": 0.0,
+            "cornerSmoothing": 0.0
           },
           {
-            "id": "26:9286",
+            "id": "2:38921",
             "name": "Group-4 (텍스트 입력)",
             "type": "GROUP",
             "scrollBehavior": "SCROLLS",
@@ -340,7 +350,7 @@
             },
             "children": [
               {
-                "id": "79:52514",
+                "id": "9:39616",
                 "name": "InputBox-8",
                 "type": "INSTANCE",
                 "scrollBehavior": "SCROLLS",
@@ -368,7 +378,7 @@
                 "children": [],
                 "overriddenFields": [],
                 "componentId": "1:4008",
-                "componentProperties": {
+                "componentPropertyReferences": {
                   "Text#2020:7": {
                     "value": "텍스트 입력",
                     "type": "TEXT"
@@ -381,7 +391,7 @@
                 },
                 "overrides": [
                   {
-                    "id": "79:52514",
+                    "id": "9:39616",
                     "overriddenFields": [
                       "height",
                       "width"
@@ -396,12 +406,23 @@
                 "interactions": []
               },
               {
-                "id": "95:54477",
+                "id": "30:87571",
                 "name": "Output-39",
                 "type": "TEXT",
                 "scrollBehavior": "SCROLLS",
                 "blendMode": "PASS_THROUGH",
-                "fills": [],
+                "fills": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.11764705882352941,
+                      "g": 0.11764705882352941,
+                      "b": 0.11372549019607843,
+                      "a": 1.0
+                    }
+                  }
+                ],
                 "strokes": [],
                 "strokeWeight": 1.0,
                 "strokeAlign": "OUTSIDE",
@@ -424,49 +445,56 @@
                 "children": [],
                 "overriddenFields": [
                   "characters",
+                  "characterStyleOverrides",
+                  "inheritFillStyleId",
+                  "inheritTextStyleId",
+                  "layoutGrow",
+                  "lineIndentations",
+                  "lineTypes",
+                  "styleOverrideTable",
                   "text",
                   "textAutoResize"
                 ],
                 "characters": "버튼",
-                "styles": {
-                  "fill": "1:3172",
-                  "text": "1:4305"
-                },
                 "characterStyleOverrides": [],
+                "styleOverrideTable": {},
+                "lineTypes": [
+                  "NONE"
+                ],
                 "style": {
                   "fontFamily": "Pretendard",
                   "fontWeight": 400,
                   "fontSize": 29.0,
                   "textAlignHorizontal": "LEFT",
-                  "textAlignVertical": "CENTER",
+                  "textAlignVertical": "TOP",
                   "letterSpacing": 0.0,
                   "lineHeightPx": 46.400000000000006,
                   "lineHeightPercent": 125.6955795288086,
                   "lineHeightPercentFontSize": 150.0,
-                  "lineHeightUnit": "FONT_SIZE_%",
-                  "fills": [
-                    {
-                      "type": "SOLID",
-                      "color": {
-                        "r": 0.11764705882352941,
-                        "g": 0.11764705882352941,
-                        "b": 0.11372549019607843,
-                        "a": 1.0
-                      }
-                    }
-                  ]
+                  "lineHeightUnit": "FONT_SIZE_%"
                 },
                 "layoutVersion": 4,
                 "effects": [],
                 "interactions": []
               },
               {
-                "id": "6:61380",
+                "id": "11:57312",
                 "name": "Output-43",
                 "type": "TEXT",
                 "scrollBehavior": "SCROLLS",
                 "blendMode": "PASS_THROUGH",
-                "fills": [],
+                "fills": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.11764705882352941,
+                      "g": 0.11764705882352941,
+                      "b": 0.11372549019607843,
+                      "a": 1.0
+                    }
+                  }
+                ],
                 "strokes": [],
                 "strokeWeight": 1.0,
                 "strokeAlign": "OUTSIDE",
@@ -489,44 +517,40 @@
                 "children": [],
                 "overriddenFields": [
                   "characters",
+                  "characterStyleOverrides",
+                  "inheritFillStyleId",
+                  "inheritTextStyleId",
+                  "layoutGrow",
+                  "lineIndentations",
+                  "lineTypes",
+                  "styleOverrideTable",
                   "text",
                   "textAutoResize"
                 ],
                 "characters": "버튼",
-                "styles": {
-                  "fill": "1:3172",
-                  "text": "1:4305"
-                },
                 "characterStyleOverrides": [],
+                "styleOverrideTable": {},
+                "lineTypes": [
+                  "NONE"
+                ],
                 "style": {
                   "fontFamily": "Pretendard",
                   "fontWeight": 400,
                   "fontSize": 26.0,
                   "textAlignHorizontal": "LEFT",
-                  "textAlignVertical": "CENTER",
+                  "textAlignVertical": "TOP",
                   "letterSpacing": 0.0,
                   "lineHeightPx": 41.6,
                   "lineHeightPercent": 125.6955795288086,
                   "lineHeightPercentFontSize": 150.0,
-                  "lineHeightUnit": "FONT_SIZE_%",
-                  "fills": [
-                    {
-                      "type": "SOLID",
-                      "color": {
-                        "r": 0.11764705882352941,
-                        "g": 0.11764705882352941,
-                        "b": 0.11372549019607843,
-                        "a": 1.0
-                      }
-                    }
-                  ]
+                  "lineHeightUnit": "FONT_SIZE_%"
                 },
                 "layoutVersion": 4,
                 "effects": [],
                 "interactions": []
               },
               {
-                "id": "60:68084",
+                "id": "38:6669",
                 "name": "InputBox-52",
                 "type": "INSTANCE",
                 "scrollBehavior": "SCROLLS",
@@ -554,7 +578,7 @@
                 "children": [],
                 "overriddenFields": [],
                 "componentId": "1:4052",
-                "componentProperties": {
+                "componentPropertyReferences": {
                   "Text#2020:7": {
                     "value": "텍스트 입력",
                     "type": "TEXT"
@@ -567,7 +591,7 @@
                 },
                 "overrides": [
                   {
-                    "id": "60:68084",
+                    "id": "38:6669",
                     "overriddenFields": [
                       "height",
                       "width"
@@ -591,7 +615,7 @@
             "interactions": []
           },
           {
-            "id": "57:63432",
+            "id": "48:7686",
             "name": "Group-12 (텍스트 입력)",
             "type": "GROUP",
             "scrollBehavior": "SCROLLS",
@@ -629,7 +653,7 @@
             },
             "children": [
               {
-                "id": "49:75277",
+                "id": "6:68232",
                 "name": "Button-6",
                 "type": "INSTANCE",
                 "scrollBehavior": "SCROLLS",
@@ -657,7 +681,7 @@
                 "children": [],
                 "overriddenFields": [],
                 "componentId": "1:4006",
-                "componentProperties": {
+                "componentPropertyReferences": {
                   "Button name#67:81": {
                     "value": "버튼",
                     "type": "TEXT"
@@ -669,7 +693,7 @@
                 },
                 "overrides": [
                   {
-                    "id": "49:75277",
+                    "id": "6:68232",
                     "overriddenFields": [
                       "height",
                       "width"
@@ -684,7 +708,7 @@
                 "interactions": []
               },
               {
-                "id": "71:61027",
+                "id": "45:24759",
                 "name": "Button-7",
                 "type": "INSTANCE",
                 "scrollBehavior": "SCROLLS",
@@ -712,7 +736,7 @@
                 "children": [],
                 "overriddenFields": [],
                 "componentId": "1:4007",
-                "componentProperties": {
+                "componentPropertyReferences": {
                   "Button name#67:81": {
                     "value": "버튼",
                     "type": "TEXT"
@@ -724,7 +748,7 @@
                 },
                 "overrides": [
                   {
-                    "id": "71:61027",
+                    "id": "45:24759",
                     "overriddenFields": [
                       "height",
                       "width"
@@ -739,7 +763,7 @@
                 "interactions": []
               },
               {
-                "id": "44:10398",
+                "id": "5:44706",
                 "name": "Button-16",
                 "type": "INSTANCE",
                 "scrollBehavior": "SCROLLS",
@@ -767,7 +791,7 @@
                 "children": [],
                 "overriddenFields": [],
                 "componentId": "1:4016",
-                "componentProperties": {
+                "componentPropertyReferences": {
                   "Button name#67:81": {
                     "value": "버튼",
                     "type": "TEXT"
@@ -779,7 +803,7 @@
                 },
                 "overrides": [
                   {
-                    "id": "44:10398",
+                    "id": "5:44706",
                     "overriddenFields": [
                       "height",
                       "width"
@@ -794,7 +818,7 @@
                 "interactions": []
               },
               {
-                "id": "85:47026",
+                "id": "23:44278",
                 "name": "Button-50",
                 "type": "INSTANCE",
                 "scrollBehavior": "SCROLLS",
@@ -822,7 +846,7 @@
                 "children": [],
                 "overriddenFields": [],
                 "componentId": "1:4050",
-                "componentProperties": {
+                "componentPropertyReferences": {
                   "Button name#67:81": {
                     "value": "버튼",
                     "type": "TEXT"
@@ -834,7 +858,7 @@
                 },
                 "overrides": [
                   {
-                    "id": "85:47026",
+                    "id": "23:44278",
                     "overriddenFields": [
                       "height",
                       "width"
@@ -849,7 +873,7 @@
                 "interactions": []
               },
               {
-                "id": "4:56910",
+                "id": "89:80481",
                 "name": "Button-59",
                 "type": "INSTANCE",
                 "scrollBehavior": "SCROLLS",
@@ -877,7 +901,7 @@
                 "children": [],
                 "overriddenFields": [],
                 "componentId": "1:4059",
-                "componentProperties": {
+                "componentPropertyReferences": {
                   "Button name#67:81": {
                     "value": "버튼",
                     "type": "TEXT"
@@ -889,7 +913,7 @@
                 },
                 "overrides": [
                   {
-                    "id": "4:56910",
+                    "id": "89:80481",
                     "overriddenFields": [
                       "height",
                       "width"
@@ -913,7 +937,7 @@
             "interactions": []
           },
           {
-            "id": "13:19279",
+            "id": "80:54724",
             "name": "Group-28 (텍스트 입력)",
             "type": "GROUP",
             "scrollBehavior": "SCROLLS",
@@ -951,7 +975,7 @@
             },
             "children": [
               {
-                "id": "80:96360",
+                "id": "45:37114",
                 "name": "DateInput-5",
                 "type": "INSTANCE",
                 "scrollBehavior": "SCROLLS",
@@ -979,7 +1003,7 @@
                 "children": [],
                 "overriddenFields": [],
                 "componentId": "1:4005",
-                "componentProperties": {
+                "componentPropertyReferences": {
                   "Text#2020:7": {
                     "value": "텍스트 입력",
                     "type": "TEXT"
@@ -992,7 +1016,7 @@
                 },
                 "overrides": [
                   {
-                    "id": "80:96360",
+                    "id": "45:37114",
                     "overriddenFields": [
                       "height",
                       "width"
@@ -1007,7 +1031,7 @@
                 "interactions": []
               },
               {
-                "id": "5:19188",
+                "id": "23:21535",
                 "name": "DateInput-9",
                 "type": "INSTANCE",
                 "scrollBehavior": "SCROLLS",
@@ -1035,7 +1059,7 @@
                 "children": [],
                 "overriddenFields": [],
                 "componentId": "1:4009",
-                "componentProperties": {
+                "componentPropertyReferences": {
                   "Text#2020:7": {
                     "value": "텍스트 입력",
                     "type": "TEXT"
@@ -1048,7 +1072,7 @@
                 },
                 "overrides": [
                   {
-                    "id": "5:19188",
+                    "id": "23:21535",
                     "overriddenFields": [
                       "height",
                       "width"
@@ -1063,7 +1087,7 @@
                 "interactions": []
               },
               {
-                "id": "57:59367",
+                "id": "9:34378",
                 "name": "DateInput-11",
                 "type": "INSTANCE",
                 "scrollBehavior": "SCROLLS",
@@ -1091,7 +1115,7 @@
                 "children": [],
                 "overriddenFields": [],
                 "componentId": "1:4011",
-                "componentProperties": {
+                "componentPropertyReferences": {
                   "Text#2020:7": {
                     "value": "텍스트 입력",
                     "type": "TEXT"
@@ -1104,7 +1128,7 @@
                 },
                 "overrides": [
                   {
-                    "id": "57:59367",
+                    "id": "9:34378",
                     "overriddenFields": [
                       "height",
                       "width"
@@ -1119,7 +1143,7 @@
                 "interactions": []
               },
               {
-                "id": "55:83785",
+                "id": "30:95631",
                 "name": "DateInput-15",
                 "type": "INSTANCE",
                 "scrollBehavior": "SCROLLS",
@@ -1147,7 +1171,7 @@
                 "children": [],
                 "overriddenFields": [],
                 "componentId": "1:4015",
-                "componentProperties": {
+                "componentPropertyReferences": {
                   "Text#2020:7": {
                     "value": "텍스트 입력",
                     "type": "TEXT"
@@ -1160,7 +1184,7 @@
                 },
                 "overrides": [
                   {
-                    "id": "55:83785",
+                    "id": "30:95631",
                     "overriddenFields": [
                       "height",
                       "width"
@@ -1184,7 +1208,7 @@
             "interactions": []
           },
           {
-            "id": "21:36823",
+            "id": "89:36189",
             "name": "Group-31 (텍스트 입력)",
             "type": "GROUP",
             "scrollBehavior": "SCROLLS",
@@ -1230,7 +1254,7 @@
             "interactions": []
           },
           {
-            "id": "75:23384",
+            "id": "66:41522",
             "name": "Button-10",
             "type": "INSTANCE",
             "scrollBehavior": "SCROLLS",
@@ -1258,7 +1282,7 @@
             "children": [],
             "overriddenFields": [],
             "componentId": "1:4010",
-            "componentProperties": {
+            "componentPropertyReferences": {
               "Button name#67:81": {
                 "value": "텍스트 입력",
                 "type": "TEXT"
@@ -1270,7 +1294,7 @@
             },
             "overrides": [
               {
-                "id": "75:23384",
+                "id": "66:41522",
                 "overriddenFields": [
                   "height",
                   "width"
@@ -1285,7 +1309,7 @@
             "interactions": []
           },
           {
-            "id": "14:27287",
+            "id": "9:16636",
             "name": "Button-22",
             "type": "INSTANCE",
             "scrollBehavior": "SCROLLS",
@@ -1313,7 +1337,7 @@
             "children": [],
             "overriddenFields": [],
             "componentId": "1:4022",
-            "componentProperties": {
+            "componentPropertyReferences": {
               "Button name#67:81": {
                 "value": "버튼",
                 "type": "TEXT"
@@ -1325,7 +1349,7 @@
             },
             "overrides": [
               {
-                "id": "14:27287",
+                "id": "9:16636",
                 "overriddenFields": [
                   "height",
                   "width"
@@ -1340,7 +1364,7 @@
             "interactions": []
           },
           {
-            "id": "1:96697",
+            "id": "57:91580",
             "name": "Button-27",
             "type": "INSTANCE",
             "scrollBehavior": "SCROLLS",
@@ -1368,7 +1392,7 @@
             "children": [],
             "overriddenFields": [],
             "componentId": "1:4027",
-            "componentProperties": {
+            "componentPropertyReferences": {
               "Button name#67:81": {
                 "value": "텍스트 입력",
                 "type": "TEXT"
@@ -1380,7 +1404,7 @@
             },
             "overrides": [
               {
-                "id": "1:96697",
+                "id": "57:91580",
                 "overriddenFields": [
                   "height",
                   "width"
@@ -1395,7 +1419,7 @@
             "interactions": []
           },
           {
-            "id": "40:19172",
+            "id": "30:13485",
             "name": "Button-48",
             "type": "INSTANCE",
             "scrollBehavior": "SCROLLS",
@@ -1423,7 +1447,7 @@
             "children": [],
             "overriddenFields": [],
             "componentId": "1:4048",
-            "componentProperties": {
+            "componentPropertyReferences": {
               "Button name#67:81": {
                 "value": "텍스트 입력",
                 "type": "TEXT"
@@ -1435,7 +1459,7 @@
             },
             "overrides": [
               {
-                "id": "40:19172",
+                "id": "30:13485",
                 "overriddenFields": [
                   "height",
                   "width"
@@ -1450,7 +1474,7 @@
             "interactions": []
           },
           {
-            "id": "20:33467",
+            "id": "42:94788",
             "name": "Button-53",
             "type": "INSTANCE",
             "scrollBehavior": "SCROLLS",
@@ -1478,7 +1502,7 @@
             "children": [],
             "overriddenFields": [],
             "componentId": "1:4053",
-            "componentProperties": {
+            "componentPropertyReferences": {
               "Button name#67:81": {
                 "value": "버튼",
                 "type": "TEXT"
@@ -1490,7 +1514,7 @@
             },
             "overrides": [
               {
-                "id": "20:33467",
+                "id": "42:94788",
                 "overriddenFields": [
                   "height",
                   "width"
@@ -1505,7 +1529,7 @@
             "interactions": []
           },
           {
-            "id": "69:80527",
+            "id": "58:91910",
             "name": "Button-54",
             "type": "INSTANCE",
             "scrollBehavior": "SCROLLS",
@@ -1533,7 +1557,7 @@
             "children": [],
             "overriddenFields": [],
             "componentId": "1:4054",
-            "componentProperties": {
+            "componentPropertyReferences": {
               "Button name#67:81": {
                 "value": "버튼",
                 "type": "TEXT"
@@ -1545,7 +1569,7 @@
             },
             "overrides": [
               {
-                "id": "69:80527",
+                "id": "58:91910",
                 "overriddenFields": [
                   "height",
                   "width"
@@ -1560,7 +1584,7 @@
             "interactions": []
           },
           {
-            "id": "44:43492",
+            "id": "59:42901",
             "name": "DateInput-55",
             "type": "INSTANCE",
             "scrollBehavior": "SCROLLS",
@@ -1588,7 +1612,7 @@
             "children": [],
             "overriddenFields": [],
             "componentId": "1:4055",
-            "componentProperties": {
+            "componentPropertyReferences": {
               "Text#2020:7": {
                 "value": "텍스트 입력",
                 "type": "TEXT"
@@ -1601,7 +1625,7 @@
             },
             "overrides": [
               {
-                "id": "44:43492",
+                "id": "59:42901",
                 "overriddenFields": [
                   "height",
                   "width"
@@ -1630,9 +1654,9 @@
   "schemaVersion": 0,
   "styles": {},
   "name": "testFigma",
-  "lastModified": "2025-08-04T15:32:44.973937",
+  "lastModified": "2025-08-04T16:00:51.120870",
   "thumbnailUrl": "",
-  "version": "9a5aeb17-2543-4830-8bf2-17eb3782fb34",
+  "version": "0b4db191-1b77-4fee-891d-f9b32a9d2c91",
   "role": "owner",
   "editorType": "figma",
   "linkAccess": "view"
