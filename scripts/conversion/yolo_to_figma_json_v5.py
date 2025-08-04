@@ -644,6 +644,89 @@ def build_hierarchical_structure_v5(detected_elements_df, image):
         node['original_row'] = row
         nodes.append(node)
     
+    # AppHeader 처리: 최상단에만 1개 유지
+    app_headers = [node for node in nodes if node['original_row']['name'] == 'AppHeader']
+    if len(app_headers) > 1:
+        # 가장 위쪽에 있는 AppHeader만 유지
+        app_headers.sort(key=lambda x: x['original_row']['box']['y1'])
+        keep_header = app_headers[0]
+        nodes = [node for node in nodes if node['original_row']['name'] != 'AppHeader']
+        nodes.append(keep_header)
+        print(f"✅ AppHeader: 최상단 1개만 유지 (총 {len(app_headers)}개 중)")
+    
+    # Grid와 GridTitle 처리
+    grids = [node for node in nodes if node['original_row']['name'] == 'Grid']
+    grid_titles = [node for node in nodes if node['original_row']['name'] == 'GridTitle']
+    
+    print(f"📊 감지된 Grid: {len(grids)}개, GridTitle: {len(grid_titles)}개")
+    
+    # GridTitle을 각 Grid 위에 배치
+    for i, grid in enumerate(grids):
+        grid_box = grid['original_row']['box']
+        grid_y = grid_box['y1']
+        
+        # Grid 바로 위에 있는 GridTitle 찾기
+        closest_title = None
+        min_distance = float('inf')
+        
+        for title in grid_titles:
+            title_box = title['original_row']['box']
+            title_y = title_box['y2']  # GridTitle의 하단
+            
+            # GridTitle이 Grid 위에 있고, 적절한 거리에 있는지 확인
+            if title_y < grid_y and title_box['x1'] <= grid_box['x2'] and title_box['x2'] >= grid_box['x1']:
+                distance = grid_y - title_y
+                if distance < min_distance and distance < 100:  # 100px 이내
+                    min_distance = distance
+                    closest_title = title
+        
+        if closest_title:
+            # GridTitle을 Grid의 자식으로 설정
+            grid['children'].append(closest_title)
+            nodes.remove(closest_title)
+            print(f"✅ Grid {i+1}: GridTitle 배치 (거리: {min_distance:.1f}px)")
+        else:
+            print(f"⚠️ Grid {i+1}: 매칭되는 GridTitle 없음")
+    
+    # 남은 GridTitle들 처리 (매칭되지 않은 경우)
+    remaining_titles = [node for node in nodes if node['original_row']['name'] == 'GridTitle']
+    if remaining_titles:
+        print(f"⚠️ 매칭되지 않은 GridTitle: {len(remaining_titles)}개")
+        for title in remaining_titles:
+            print(f"  - 위치: ({title['original_row']['box']['x1']:.0f}, {title['original_row']['box']['y1']:.0f})")
+    
+    # Grid 내부 객체 필터링
+    filtered_nodes = []
+    excluded_count = 0
+    
+    for node in nodes:
+        node_name = node['original_row']['name']
+        node_box = node['original_row']['box']
+        
+        # Grid 내부에 있는 객체인지 확인
+        is_inside_grid = False
+        for grid in grids:
+            grid_box = grid['original_row']['box']
+            
+            # Grid 내부에 완전히 포함되는지 확인
+            if (node_box['x1'] >= grid_box['x1'] and node_box['x2'] <= grid_box['x2'] and
+                node_box['y1'] >= grid_box['y1'] and node_box['y2'] <= grid_box['y2']):
+                
+                # Grid, GridTitle, AppHeader는 제외
+                if node_name not in ['Grid', 'GridTitle', 'AppHeader']:
+                    is_inside_grid = True
+                    excluded_count += 1
+                    print(f"⚠️ Grid 내부 객체 제외: {node_name} (위치: {node_box['x1']:.0f}, {node_box['y1']:.0f})")
+                    break
+        
+        if not is_inside_grid:
+            filtered_nodes.append(node)
+    
+    if excluded_count > 0:
+        print(f"📊 Grid 내부 객체 제외: {excluded_count}개")
+    
+    nodes = filtered_nodes
+    
     # 프레임, 그룹, 일반 요소 분리
     frame_nodes = []
     group_nodes = []
@@ -984,6 +1067,11 @@ def save_detection_result_with_image_v5(image_path, results, output_dir):
 
 def main():
     print("🚀 YOLO to Figma JSON Converter v5 (텍스트 감지 + 스타일 분석)")
+    print("=" * 60)
+    print("✨ 특별 기능:")
+    print("  • AppHeader: 최상단에만 1개 생성")
+    print("  • GridTitle: Grid 바로 위에 1개씩 배치")
+    print("  • Grid 내부 객체: 자동 필터링")
     print("=" * 60)
     
     # 라이브러리 상태 출력
